@@ -30,11 +30,19 @@ def main():
     try:
         # Run the various graph algorithm below
         db_conn = cube_db_initialize()
-        cube_sql_table_drop_create(db_conn, CUBE_TABLE, "src_ip text, dst_ip text, time_stamp text")
-        col_fmt = "src_ip, dst_ip, time_stamp"
-        cube_sql_load_table_from_file(db_conn, CUBE_TABLE, col_fmt, args.input_file, args.delimiter)
+        cube_sql_table_drop_create(db_conn, CUBE_TABLE, "src_ip text, dest_ip text, time_stamp text")
+        cols_name = "src_ip, dest_ip, time_stamp"
+        cube_sql_load_table_from_file(db_conn, CUBE_TABLE, cols_name, args.input_file, args.delimiter)
         cube_sql_copy_table(db_conn, ORI_TABLE, CUBE_TABLE)
-        
+        att_tables = [None]*args.dimension_num
+        att_names = ['src_ip', 'dest_ip', 'time_stamp']
+        col_fmts = ['src_ip text', 'dest_ip text', 'time_stamp text']
+        for n in range(args.dimension_num):
+        	att_tables[n] = 'R' + str(n)
+        	att_name = att_names[n]
+        	col_fmt = col_fmts[n]
+        	cube_sql_distinct_attribute_value(db_conn, att_tables[n], CUBE_TABLE, att_name, col_fmt)
+        #cube_sql_print_table(db_conn, att_tables[2])
     except:
         print "Unexpected error:", sys.exc_info()[0]    
         raise 
