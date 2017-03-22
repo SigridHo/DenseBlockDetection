@@ -9,3 +9,4 @@ CUBE_DB_PORT = 5432
 
 #Default Table names
 CUBE_TABLE = "CUBE_TABLE"
+ORI_TABLE = "ORI_TABLE"

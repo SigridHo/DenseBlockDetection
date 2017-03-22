@@ -18,9 +18,9 @@ def cube_sql_table_drop_create(db_conn, table_name, create_sql_cols, drop=True):
             # Ignore the error
             db_conn.commit()
         
-    cur.execute("CREATE TABLE %s (%s)" % (table_name, create_sql_cols));
-    db_conn.commit();
-    cur.close();
+    cur.execute("CREATE TABLE %s (%s)" % (table_name, create_sql_cols))
+    db_conn.commit()
+    cur.close()
 
 # Load table from file 
 def cube_sql_load_table_from_file(db_conn, table_name, col_fmt, file_name, delim):
@@ -31,5 +31,12 @@ def cube_sql_load_table_from_file(db_conn, table_name, col_fmt, file_name, delim
     db_conn.commit()
     cur.close()
     print "Loaded data from %s" % (file_name)
-    
+
+# Copy table completely
+def cube_sql_copy_table(db_conn, dest_table, src_table):
+    cur = db_conn.cursor()
+    cur.execute("CREATE TABLE %s AS TABLE %s" % (dest_table, src_table))
+    db_conn.commit()
+    cur.close()
+    print "Copied table %s to %s" % (src_table, dest_table)
     
