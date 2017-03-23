@@ -16,14 +16,13 @@ def cube_sql_table_drop_create(db_conn, table_name, create_sql_cols, drop=True):
             cur.execute("DROP TABLE %s" % table_name)
         except psycopg2.Error:
             # Ignore the error
-            db_conn.commit()
-        
+            db_conn.commit()        
     cur.execute("CREATE TABLE %s (%s)" % (table_name, create_sql_cols))
     db_conn.commit()
     cur.close()
 
 # Load table from file 
-def cube_sql_load_table_from_file(db_conn, table_name, col_fmt, file_name, delim):
+def cube_sql_load_table_from_file(db_conn, table_name, col_fmt, file_name, delim, drop=True):
     cur = db_conn.cursor()
     cur.execute("COPY %s(%s) FROM '%s' DELIMITER AS '%s' CSV" % (table_name, col_fmt, file_name, delim))   
     db_conn.commit()
@@ -31,10 +30,14 @@ def cube_sql_load_table_from_file(db_conn, table_name, col_fmt, file_name, delim
     print "Loaded data from %s" % (file_name)
 
 # Copy table completely
-def cube_sql_copy_table(db_conn, dest_table, src_table):
+def cube_sql_copy_table(db_conn, dest_table, src_table, drop=True):
     cur = db_conn.cursor()
-    cur.execute("DROP TABLE %s" % dest_table)
-    db_conn.commit()
+    if (drop):
+        try:
+            cur.execute("DROP TABLE %s" % dest_table)
+        except psycopg2.Error:
+            # Ignore the error
+            db_conn.commit()
     cur.execute("CREATE TABLE %s AS TABLE %s" % (dest_table, src_table))
     db_conn.commit()
     cur.close()
@@ -60,3 +63,9 @@ def cube_sql_distinct_attribute_value(db_conn, dest_table, src_table, att_name, 
     cur.execute ("INSERT INTO %s(%s)" % (dest_table, att_name) + " SELECT DISTINCT ON (%s) %s FROM %s" % (att_name, att_name, src_table))
     db_conn.commit()                            
     cur.close() 
+
+def cube_sql_mass(db_conn, table_name):
+    cur = db_conn.cursor()
+    cur.execute ("SELECT count(*) FROM %s" % table_name)
+    mass = cur.fetchone()[0]
+    return mass
