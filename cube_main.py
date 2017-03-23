@@ -63,15 +63,16 @@ def main():
 
         # cube_sql_print_table(db_conn, "R1")
 
+        ''' find single blocks and retrieve blocks from origianl data '''
         results = [None] * args.block_num
         for i in range(args.block_num):
             m_r = cube_sql_mass(db_conn, CUBE_TABLE)
             #print m_r
             block_tables = [None] * args.dimension_num # B_n
             block_tables = find_single_block(db_conn, CUBE_TABLE, att_tables, args.dimension_num, m_r, args.density, att_names, col_fmts)
-            cub_sql_delete_from_block(db_conn, CUBE_TABLE, block_tables, att_names, args.dimension_num)
+            cube_sql_delete_from_block(db_conn, CUBE_TABLE, block_tables, att_names, args.dimension_num)
             results[i] = BLOCK_TABLE + str(i)
-            cub_sql_block_create_insert(db_conn, results[i], ORI_TABLE, block_tables, att_names, args.dimension_num, cols_description)
+            cube_sql_block_create_insert(db_conn, results[i], ORI_TABLE, block_tables, att_names, args.dimension_num, cols_description)
             #m_r = cube_sql_mass(db_conn, results[i])
             #print m_r
 

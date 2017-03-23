@@ -78,7 +78,7 @@ def cube_sql_mass(db_conn, table_name):
     print "Mass: " + str(mass)
     return mass
 
-def cub_sql_delete_from_block(db_conn, table_name, block_tables, att_names, dimension_num):
+def cube_sql_delete_from_block(db_conn, table_name, block_tables, att_names, dimension_num):
     cur = db_conn.cursor()
     query = "DELETE FROM " + table_name + " USING "
     for i in range(dimension_num):
@@ -96,7 +96,7 @@ def cub_sql_delete_from_block(db_conn, table_name, block_tables, att_names, dime
     cur.close()
     print "Deleted from block." 
 
-def cub_sql_block_create_insert(db_conn, block_table, cube_table, block_tables, att_names, dimension_num, cols_description):
+def cube_sql_block_create_insert(db_conn, block_table, cube_table, block_tables, att_names, dimension_num, cols_description):
     cur = db_conn.cursor()
     cube_sql_table_drop_create(db_conn, block_table, cols_description)
     insert_cols = ", ".join(att_names)
