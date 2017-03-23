@@ -1,1 +1,1 @@
-python cube_main.py --file ~/Desktop/15826\ Project/DenseBlockDetection/datasets/darpa.csv --N 3 --k 1
+python cube_main.py --file ~/Desktop/15826\ Project/DenseBlockDetection/toy.csv --N 3 --k 1
