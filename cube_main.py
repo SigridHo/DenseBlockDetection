@@ -22,6 +22,7 @@ def main():
     global db_conn
     global CUBE_TABLE  # R
     global ORI_TABLE   # R_ori
+    global BLOCK_TABLE # B_ori
     # Command Line processing
     parser = argparse.ArgumentParser(description="Dense Block Detection")
     parser.add_argument ('--file', dest='input_file', type=str, required=True,
@@ -40,7 +41,8 @@ def main():
     try:
         # Run the various graph algorithm below
         db_conn = cube_db_initialize()
-        cube_sql_table_drop_create(db_conn, CUBE_TABLE, "src_ip text, dest_ip text, time_stamp text")
+        cols_description = "src_ip text, dest_ip text, time_stamp text"
+        cube_sql_table_drop_create(db_conn, CUBE_TABLE, cols_description)
         cols_name = "src_ip, dest_ip, time_stamp"
         cube_sql_load_table_from_file(db_conn, CUBE_TABLE, cols_name, args.input_file, args.delimiter)
         cube_sql_copy_table(db_conn, ORI_TABLE, CUBE_TABLE)
@@ -60,13 +62,15 @@ def main():
             block_tables = [None] * args.dimension_num # B_n
             block_tables = find_single_block(db_conn, CUBE_TABLE, att_tables, args.dimension_num, m_r, args.density, att_names, col_fmts)
             cub_sql_delete_from_block(db_conn, CUBE_TABLE, block_tables, att_names, args.dimension_num)
-            m_r = cube_sql_mass(db_conn, CUBE_TABLE)
-            print m_r
-
+            results[i] = BLOCK_TABLE + str(i)
+            cub_sql_block_create_insert(db_conn, results[i], ORI_TABLE, block_tables, att_names, args.dimension_num, cols_description)
+            #m_r = cube_sql_mass(db_conn, results[i])
+            #print m_r
 
     except:
         print "Unexpected error:", sys.exc_info()[0]    
         raise 
+    #return results
 
 if __name__ == '__main__':
     main()
