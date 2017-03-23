@@ -39,22 +39,30 @@ def main():
                          help='dimension selection policy.Support density, cardinality.')
     args = parser.parse_args()
     try:
-        # Run the various graph algorithm below
+        ''' initialize the database connection '''
         db_conn = cube_db_initialize()
+
+        ''' initialize tables and copy original relations '''
         cols_description = "src_ip text, dest_ip text, time_stamp text"
         cube_sql_table_drop_create(db_conn, CUBE_TABLE, cols_description)
         cols_name = "src_ip, dest_ip, time_stamp"
         cube_sql_load_table_from_file(db_conn, CUBE_TABLE, cols_name, args.input_file, args.delimiter)
+
         cube_sql_copy_table(db_conn, ORI_TABLE, CUBE_TABLE)
+        # cube_sql_print_table(db_conn, CUBE_TABLE)
+
+        ''' create tables for N dimension attributes to store the distinct values '''
         att_tables = [None] * args.dimension_num    # R_n
-        att_names = ['src_ip', 'dest_ip', 'time_stamp']
-        col_fmts = ['src_ip text', 'dest_ip text', 'time_stamp text']
+        att_names = cols_name.split(", ")    
+        col_fmts = cols_description.split(", ")   		# modified for better generalization
         for n in range(args.dimension_num):
             att_tables[n] = 'R' + str(n)
             att_name = att_names[n]
             col_fmt = col_fmts[n]
             cube_sql_distinct_attribute_value(db_conn, att_tables[n], CUBE_TABLE, att_name, col_fmt)
-        #cube_sql_print_table(db_conn, att_tables[2])
+
+        # cube_sql_print_table(db_conn, "R1")
+
         results = [None] * args.block_num
         for i in range(args.block_num):
             m_r = cube_sql_mass(db_conn, CUBE_TABLE)
