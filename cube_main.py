@@ -7,11 +7,21 @@ import os
 import time
 
 db_conn = None;
+# TODO: Algorithm 2
+def find_single_block(db_conn, CUBE_TABLE, att_tables, dimension_num, m_r, density, att_names, col_fmts):
+    block_tables = [None] * dimension_num
+    # For algorithm 1 testing
+    for n in range(dimension_num):
+        block_tables[n] = 'B' + str(n)
+        att_name = att_names[n]
+        col_fmt = col_fmts[n]
+        cube_sql_distinct_attribute_value(db_conn, block_tables[n], CUBE_TABLE, att_name, col_fmt)
+    return block_tables
 
 def main():
     global db_conn
-    global CUBE_TABLE
-    global ORI_TABLE
+    global CUBE_TABLE  # R
+    global ORI_TABLE   # R_ori
     # Command Line processing
     parser = argparse.ArgumentParser(description="Dense Block Detection")
     parser.add_argument ('--file', dest='input_file', type=str, required=True,
@@ -25,7 +35,7 @@ def main():
     parser.add_argument ('--density', dest='density', type=str, default='arithmetic',
                          help='density measure. Support arithmetic, geometric, suspiciousness.')
     parser.add_argument ('--selection', dest='selection', type=str, default='density',
-    	                 help='dimension selection policy.Support density, cardinality.')
+                         help='dimension selection policy.Support density, cardinality.')
     args = parser.parse_args()
     try:
         # Run the various graph algorithm below
@@ -34,19 +44,25 @@ def main():
         cols_name = "src_ip, dest_ip, time_stamp"
         cube_sql_load_table_from_file(db_conn, CUBE_TABLE, cols_name, args.input_file, args.delimiter)
         cube_sql_copy_table(db_conn, ORI_TABLE, CUBE_TABLE)
-        att_tables = [None] * args.dimension_num
+        att_tables = [None] * args.dimension_num    # R_n
         att_names = ['src_ip', 'dest_ip', 'time_stamp']
         col_fmts = ['src_ip text', 'dest_ip text', 'time_stamp text']
         for n in range(args.dimension_num):
-        	att_tables[n] = 'R' + str(n)
-        	att_name = att_names[n]
-        	col_fmt = col_fmts[n]
-        	cube_sql_distinct_attribute_value(db_conn, att_tables[n], CUBE_TABLE, att_name, col_fmt)
+            att_tables[n] = 'R' + str(n)
+            att_name = att_names[n]
+            col_fmt = col_fmts[n]
+            cube_sql_distinct_attribute_value(db_conn, att_tables[n], CUBE_TABLE, att_name, col_fmt)
         #cube_sql_print_table(db_conn, att_tables[2])
         results = [None] * args.block_num
         for i in range(args.block_num):
-        	m_r = cube_sql_mass(db_conn, CUBE_TABLE)
-        	print m_r
+            m_r = cube_sql_mass(db_conn, CUBE_TABLE)
+            #print m_r
+            block_tables = [None] * args.dimension_num # B_n
+            block_tables = find_single_block(db_conn, CUBE_TABLE, att_tables, args.dimension_num, m_r, args.density, att_names, col_fmts)
+            cub_sql_delete_from_block(db_conn, CUBE_TABLE, block_tables, att_names, args.dimension_num)
+            m_r = cube_sql_mass(db_conn, CUBE_TABLE)
+            print m_r
+
 
     except:
         print "Unexpected error:", sys.exc_info()[0]    

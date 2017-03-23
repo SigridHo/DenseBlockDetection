@@ -68,4 +68,24 @@ def cube_sql_mass(db_conn, table_name):
     cur = db_conn.cursor()
     cur.execute ("SELECT count(*) FROM %s" % table_name)
     mass = cur.fetchone()[0]
+    db_conn.commit()                            
+    cur.close() 
     return mass
+
+def cub_sql_delete_from_block(db_conn, table_name, block_tables, att_names, dimension_num):
+    cur = db_conn.cursor()
+    query = "DELETE FROM " + table_name + " USING "
+    for i in range(dimension_num):
+        if i != dimension_num - 1:
+            query += block_tables[i] + ", "
+        else:
+            query += block_tables[i] + " "
+    query += "WHERE "
+    for i in range(dimension_num):
+        if i != dimension_num - 1:
+            query += table_name + "." + att_names[i] + " = " + block_tables[i] + "." + att_names[i] + " AND "
+        else:
+            query += table_name + "." + att_names[i] + " = " + block_tables[i] + "." + att_names[i]
+    cur.execute(query)
+    db_conn.commit()                            
+    cur.close() 
