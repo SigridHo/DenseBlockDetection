@@ -156,11 +156,21 @@ def cube_sql_fetch_firstRow(db_conn, dest_table):
 
 def cube_sql_delete_rows(db_conn, dest_table, conditions):
     cur = db_conn.cursor()
-    query = "DELETE FROM %s WHERE %s" % (dest_table, " AND ".join(conditions))
+    conditions = " AND ".join(conditions)
+    query = "DELETE FROM %s WHERE %s" % (dest_table, conditions)
     cur.execute(query)
     db_conn.commit()                       
     cur.close() 
     # print "Deleted rows given the conditions."
+
+def cube_sql_insert_row(db_conn, dest_table, newEntry):
+    cur = db_conn.cursor()
+    newEntry = ", ".join(newEntry)
+    query = "INSERT INTO %s VALUES (%s)" % (dest_table, newEntry) 
+    cur.execute(query)
+    db_conn.commit()                       
+    cur.close() 
+    # print "Inserted a row given the conditions."
 
 
 
