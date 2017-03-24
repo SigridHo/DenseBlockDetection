@@ -133,7 +133,6 @@ def cube_sql_insert_attrVal_mass(db_conn, B_TABLE, block_table, attVal_Masses_TA
 
 
 def cube_select_values_to_remove(db_conn, valuesToDel_TABLE, attVal_Masses_TABLE, threshold, dim):
-    # cols_name = ["dimension_index", "a_value", "attrVal_mass"] 
     cur = db_conn.cursor()
     cube_sql_table_drop_create(db_conn, valuesToDel_TABLE, "a_value text, attrVal_mass numeric")
     query = "INSERT INTO %s SELECT a_value, attrVal_mass FROM %s" % (valuesToDel_TABLE, attVal_Masses_TABLE) \
@@ -142,6 +141,27 @@ def cube_select_values_to_remove(db_conn, valuesToDel_TABLE, attVal_Masses_TABLE
     db_conn.commit()                         
     cur.close() 
     print "Created %s for dimension %d in increasing order of attrVal_mass." % (valuesToDel_TABLE, dim)
+
+
+def cube_sql_fetch_firstRow(db_conn, dest_table):
+    cur = db_conn.cursor()
+    query = "SELECT a_value, attrVal_mass::text FROM %s LIMIT 1" % dest_table 
+    cur.execute(query)
+    (a_value, attrVal_mass) = cur.fetchone()  # fetch the corresponding a_value and attrVal mass
+    db_conn.commit()                     
+    cur.close() 
+    # print "Fetched first row for %s." % dest_table
+    return a_value, attrVal_mass
+
+
+def cube_sql_delete_rows(db_conn, dest_table, conditions):
+    cur = db_conn.cursor()
+    query = "DELETE FROM %s WHERE %s" % (dest_table, " AND ".join(conditions))
+    cur.execute(query)
+    db_conn.commit()                       
+    cur.close() 
+    # print "Deleted rows given the conditions."
+
 
 
 

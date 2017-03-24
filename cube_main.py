@@ -52,11 +52,14 @@ def measure_density(db_conn, m_b, block_tables, m_r, att_tables, args):
     print 'Density of Block: ' + str(density)
     return density
 
-def tables_not_empty(db_conn, block_tables):
+def CUBE_not_empty(db_conn, block_tables):
     for block_table in block_tables:
         if cube_sql_mass(db_conn, CUBE_TABLE) > 0:
             return True
     return False
+
+def table_not_empty(db_conn, dest_table):
+	return cube_sql_mass(db_conn, dest_table) > 0
 
 def select_dimension(db_conn, block_tables, metric = "cardinality"):
 	if metric == "density":
@@ -102,8 +105,7 @@ def find_single_block(db_conn, CUBE_TABLE, att_tables, mass_r, att_names, col_fm
     r_tilde = 1
 
     # iteratation begins 
-    notEmpty = tables_not_empty(db_conn, block_tables)
-    while notEmpty:
+    while CUBE_not_empty(db_conn, block_tables):
         # compute all possible attribute_value masses
         print "\n# Calculating attribute-vale masses..."
         cols_description = "dimension_index integer, a_value text, attrVal_mass numeric"
@@ -121,19 +123,23 @@ def find_single_block(db_conn, CUBE_TABLE, att_tables, mass_r, att_names, col_fm
         print "threshold = %f" % threshold
         valuesToDel_TABLE = "Values_to_remove_TABLE"
         cube_select_values_to_remove(db_conn, valuesToDel_TABLE, attVal_Masses_TABLE, threshold, dim_i)
-        
-        break	
+        valuesToDel_Static_TABLE = "Values_to_remove_TABLE_static"   # duplicate a static copy for later operation 
+        cube_sql_copy_table(db_conn, valuesToDel_Static_TABLE, valuesToDel_TABLE)
 
-    #     #TO DO: iteratively delete rows of the specific dimsension and attribute value
-    #     for i in range(len(valueToDel)):
-    #     	# TO DO
-
+        # iteratively delete rows of the specific dimsension and attribute value in Block
+        print "\n# Iterating removal values..."
+        while table_not_empty(db_conn, valuesToDel_TABLE):
+        	a_value, attrVal_Mass = cube_sql_fetch_firstRow(db_conn, valuesToDel_TABLE)
+        	conditions = ["a_value = '%s'" % a_value, "attrVal_Mass = %s" % attrVal_Mass]  # a list of conditions 
+        	cube_sql_delete_rows(db_conn, valuesToDel_TABLE, conditions)
+        	
     #     # TO DO: remove tuples
 
-    #     notEmpty = tables_not_empty(db_conn, block_tables)
 
     # # TO DO: reconstruct target block
     # block_tables = reconstruct_block()
+
+    	break
 
     # return block_tables
     return None
