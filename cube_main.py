@@ -7,8 +7,8 @@ import os
 import time
 
 db_conn = None;
-# TODO: Algorithm 2
-def find_single_block(db_conn, CUBE_TABLE, att_tables, dimension_num, m_r, density, att_names, col_fmts):
+
+def find_single_block_test(db_conn, CUBE_TABLE, att_tables, dimension_num, m_r, density, att_names, col_fmts):
     block_tables = [None] * dimension_num
     # For algorithm 1 testing
     for n in range(dimension_num):
@@ -16,6 +16,33 @@ def find_single_block(db_conn, CUBE_TABLE, att_tables, dimension_num, m_r, densi
         att_name = att_names[n]
         col_fmt = col_fmts[n]
         cube_sql_distinct_attribute_value(db_conn, block_tables[n], CUBE_TABLE, att_name, col_fmt)
+    return block_tables
+
+#TODO: measure density
+def measure_density(db_conn, m_b, block_tables, m_r, att_tables):
+    return 0
+
+def tables_not_empty(db_conn, block_tables):
+    for block_table in block_tables:
+        if cube_sql_mass(db_conn, CUBE_TABLE) > 0:
+            return True
+    return False
+
+def find_single_block(db_conn, CUBE_TABLE, att_tables, dimension_num, m_r, density, att_names, col_fmts):
+    B_TABLE = "B_TABLE"
+    cube_sql_copy_table(db_conn, B_TABLE, CUBE_TABLE)
+    m_b = m_r
+    block_tables = [None] * dimension_num
+    for n in range(dimension_num):
+        block_tables[n] = 'B' + str(n)
+        cube_sql_copy_table(db_conn, block_tables[n], att_tables[n])
+    density_tilde = measure_density(db_conn, m_b, block_tables, m_r, att_tables)
+    r = 1
+    r_tilde = 1
+    flag = tables_not_empty(db_conn, block_tables)
+    while flag:
+        # TODO: Block selection
+        flag = tables_not_empty(db_conn, block_tables)
     return block_tables
 
 def main():
@@ -75,6 +102,9 @@ def main():
             cube_sql_block_create_insert(db_conn, results[i], ORI_TABLE, block_tables, att_names, args.dimension_num, cols_description)
             #m_r = cube_sql_mass(db_conn, results[i])
             #print m_r
+            cub_sql_block_create_insert(db_conn, results[i], ORI_TABLE, block_tables, att_names, args.dimension_num, cols_description)
+            m_r = cube_sql_mass(db_conn, results[i])
+            print m_r
 
     except:
         print "Unexpected error:", sys.exc_info()[0]    
