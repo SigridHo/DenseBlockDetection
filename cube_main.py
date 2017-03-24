@@ -64,15 +64,20 @@ def select_dimension(db_conn, block_tables, metric = "cardinality"):
 	else:
 		return select_dimension_by_cardinality(db_conn, block_tables)
 
-
 def select_dimension_by_density(db_conn, block_tables):
 
 	return 1
 
 
 def select_dimension_by_cardinality(db_conn, block_tables):
-
-	return 1
+	dim = -1 		
+	maxMass = -1
+	for block_table in block_tables:
+		currMass = cube_sql_mass(db_conn, block_table)
+        if currMass > maxMass:
+        	maxMass = currMass
+        	dim = int(block_table[1:])
+	return dim
 
 
 def compute_attribute_value_masses(db_conn, B_TABLE, block_tables, attVal_Masses_TABLE, att_names):
@@ -100,15 +105,17 @@ def find_single_block(db_conn, CUBE_TABLE, att_tables, mass_r, att_names, col_fm
     notEmpty = tables_not_empty(db_conn, block_tables)
     while notEmpty:
         # compute all possible attribute_value masses
+        print "\n# Calculating attribute-vale masses..."
         cols_description = "dimension_index integer, a_value text, attrVal_mass numeric"
         attVal_Masses_TABLE = "AttributeValue_Masses_TABLE"
         cube_sql_table_drop_create(db_conn, attVal_Masses_TABLE, cols_description)
         compute_attribute_value_masses(db_conn, B_TABLE, block_tables, attVal_Masses_TABLE, att_names)
-        break
 
-    #     # select dimension with specified metric (default: by cardinality)
-    #     i_dim = select_dimension(db_conn, block_tables)  
-    #     print "the dimension to iterate is dim-%d" % i_dim 
+        # select dimension with specified metric (default: by cardinality)
+        print "\n# Choosing dimension..." 
+        i_dim = select_dimension(db_conn, block_tables, "cardinality")  # methods: density, cardinality(default)
+        print "\n# Iterating: chosen dimension is dim-%d..." % i_dim 
+        break
 
     #     # find set which satisfies constraint to be removed 
     #     mass_b_i = cube_sql_mass(db_conn, block_tables[i_dim]) 
