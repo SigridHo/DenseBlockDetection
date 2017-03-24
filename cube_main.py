@@ -2,7 +2,7 @@ import argparse
 
 from cube_params import *
 from cube_sql import *
-from math import sqrt
+import math
 import os
 import time
 
@@ -18,9 +18,38 @@ def find_single_block_test(db_conn, CUBE_TABLE, att_tables, dimension_num, m_r, 
         cube_sql_distinct_attribute_value(db_conn, block_tables[n], CUBE_TABLE, att_name, col_fmt)
     return block_tables
 
-#TODO: measure density
-def measure_density(db_conn, m_b, block_tables, m_r, att_tables):
-    return 0
+def measure_density(db_conn, m_b, block_tables, m_r, att_tables, args):
+    method = args.density
+    if method.startswith('a'):  # Arithmetic Average Mass
+        sum_size = 0.0  # sum of |B_n|
+        for block_table in block_tables:
+            sum_size += cube_sql_mass(db_conn, block_table)
+        sum_size /= args.dimension_num
+        density = m_b / sum_size
+
+    elif method.startswith('g'): # Geometric Average Mass
+        product_size = 1.0  # product of |B_n|
+        for block_table in block_tables:
+            product_size *= cube_sql_mass(db_conn, block_table)
+        product_size = pow(product_size, 1.0/args.dimension_num)
+        density = m_b / product_size
+
+    elif method.startswith('s'): # Suspicousness
+        ratio = float(m_b) / m_r
+        density = m_b * (math.log(ratio) - 1)
+        product_ratio = 1.0   # product of |B_n| / |R_n|
+        for n in range(args.dimension_num):
+            b_size = cube_sql_mass(db_conn, block_tables[n])
+            r_size = cube_sql_mass(db_conn, att_tables[n])
+            product_ratio *= float(b_size) / r_size
+        density += m_r * product_ratio
+        density -= m_b * math.log(product_ratio)
+
+    else:
+        print 'Unknown density measurement.'
+        return 0
+    print 'Density: ' + str(density)
+    return density
 
 def tables_not_empty(db_conn, block_tables):
     for block_table in block_tables:
@@ -28,7 +57,7 @@ def tables_not_empty(db_conn, block_tables):
             return True
     return False
 
-def find_single_block(db_conn, CUBE_TABLE, att_tables, dimension_num, m_r, density, att_names, col_fmts):
+def find_single_block(db_conn, CUBE_TABLE, att_tables, dimension_num, m_r, density, att_names, col_fmts, args):
     B_TABLE = "B_TABLE"
     cube_sql_copy_table(db_conn, B_TABLE, CUBE_TABLE)
     m_b = m_r
@@ -36,13 +65,15 @@ def find_single_block(db_conn, CUBE_TABLE, att_tables, dimension_num, m_r, densi
     for n in range(dimension_num):
         block_tables[n] = 'B' + str(n)
         cube_sql_copy_table(db_conn, block_tables[n], att_tables[n])
-    density_tilde = measure_density(db_conn, m_b, block_tables, m_r, att_tables)
+    density_tilde = measure_density(db_conn, m_b, block_tables, m_r, att_tables, args)
     r = 1
     r_tilde = 1
     flag = tables_not_empty(db_conn, block_tables)
     while flag:
         # TODO: Block selection
-        flag = tables_not_empty(db_conn, block_tables)
+        #flag = tables_not_empty(db_conn, block_tables)
+        print 'Enter loop.'
+        flag = False
     return block_tables
 
 def main():
@@ -87,7 +118,6 @@ def main():
             att_name = att_names[n]
             col_fmt = col_fmts[n]
             cube_sql_distinct_attribute_value(db_conn, att_tables[n], CUBE_TABLE, att_name, col_fmt)
-
         # cube_sql_print_table(db_conn, "R1")
 
         ''' find single blocks and retrieve blocks from origianl data '''
@@ -96,15 +126,14 @@ def main():
             m_r = cube_sql_mass(db_conn, CUBE_TABLE)
             #print m_r
             block_tables = [None] * args.dimension_num # B_n
-            block_tables = find_single_block(db_conn, CUBE_TABLE, att_tables, args.dimension_num, m_r, args.density, att_names, col_fmts)
-            cube_sql_delete_from_block(db_conn, CUBE_TABLE, block_tables, att_names, args.dimension_num)
+            block_tables = find_single_block(db_conn, CUBE_TABLE, att_tables, args.dimension_num, m_r, args.density, att_names, col_fmts, args)
+            cub_sql_delete_from_block(db_conn, CUBE_TABLE, block_tables, att_names, args.dimension_num)
             results[i] = BLOCK_TABLE + str(i)
             cube_sql_block_create_insert(db_conn, results[i], ORI_TABLE, block_tables, att_names, args.dimension_num, cols_description)
             #m_r = cube_sql_mass(db_conn, results[i])
             #print m_r
             cube_sql_block_create_insert(db_conn, results[i], ORI_TABLE, block_tables, att_names, args.dimension_num, cols_description)
             m_r = cube_sql_mass(db_conn, results[i])
-            print m_r
 
     except:
         print "Unexpected error:", sys.exc_info()[0]    
