@@ -77,7 +77,7 @@ def select_dimension_by_cardinality(db_conn, block_tables):
         if currMass > maxMass:
         	maxMass = currMass
         	dim = int(block_table[1:])
-	return dim
+	return dim, maxMass
 
 
 def compute_attribute_value_masses(db_conn, B_TABLE, block_tables, attVal_Masses_TABLE, att_names):
@@ -113,15 +113,16 @@ def find_single_block(db_conn, CUBE_TABLE, att_tables, mass_r, att_names, col_fm
 
         # select dimension with specified metric (default: by cardinality)
         print "\n# Selecting dimension..." 
-        i_dim = select_dimension(db_conn, block_tables, "cardinality")  # methods: density, cardinality(default)
-        print "\n# Iterating: chosen dimension is dim-%d..." % i_dim 
-        break
+        dim_i, mass_b_i = select_dimension(db_conn, block_tables, "cardinality")  # methods: density, cardinality(default)
 
-    #     # find set which satisfies constraint to be removed 
-    #     mass_b_i = cube_sql_mass(db_conn, block_tables[i_dim]) 
-    #     threshold = mass_b * 1.0 / mass_b_i
-    #     valueToDel_TABLE = "Values_to_remove_TABLE"
-    #     valueToDel = cube_select_values_to_remove(db_conn, valueToDel_TABLE, attVal_Masses_TABLE, threshold, i_dim)
+        # find set which satisfies constraint to be removed 
+        print "\n# Forming set to be removed (dim-%d)..." % dim_i
+        threshold = mass_b * 1.0 / mass_b_i
+        print "threshold = %f" % threshold
+        valuesToDel_TABLE = "Values_to_remove_TABLE"
+        cube_select_values_to_remove(db_conn, valuesToDel_TABLE, attVal_Masses_TABLE, threshold, dim_i)
+        
+        break	
 
     #     #TO DO: iteratively delete rows of the specific dimsension and attribute value
     #     for i in range(len(valueToDel)):
