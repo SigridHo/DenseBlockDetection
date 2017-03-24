@@ -102,7 +102,7 @@ def main():
             cube_sql_block_create_insert(db_conn, results[i], ORI_TABLE, block_tables, att_names, args.dimension_num, cols_description)
             #m_r = cube_sql_mass(db_conn, results[i])
             #print m_r
-            cub_sql_block_create_insert(db_conn, results[i], ORI_TABLE, block_tables, att_names, args.dimension_num, cols_description)
+            cube_sql_block_create_insert(db_conn, results[i], ORI_TABLE, block_tables, att_names, args.dimension_num, cols_description)
             m_r = cube_sql_mass(db_conn, results[i])
             print m_r
 
