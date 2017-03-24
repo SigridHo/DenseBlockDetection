@@ -75,7 +75,7 @@ def cube_sql_mass(db_conn, table_name):
     mass = cur.fetchone()[0]
     db_conn.commit()                            
     cur.close() 
-    print "Mass: " + str(mass)
+    print "Mass of %s: " % table_name + str(mass)
     return mass
 
 def cube_sql_delete_from_block(db_conn, table_name, block_tables, att_names, dimension_num):
@@ -119,15 +119,16 @@ def cube_sql_block_create_insert(db_conn, block_table, cube_table, block_tables,
     cur.close() 
     print "Created and inserted block table %s." % block_table
 
+
 def cube_select_values_to_remove(db_conn, valueToDel_TABLE, attVal_Masses_TABLE, threshold, i_dim):
-    cols_description = "dimension_index integer, a_value integer, attribute-value_mass numeric"
-    cols_name = ["dimension_index", "a_value", "attribute-value_mass"] 
+    cols_description = "dimension_index integer, a_value integer, attrVal_mass numeric"
+    cols_name = ["dimension_index", "a_value", "attrVal_mass"] 
     cur = db_conn.cursor()
     cube_sql_table_drop_create(db_conn, valueToDel_TABLE, cols_description)
     insert_cols = ", ".join(cols_name)
-    query = "INSERT INTO %s(%s)" % (valueToDel_TABLE, insert_cols) 
-        + " SELECT * FROM %s WHERE %s == %d AND %f <= %f" % (attVal_Masses_TABLE, cols_name[0], i_dim, cols_name[1], threshold)
-        + " ORDER BY %s" % cols_name[1]
+    query = ("INSERT INTO %s(%s)" % (valueToDel_TABLE, insert_cols)) \
+        + (" SELECT * FROM %s WHERE %s = %d AND %s <= %f" % (attVal_Masses_TABLE, cols_name[0], i_dim, cols_name[1], threshold)) \
+        + (" ORDER BY %s" % (cols_name[1]))
     cur.execute(query)
     db_conn.commit()   
     cur.execute("SELECT %s FROM %s" % (cols_name[1], attVal_Masses_TABLE))
@@ -138,5 +139,16 @@ def cube_select_values_to_remove(db_conn, valueToDel_TABLE, attVal_Masses_TABLE,
     return valuesToDel
 
 
+def cube_sql_insert_attrVal_mass(db_conn, B_TABLE, block_table, attVal_Masses_TABLE, dim, attrName):
+    cols_name = ["dimension_index", "a_value", "attrVal_mass"] 
+    cur = db_conn.cursor()
+    query = "INSERT INTO %s" % attVal_Masses_TABLE \
+        + " SELECT %d, %s.%s, COUNT(*) AS attrVal_mass" % (dim, block_table, attrName) \
+        + " FROM %s, %s WHERE %s.%s = %s.%s " % (block_table, B_TABLE, block_table, attrName, B_TABLE, attrName) \
+        + " GROUP BY %s.%s" % (block_table, attrName)
+    cur.execute(query)
+    db_conn.commit()     
+    cur.close() 
+    print "Inserted AttrVal Masses of dimension-%d (%s) into %s." % (dim, attrName, attVal_Masses_TABLE)
 
 
