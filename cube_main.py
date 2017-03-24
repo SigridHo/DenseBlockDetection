@@ -112,7 +112,7 @@ def find_single_block(db_conn, CUBE_TABLE, att_tables, mass_r, att_names, col_fm
         compute_attribute_value_masses(db_conn, B_TABLE, block_tables, attVal_Masses_TABLE, att_names)
 
         # select dimension with specified metric (default: by cardinality)
-        print "\n# Choosing dimension..." 
+        print "\n# Selecting dimension..." 
         i_dim = select_dimension(db_conn, block_tables, "cardinality")  # methods: density, cardinality(default)
         print "\n# Iterating: chosen dimension is dim-%d..." % i_dim 
         break
