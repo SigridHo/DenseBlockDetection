@@ -28,7 +28,31 @@ def tables_not_empty(db_conn, block_tables):
             return True
     return False
 
+def compute_attribute_value_masses(db_conn, B_TABLE, block_tables, attVal_Masses_tables):
+
+
+	return None
+
+def select_dimension(db_conn, block_tables, metric = "cardinality"):
+	if metric == "density":
+		return select_dimension_by_density(db_conn, block_tables)
+	else:
+		return select_dimension_by_cardinality(db_conn, block_tables)
+
+
+def select_dimension_by_density(db_conn, block_tables):
+
+	return 1
+
+
+def select_dimension_by_cardinality(db_conn, block_tables):
+
+	return 1
+
+
 def find_single_block(db_conn, CUBE_TABLE, att_tables, dimension_num, m_r, density, att_names, col_fmts):
+
+	# initialization of tables and attributes sets
     B_TABLE = "B_TABLE"
     cube_sql_copy_table(db_conn, B_TABLE, CUBE_TABLE)
     m_b = m_r
@@ -39,10 +63,22 @@ def find_single_block(db_conn, CUBE_TABLE, att_tables, dimension_num, m_r, densi
     density_tilde = measure_density(db_conn, m_b, block_tables, m_r, att_tables)
     r = 1
     r_tilde = 1
-    flag = tables_not_empty(db_conn, block_tables)
-    while flag:
-        # TODO: Block selection
-        flag = tables_not_empty(db_conn, block_tables)
+
+    # iteratation begins 
+    notEmpty = tables_not_empty(db_conn, block_tables)
+    while notEmpty:
+        # compute all possible attribute_value masses
+        cols_description = "dimension_index integer, value integer, attribute-value_mass integer"
+        attVal_Masses_tables = "Attribute-value_Masses_TABLE"
+        cube_sql_table_drop_create(db_conn, attVal_Masses_tables, cols_description)
+        compute_attribute_value_masses(db_conn, B_TABLE, block_tables, attVal_Masses_tables)
+
+        # select dimension with specified metric (default: by cardinality)
+        i_dim = select_dimension(db_conn, block_tables)   
+
+
+
+        notEmpty = tables_not_empty(db_conn, block_tables)
     return block_tables
 
 def main():
@@ -94,7 +130,7 @@ def main():
         results = [None] * args.block_num
         for i in range(args.block_num):
             m_r = cube_sql_mass(db_conn, CUBE_TABLE)
-            #print m_r
+            # print m_r
             block_tables = [None] * args.dimension_num # B_n
             block_tables = find_single_block(db_conn, CUBE_TABLE, att_tables, args.dimension_num, m_r, args.density, att_names, col_fmts)
             cube_sql_delete_from_block(db_conn, CUBE_TABLE, block_tables, att_names, args.dimension_num)
