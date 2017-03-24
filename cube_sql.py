@@ -75,7 +75,7 @@ def cube_sql_mass(db_conn, table_name):
     mass = cur.fetchone()[0]
     db_conn.commit()                            
     cur.close() 
-    print "Mass of %s: " % table_name + str(mass)
+    # print "Mass of %s: " % table_name + str(mass)
     return mass
 
 def cube_sql_delete_from_block(db_conn, table_name, block_tables, att_names, dimension_num):
@@ -132,15 +132,15 @@ def cube_sql_insert_attrVal_mass(db_conn, B_TABLE, block_table, attVal_Masses_TA
     print "Inserted AttrVal Masses of dimension-%d (%s) into %s." % (dim, attrName, attVal_Masses_TABLE)
 
 
-def cube_select_values_to_remove(db_conn, valuesToDel_TABLE, attVal_Masses_TABLE, threshold, dim):
+def cube_select_values_to_remove(db_conn, D_CUBE_TABLE, attVal_Masses_TABLE, threshold, dim):
     cur = db_conn.cursor()
-    cube_sql_table_drop_create(db_conn, valuesToDel_TABLE, "a_value text, attrVal_mass numeric")
-    query = "INSERT INTO %s SELECT a_value, attrVal_mass FROM %s" % (valuesToDel_TABLE, attVal_Masses_TABLE) \
+    cube_sql_table_drop_create(db_conn, D_CUBE_TABLE, "a_value text, attrVal_mass numeric")
+    query = "INSERT INTO %s SELECT a_value, attrVal_mass FROM %s" % (D_CUBE_TABLE, attVal_Masses_TABLE) \
         + " WHERE dimension_index = %d AND attrVal_mass <= %f ORDER BY attrVal_mass" % (dim, threshold)
     cur.execute(query)
     db_conn.commit()                         
     cur.close() 
-    print "Created %s for dimension %d in increasing order of attrVal_mass." % (valuesToDel_TABLE, dim)
+    print "Created %s for dimension %d in increasing order of attrVal_mass." % (D_CUBE_TABLE, dim)
 
 
 def cube_sql_fetch_firstRow(db_conn, dest_table):
@@ -172,6 +172,14 @@ def cube_sql_insert_row(db_conn, dest_table, newEntry):
     cur.close() 
     # print "Inserted a row given the conditions."
 
+def cube_sql_remove_rows_from_block(db_conn, dest_table, conditions):
+    cur = db_conn.cursor()
+    conditions = " AND ".join(conditions)
+    query = "DELETE FROM %s WHERE %s" % (dest_table, conditions)
+    cur.execute(query)
+    db_conn.commit()                       
+    cur.close() 
+    # print "Deleted rows given the conditions."
 
 
 

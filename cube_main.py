@@ -121,10 +121,10 @@ def find_single_block(db_conn, CUBE_TABLE, att_tables, mass_r, att_names, col_fm
         print "\n# Forming set to be removed (dim-%d)..." % dim_i
         threshold = mass_b * 1.0 / mass_b_i
         print "threshold = %f" % threshold
-        valuesToDel_TABLE = "Values_to_remove_TABLE"
-        cube_select_values_to_remove(db_conn, valuesToDel_TABLE, attVal_Masses_TABLE, threshold, dim_i)
-        valuesToDel_Static_TABLE = "Values_to_remove_TABLE_static"   # duplicate a static copy for later operation 
-        cube_sql_copy_table(db_conn, valuesToDel_Static_TABLE, valuesToDel_TABLE)
+        D_CUBE_TABLE = "D_CUBE_TABLE"
+        cube_select_values_to_remove(db_conn, D_CUBE_TABLE, attVal_Masses_TABLE, threshold, dim_i)
+        D_CUBE_Static_TABLE = "D_CUBE_TABLE_static"   # duplicate a static copy for later operations
+        cube_sql_copy_table(db_conn, D_CUBE_Static_TABLE, D_CUBE_TABLE)
 
         # iteratively delete rows of the specific dimsension and attribute value in Block
         print "\n# Iterating removal values..."
@@ -132,10 +132,10 @@ def find_single_block(db_conn, CUBE_TABLE, att_tables, mass_r, att_names, col_fm
         cols_description = "a_value text, dimension_index integer, order_a_i integer"
         cube_sql_table_drop_create(db_conn, order_TABLE, cols_description) 		# create order table
 
-        while table_not_empty(db_conn, valuesToDel_TABLE):
-        	a_value, attrVal_Mass = cube_sql_fetch_firstRow(db_conn, valuesToDel_TABLE)
+        while table_not_empty(db_conn, D_CUBE_TABLE):
+        	a_value, attrVal_Mass = cube_sql_fetch_firstRow(db_conn, D_CUBE_TABLE)
         	conditions = ["a_value = '%s'" % a_value, "attrVal_Mass = %s" % attrVal_Mass]  # a list of conditions 
-        	cube_sql_delete_rows(db_conn, valuesToDel_TABLE, conditions)
+        	cube_sql_delete_rows(db_conn, D_CUBE_TABLE, conditions)
         	
         	# update block_i and mass_b
         	conditions = ["%s = '%s'" % (att_names[dim_i], a_value)]
@@ -150,6 +150,11 @@ def find_single_block(db_conn, CUBE_TABLE, att_tables, mass_r, att_names, col_fm
         	if density_prime > density_tilde:
         		density_tilde = density_prime
         		r_tilde = r
+
+        # remove tuples from block (and update block_tables)
+        print "\n# Removing tuples from block..."
+
+
 
 
     # # TO DO: reconstruct target block
@@ -218,8 +223,6 @@ def main():
             # cube_sql_block_create_insert(db_conn, results[i], ORI_TABLE, block_tables, att_names, args.dimension_num, cols_description)
             # #m_r = cube_sql_mass(db_conn, results[i])
             # #print m_r
-            # cube_sql_block_create_insert(db_conn, results[i], ORI_TABLE, block_tables, att_names, args.dimension_num, cols_description)
-            # m_r = cube_sql_mass(db_conn, results[i])
 
     except:
         print "Unexpected error:", sys.exc_info()[0]    
