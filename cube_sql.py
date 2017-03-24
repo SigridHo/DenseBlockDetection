@@ -118,3 +118,25 @@ def cube_sql_block_create_insert(db_conn, block_table, cube_table, block_tables,
     db_conn.commit()                            
     cur.close() 
     print "Created and inserted block table %s." % block_table
+
+def cube_select_values_to_remove(db_conn, valueToDel_TABLE, attVal_Masses_TABLE, threshold, i_dim):
+    cols_description = "dimension_index integer, a_value integer, attribute-value_mass numeric"
+    cols_name = ["dimension_index", "a_value", "attribute-value_mass"] 
+    cur = db_conn.cursor()
+    cube_sql_table_drop_create(db_conn, valueToDel_TABLE, cols_description)
+    insert_cols = ", ".join(cols_name)
+    query = "INSERT INTO %s(%s)" % (valueToDel_TABLE, insert_cols) 
+        + " SELECT * FROM %s WHERE %s == %d AND %f <= %f" % (attVal_Masses_TABLE, cols_name[0], i_dim, cols_name[1], threshold)
+        + " ORDER BY %s" % cols_name[1]
+    cur.execute(query)
+    db_conn.commit()   
+    cur.execute("SELECT %s FROM %s" % (cols_name[1], attVal_Masses_TABLE))
+    valuesToDel = map(lambda x: x[0], cur.fetchall())
+    db_conn.commit()                         
+    cur.close() 
+    print "Created %s for dimension %d in increasing order." % (valueToDel_TABLE, i_dim)
+    return valuesToDel
+
+
+
+

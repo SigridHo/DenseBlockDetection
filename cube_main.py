@@ -48,6 +48,7 @@ def measure_density(db_conn, m_b, block_tables, m_r, att_tables, args):
     else:
         print 'Unknown density measurement.'
         return 0
+
     print 'Density: ' + str(density)
     return density
 
@@ -79,17 +80,18 @@ def select_dimension_by_cardinality(db_conn, block_tables):
 	return 1
 
 
+
 def find_single_block(db_conn, CUBE_TABLE, att_tables, dimension_num, m_r, density, att_names, col_fmts):
 
 	# initialization of tables and attributes sets
     B_TABLE = "B_TABLE"
     cube_sql_copy_table(db_conn, B_TABLE, CUBE_TABLE)
-    m_b = m_r
+    mass_b = mass_r
     block_tables = [None] * dimension_num
     for n in range(dimension_num):
         block_tables[n] = 'B' + str(n)
         cube_sql_copy_table(db_conn, block_tables[n], att_tables[n])
-    density_tilde = measure_density(db_conn, m_b, block_tables, m_r, att_tables, args)
+    density_tilde = measure_density(db_conn, mass_b, block_tables, mass_r, att_tables, args)
     r = 1
     r_tilde = 1
 
@@ -97,23 +99,32 @@ def find_single_block(db_conn, CUBE_TABLE, att_tables, dimension_num, m_r, densi
     notEmpty = tables_not_empty(db_conn, block_tables)
     while notEmpty:
         # compute all possible attribute_value masses
-        cols_description = "dimension_index integer, value integer, attribute-value_mass integer"
-        attVal_Masses_tables = "Attribute-value_Masses_TABLE"
-        cube_sql_table_drop_create(db_conn, attVal_Masses_tables, cols_description)
+        cols_description = "dimension_index integer, a_value integer, attribute-value_mass numeric"
+        attVal_Masses_TABLE = "Attribute-value_Masses_TABLE"
+        cube_sql_table_drop_create(db_conn, attVal_Masses_TABLE, cols_description)
         compute_attribute_value_masses(db_conn, B_TABLE, block_tables, attVal_Masses_tables)
 
         # select dimension with specified metric (default: by cardinality)
-        i_dim = select_dimension(db_conn, block_tables)   
+        i_dim = select_dimension(db_conn, block_tables)  
+        print "the dimension to iterate is dim-%d" % i_dim 
 
+        # find set which satisfies constraint to be removed 
+        mass_b_i = cube_sql_mass(db_conn, block_tables[i_dim]) 
+        threshold = mass_b * 1.0 / mass_b_i
+        valueToDel_TABLE = "Values_to_remove_TABLE"
+        valueToDel = cube_select_values_to_remove(db_conn, valueToDel_TABLE, attVal_Masses_TABLE, threshold, i_dim)
 
+        #TO DO: iteratively delete rows of the specific dimsension and attribute value
+        for i in range(len(valueToDel)):
+        	# TO DO
+
+        # TO DO: remove tuples
 
         notEmpty = tables_not_empty(db_conn, block_tables)
-    flag = tables_not_empty(db_conn, block_tables)
-    while flag:
-        # TODO: Block selection
-        #flag = tables_not_empty(db_conn, block_tables)
-        print 'Enter loop.'
-        flag = False
+
+    # TO DO: reconstruct target block
+    block_tables = reconstruct_block()
+
     return block_tables
 
 def main():
