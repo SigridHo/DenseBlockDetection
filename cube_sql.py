@@ -172,14 +172,14 @@ def cube_sql_insert_row(db_conn, dest_table, newEntry):
     cur.close() 
     # print "Inserted a row given the conditions."
 
-def cube_sql_remove_rows_from_block(db_conn, dest_table, conditions):
+def cube_sql_update_block(db_conn, B_table, D_table, attrName):
     cur = db_conn.cursor()
-    conditions = " AND ".join(conditions)
-    query = "DELETE FROM %s WHERE %s" % (dest_table, conditions)
+    query = "DELETE FROM %s USING %s" % (B_table, D_table) \
+        + " WHERE %s.%s = %s.a_value" % (B_table, attrName, D_table)
     cur.execute(query)
-    db_conn.commit()                       
-    cur.close() 
-    # print "Deleted rows given the conditions."
+    db_conn.commit()                            
+    cur.close()
+    print "Updated %s by removing tuples in %s." % (B_table, D_table)
 
 
 
