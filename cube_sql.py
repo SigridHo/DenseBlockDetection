@@ -75,7 +75,7 @@ def cube_sql_mass(db_conn, table_name):
     mass = cur.fetchone()[0]
     db_conn.commit()                            
     cur.close() 
-    print "Mass of %s: " % table_name + str(mass)
+    # print "Mass of %s: " % table_name + str(mass)
     return mass
 
 def cube_sql_delete_from_block(db_conn, table_name, block_tables, att_names, dimension_num):
@@ -192,8 +192,4 @@ def cube_sql_reconstruct_block(db_conn, b_table, r_table, order_table, att_name,
     db_conn.commit()                            
     cur.close() 
     print "Reconstruct %s by %s and %s" % (b_table, r_table, order_table)    
-
-
-
-
 

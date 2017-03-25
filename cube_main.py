@@ -8,14 +8,14 @@ import time
 
 db_conn = None;
 
-def find_single_block_test(db_conn, CUBE_TABLE, att_tables, dimension_num, m_r, density, att_names, col_fmts):
+def find_single_block_test(db_conn, RELATION_TABLE, att_tables, dimension_num, m_r, density, att_names, col_fmts):
     block_tables = [None] * dimension_num
     # For algorithm 1 testing
     for n in range(dimension_num):
         block_tables[n] = 'B' + str(n)
         att_name = att_names[n]
         col_fmt = col_fmts[n]
-        cube_sql_distinct_attribute_value(db_conn, block_tables[n], CUBE_TABLE, att_name, col_fmt)
+        cube_sql_distinct_attribute_value(db_conn, block_tables[n], RELATION_TABLE, att_name, col_fmt)
     return block_tables
 
 def measure_density(db_conn, m_b, block_tables, m_r, att_tables, args):
@@ -61,20 +61,35 @@ def CUBE_not_empty(db_conn, block_tables):
 def table_not_empty(db_conn, dest_table):
 	return cube_sql_mass(db_conn, dest_table) > 0
 
-def select_dimension(db_conn, block_tables, metric = "cardinality"):
+def select_dimension(db_conn, block_tables, att_tables, attVal_Masses_TABLE, mass_b, mass_r, args, metric = "cardinality"):
 	if metric == "density":
-		return select_dimension_by_density(db_conn, block_tables)
+		return select_dimension_by_density(db_conn, block_tables, att_tables, attVal_Masses_TABLE, mass_b, mass_r, args)
 	else:
 		return select_dimension_by_cardinality(db_conn, block_tables)
 
-def select_dimension_by_density(db_conn, block_tables):
+def select_dimension_by_density(db_conn, block_tables, att_tables, attVal_Masses_TABLE, mass_b, mass_r, args):
+	# parameter initialization 
+	density_tilde = float('-inf')
+	dim = 0
 
-	return 1
+	for i in range(args.dimension_num):
+		if table_not_empty(db_conn, block_tables[i]):
+			# find set which satisfies constraint to be removed 
+			threshold = mass_b * 1.0 / mass_b_i
+			print "threshold = %f" % threshold
+			cube_select_values_to_remove(db_conn, D_CUBE_TABLE, attVal_Masses_TABLE, threshold, dim_i)
+
+	# density_prime = measure_density(db_conn, mass_b, block_tables, mass_r, att_tables, args)
+
+	return 1, -1
 
 
 def select_dimension_by_cardinality(db_conn, block_tables):
+	# parameter initialization 	
 	dim = -1 		
 	maxMass = -1
+
+	# find dimension with maximum mass
 	for block_table in block_tables:
 		currMass = cube_sql_mass(db_conn, block_table)
         if currMass > maxMass:
@@ -90,11 +105,11 @@ def compute_attribute_value_masses(db_conn, B_TABLE, block_tables, attVal_Masses
 		cube_sql_insert_attrVal_mass(db_conn, B_TABLE, block_table, attVal_Masses_TABLE, dim, att_names[dim])
 
 
-def find_single_block(db_conn, CUBE_TABLE, att_tables, mass_r, att_names, col_fmts, args):
+def find_single_block(db_conn, RELATION_TABLE, att_tables, mass_r, att_names, col_fmts, args):
 
 	# initialization of tables and attributes sets
     B_TABLE = "B_TABLE"
-    cube_sql_copy_table(db_conn, B_TABLE, CUBE_TABLE)
+    cube_sql_copy_table(db_conn, B_TABLE, RELATION_TABLE)
     mass_b = mass_r
     block_tables = [None] * args.dimension_num
     for n in range(args.dimension_num):
@@ -115,13 +130,15 @@ def find_single_block(db_conn, CUBE_TABLE, att_tables, mass_r, att_names, col_fm
 
         # select dimension with specified metric (default: by cardinality)
         print "\n# Selecting dimension..." 
-        dim_i, mass_b_i = select_dimension(db_conn, block_tables, "cardinality")  # methods: density, cardinality(default)
+        # metric methods: density, cardinality(default)
+        dim_i, mass_b_i = select_dimension(db_conn, block_tables, att_tables, attVal_Masses_TABLE, mass_b, mass_r, args, "density")  
+
+        break
 
         # find set which satisfies constraint to be removed 
         print "\n# Forming set to be removed (dim-%d)..." % dim_i
         threshold = mass_b * 1.0 / mass_b_i
         print "threshold = %f" % threshold
-        D_CUBE_TABLE = "D_CUBE_TABLE"
         cube_select_values_to_remove(db_conn, D_CUBE_TABLE, attVal_Masses_TABLE, threshold, dim_i)
         D_CUBE_Static_TABLE = "D_CUBE_TABLE_static"   # duplicate a static copy for later operations
         cube_sql_copy_table(db_conn, D_CUBE_Static_TABLE, D_CUBE_TABLE)
@@ -172,13 +189,11 @@ def find_single_block(db_conn, CUBE_TABLE, att_tables, mass_r, att_names, col_fm
 		att_table = att_tables[n]
 		cube_sql_reconstruct_block(db_conn, block_table_ret, att_table, ORDER_TABLE, att_name, col_fmt, r_tilde, dim_i)
 
-
-    # return block_tables
-    return block_tables_ret
+    return block_tables_ret     # return block_tables
 
 def main():
     global db_conn
-    global CUBE_TABLE  # R
+    global RELATION_TABLE  # R
     global ORI_TABLE   # R_ori
     global BLOCK_TABLE # B_ori
     # Command Line processing
@@ -202,12 +217,12 @@ def main():
 
         ''' initialize tables and copy original relations '''
         cols_description = "src_ip text, dest_ip text, time_stamp text"
-        cube_sql_table_drop_create(db_conn, CUBE_TABLE, cols_description)
+        cube_sql_table_drop_create(db_conn, RELATION_TABLE, cols_description)
         cols_name = "src_ip, dest_ip, time_stamp"
-        cube_sql_load_table_from_file(db_conn, CUBE_TABLE, cols_name, args.input_file, args.delimiter)
+        cube_sql_load_table_from_file(db_conn, RELATION_TABLE, cols_name, args.input_file, args.delimiter)
 
-        cube_sql_copy_table(db_conn, ORI_TABLE, CUBE_TABLE)
-        # cube_sql_print_table(db_conn, CUBE_TABLE)
+        cube_sql_copy_table(db_conn, ORI_TABLE, RELATION_TABLE)
+        # cube_sql_print_table(db_conn, RELATION_TABLE)
 
         ''' create tables for N dimension attributes to store the distinct values '''
         att_tables = [None] * args.dimension_num    # R_n
@@ -217,23 +232,23 @@ def main():
             att_tables[n] = 'R' + str(n)
             att_name = att_names[n]
             col_fmt = col_fmts[n]
-            cube_sql_distinct_attribute_value(db_conn, att_tables[n], CUBE_TABLE, att_name, col_fmt)
+            cube_sql_distinct_attribute_value(db_conn, att_tables[n], RELATION_TABLE, att_name, col_fmt)
         # cube_sql_print_table(db_conn, "R1")
 
         ''' find single blocks and retrieve blocks from origianl data '''
         results = [None] * args.block_num
         for i in range(args.block_num):
-            m_r = cube_sql_mass(db_conn, CUBE_TABLE)
+            m_r = cube_sql_mass(db_conn, RELATION_TABLE)
             # print m_r
             block_tables = [None] * args.dimension_num # B_n
 
-            block_tables = find_single_block(db_conn, CUBE_TABLE, att_tables, m_r, att_names, col_fmts, args)
+            block_tables = find_single_block(db_conn, RELATION_TABLE, att_tables, m_r, att_names, col_fmts, args)
 
-            # cube_sql_delete_from_block(db_conn, CUBE_TABLE, block_tables, att_names, args.dimension_num)
-            # results[i] = BLOCK_TABLE + str(i)
-            # cube_sql_block_create_insert(db_conn, results[i], ORI_TABLE, block_tables, att_names, args.dimension_num, cols_description)
-            # #m_r = cube_sql_mass(db_conn, results[i])
-            # #print m_r
+            cube_sql_delete_from_block(db_conn, RELATION_TABLE, block_tables, att_names, args.dimension_num)
+            results[i] = BLOCK_TABLE + str(i)
+            cube_sql_block_create_insert(db_conn, results[i], ORI_TABLE, block_tables, att_names, args.dimension_num, cols_description)
+            #m_r = cube_sql_mass(db_conn, results[i])
+            #print m_r
 
     except:
         print "Unexpected error:", sys.exc_info()[0]    
