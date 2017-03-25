@@ -8,6 +8,7 @@ def cube_db_initialize():
     print "Connected To Database"
     return db_conn
 
+
 # Drop and recreate table    
 def cube_sql_table_drop_create(db_conn, table_name, create_sql_cols, drop=True):
     cur = db_conn.cursor()
@@ -21,6 +22,7 @@ def cube_sql_table_drop_create(db_conn, table_name, create_sql_cols, drop=True):
     db_conn.commit()
     cur.close()
 
+
 # Load table from file 
 def cube_sql_load_table_from_file(db_conn, table_name, col_fmt, file_name, delim, drop=True):
     cur = db_conn.cursor()
@@ -28,6 +30,7 @@ def cube_sql_load_table_from_file(db_conn, table_name, col_fmt, file_name, delim
     db_conn.commit()
     cur.close()
     print "Loaded data from %s" % (file_name)
+
 
 # Copy table completely
 def cube_sql_copy_table(db_conn, dest_table, src_table, drop=True):
@@ -43,6 +46,7 @@ def cube_sql_copy_table(db_conn, dest_table, src_table, drop=True):
     cur.close()
     print "Copied table %s to %s" % (src_table, dest_table)
 
+
 def cube_sql_print_table(db_conn, table_name):
     cur = db_conn.cursor();
     cur.execute("SELECT * from %s" % table_name);
@@ -54,12 +58,14 @@ def cube_sql_print_table(db_conn, table_name):
             break 
     cur.close();
 
+
 def cube_sql_create_and_insert(db_conn, dest_table, src_table, col_fmt, insert_cols, select_cols):
     cur = db_conn.cursor()
     cube_sql_table_drop_create(db_conn, dest_table, col_fmt)    
     cur.execute ("INSERT INTO %s(%s)" % (dest_table, insert_cols) + " SELECT %s FROM %s" % (select_cols,src_table))
     db_conn.commit()                            
     cur.close() 
+
 
 def cube_sql_distinct_attribute_value(db_conn, dest_table, src_table, att_name, col_fmt):
     cur = db_conn.cursor()
@@ -69,6 +75,7 @@ def cube_sql_distinct_attribute_value(db_conn, dest_table, src_table, att_name, 
     cur.close() 
     print "Get distinct attribute from table %s to %s" % (src_table, dest_table)
 
+
 def cube_sql_mass(db_conn, table_name):
     cur = db_conn.cursor()
     cur.execute ("SELECT count(*) FROM %s" % table_name)
@@ -77,6 +84,7 @@ def cube_sql_mass(db_conn, table_name):
     cur.close() 
     # print "Mass of %s: " % table_name + str(mass)
     return mass
+
 
 def cube_sql_delete_from_block(db_conn, table_name, block_tables, att_names, dimension_num):
     cur = db_conn.cursor()
@@ -95,6 +103,7 @@ def cube_sql_delete_from_block(db_conn, table_name, block_tables, att_names, dim
     db_conn.commit()                            
     cur.close()
     print "Deleted from block." 
+
 
 def cube_sql_block_create_insert(db_conn, block_table, cube_table, block_tables, att_names, dimension_num, cols_description):
     cur = db_conn.cursor()
@@ -142,6 +151,7 @@ def cube_select_values_to_remove(db_conn, d_cube_table, attval_masses_table, thr
     cur.close() 
     print "Created %s for dimension %d in increasing order of attrVal_mass." % (d_cube_table, dim)
 
+
 def cube_sql_dCube_sum(db_conn, d_cube_table):
     cur = db_conn.cursor()
     query = "SELECT SUM(attrval_mass) FROM %s"  % d_cube_table 
@@ -151,6 +161,7 @@ def cube_sql_dCube_sum(db_conn, d_cube_table):
     cur.close() 
     # print "Computed attribute-vale masses for %s." % d_cube_table
     return delta
+
 
 def cube_sql_fetch_firstRow(db_conn, dest_table):
     cur = db_conn.cursor()
@@ -172,6 +183,7 @@ def cube_sql_delete_rows(db_conn, dest_table, conditions):
     cur.close() 
     # print "Deleted rows given the conditions."
 
+
 def cube_sql_insert_row(db_conn, dest_table, newEntry):
     cur = db_conn.cursor()
     newEntry = ", ".join(newEntry)
@@ -181,6 +193,7 @@ def cube_sql_insert_row(db_conn, dest_table, newEntry):
     cur.close() 
     # print "Inserted a row given the conditions."
 
+
 def cube_sql_update_block(db_conn, B_table, D_table, attrName):
     cur = db_conn.cursor()
     query = "DELETE FROM %s AS A USING %s AS B" % (B_table, D_table) \
@@ -189,6 +202,7 @@ def cube_sql_update_block(db_conn, B_table, D_table, attrName):
     db_conn.commit()                            
     cur.close()
     print "Updated %s by removing tuples in %s." % (B_table, D_table)
+
 
 def cube_sql_reconstruct_block(db_conn, b_table, r_table, order_table, att_name, col_fmt, r_tilde, dim):
     cur = db_conn.cursor()

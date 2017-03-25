@@ -18,6 +18,7 @@ def find_single_block_test(db_conn, RELATION_TABLE, att_tables, dimension_num, m
         cube_sql_distinct_attribute_value(db_conn, block_tables[n], RELATION_TABLE, att_name, col_fmt)
     return block_tables
 
+
 def measure_density(db_conn, m_b, block_tables, m_r, att_tables, args):
     method = args.density
     if method.startswith('a'):  # Arithmetic Average Mass
@@ -58,8 +59,10 @@ def Block_not_empty(db_conn, block_tables):
             return True
     return False
 
+
 def table_not_empty(db_conn, dest_table):
 	return cube_sql_mass(db_conn, dest_table) > 0
+
 
 def select_dimension(db_conn, block_tables, att_tables, att_names, attVal_Masses_TABLE, mass_b, mass_r, args, metric = "cardinality"):
 	if metric == "density":
