@@ -155,7 +155,14 @@ def find_single_block(db_conn, CUBE_TABLE, att_tables, mass_r, att_names, col_fm
         print "\n# Removing tuples from block..."
         attrName = att_names[dim_i]
         cube_sql_update_block(db_conn, B_TABLE, D_CUBE_Static_TABLE, attrName)
+    	block_tables = [None] * args.dimension_num
+        for n in range(args.dimension_num):
+        	block_tables[n] = 'B' + str(n)
+        	att_name = att_names[n]
+        	col_fmt = col_fmts[n]	
+        	cube_sql_distinct_attribute_value(db_conn, block_tables[n], B_TABLE, att_name, col_fmt)
 
+        
 
 
     # # TO DO: reconstruct target block
