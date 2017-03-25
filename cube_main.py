@@ -21,8 +21,6 @@ def find_single_block_test(db_conn, RELATION_TABLE, att_tables, dimension_num, m
 
 def measure_density(db_conn, m_b, block_tables, m_r, att_tables, args):
     method = args.density
-    if m_b == 0:
-         return 0
     if method.startswith('a'):  # Arithmetic Average Mass
         sum_size = 0.0  # sum of |B_n|
         for block_table in block_tables:
@@ -35,11 +33,17 @@ def measure_density(db_conn, m_b, block_tables, m_r, att_tables, args):
         for block_table in block_tables:
             product_size *= cube_sql_mass(db_conn, block_table)
         product_size = pow(product_size, 1.0/args.dimension_num)
-        density = m_b / product_size
+        if product_size == 0:
+            density = 0
+        else:
+            density = m_b / product_size
 
     elif method.startswith('s'): # Suspicousness
         ratio = float(m_b) / m_r
-        density = m_b * (math.log(ratio) - 1)
+        if ratio == 0:
+            density = 0.0
+        else:
+            density = m_b * (math.log(ratio) - 1)
         product_ratio = 1.0   # product of |B_n| / |R_n|
         for n in range(args.dimension_num):
             b_size = cube_sql_mass(db_conn, block_tables[n])
