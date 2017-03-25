@@ -1,0 +1,3387 @@
+ Connected To Database
+Loaded data from /Users/xinruihe/datasets/darpa.csv
+Copied table RELATION_TABLE to ORI_TABLE
+Get distinct attribute from table RELATION_TABLE to R0
+Get distinct attribute from table RELATION_TABLE to R1
+Get distinct attribute from table RELATION_TABLE to R2
+Copied table RELATION_TABLE to B_TABLE
+Copied table R0 to B0
+Copied table R1 to B1
+Copied table R2 to B2
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+4554344 4440830
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+4554344 4239973
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+4554344 3268913
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-0)...
+threshold = 480.213412
+Created D_CUBE_TABLE for dimension 0 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+4440830 4138534
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+4440830 4130920
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+4440830 3175484
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-1)...
+threshold = 189.811506
+Created D_CUBE_TABLE for dimension 1 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+4130920 3843999
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+4130920 3607566
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+4130920 2940089
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-1)...
+threshold = 5818.197183
+Created D_CUBE_TABLE for dimension 1 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+3607566 3190386
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+3607566 2957720
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+3607566 2560719
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-0)...
+threshold = 17344.067308
+Created D_CUBE_TABLE for dimension 0 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+3190386 2678446
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+3190386 2774778
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+3190386 2307622
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-1)...
+threshold = 67880.553191
+Created D_CUBE_TABLE for dimension 1 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+2774778 2639373
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+2774778 2162026
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+2774778 2163335
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-0)...
+threshold = 115615.750000
+Created D_CUBE_TABLE for dimension 0 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+2639373 1523798
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+2639373 2141460
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+2639373 2138981
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-2)...
+threshold = 119.153673
+Created D_CUBE_TABLE for dimension 2 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+2138981 1523519
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+2138981 2137599
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+2138981 1249566
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-1)...
+threshold = 427796.200000
+Created D_CUBE_TABLE for dimension 1 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+2137599 1523519
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+2137599 1523532
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+2137599 1244847
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-0)...
+threshold = 356266.500000
+Created D_CUBE_TABLE for dimension 0 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+1523519 1023906
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+1523519 0
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+1523519 932444
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-0)...
+threshold = 761759.500000
+Created D_CUBE_TABLE for dimension 0 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+1023906 0
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+1023906 0
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+1023906 548962
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-2)...
+threshold = 3908.038168
+Created D_CUBE_TABLE for dimension 2 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+548962 0
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+548962 0
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+548962 411487
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-2)...
+threshold = 5601.653061
+Created D_CUBE_TABLE for dimension 2 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+411487 0
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+411487 0
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+411487 247449
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-2)...
+threshold = 5795.591549
+Created D_CUBE_TABLE for dimension 2 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+247449 0
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+247449 0
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+247449 106919
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-2)...
+threshold = 5891.642857
+Created D_CUBE_TABLE for dimension 2 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+106919 0
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+106919 0
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+106919 47789
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-2)...
+threshold = 5939.944444
+Created D_CUBE_TABLE for dimension 2 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+47789 0
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+47789 0
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+47789 23954
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-2)...
+threshold = 5973.625000
+Created D_CUBE_TABLE for dimension 2 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+23954 0
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+23954 0
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+23954 6000
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-2)...
+threshold = 5988.500000
+Created D_CUBE_TABLE for dimension 2 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+6000 0
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+6000 0
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+6000 0
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-0)...
+threshold = 6000.000000
+Created D_CUBE_TABLE for dimension 0 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+Reconstruct B0 by R0 and ORDER_TABLE
+Reconstruct B1 by R1 and ORDER_TABLE
+Reconstruct B2 by R2 and ORDER_TABLE
+Deleted from block.
+Created and inserted block table BLOCK_TABLE0.
+0
+Copied table RELATION_TABLE to B_TABLE
+Copied table R0 to B0
+Copied table R1 to B1
+Copied table R2 to B2
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+4554344 4440830
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+4554344 4239973
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+4554344 3268913
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-0)...
+threshold = 480.213412
+Created D_CUBE_TABLE for dimension 0 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+4440830 4138534
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+4440830 4130920
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+4440830 3175484
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-1)...
+threshold = 189.811506
+Created D_CUBE_TABLE for dimension 1 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+4130920 3843999
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+4130920 3607566
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+4130920 2940089
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-1)...
+threshold = 5818.197183
+Created D_CUBE_TABLE for dimension 1 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+3607566 3190386
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+3607566 2957720
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+3607566 2560719
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-0)...
+threshold = 17344.067308
+Created D_CUBE_TABLE for dimension 0 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+3190386 2678446
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+3190386 2774778
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+3190386 2307622
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-1)...
+threshold = 67880.553191
+Created D_CUBE_TABLE for dimension 1 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+2774778 2639373
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+2774778 2162026
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+2774778 2163335
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-0)...
+threshold = 115615.750000
+Created D_CUBE_TABLE for dimension 0 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+2639373 1523798
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+2639373 2141460
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+2639373 2138981
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-2)...
+threshold = 119.153673
+Created D_CUBE_TABLE for dimension 2 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+2138981 1523519
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+2138981 2137599
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+2138981 1249566
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-1)...
+threshold = 427796.200000
+Created D_CUBE_TABLE for dimension 1 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+2137599 1523519
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+2137599 1523532
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+2137599 1244847
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-0)...
+threshold = 356266.500000
+Created D_CUBE_TABLE for dimension 0 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+1523519 1023906
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+1523519 0
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+1523519 932444
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-0)...
+threshold = 761759.500000
+Created D_CUBE_TABLE for dimension 0 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+1023906 0
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+1023906 0
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+1023906 548962
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-2)...
+threshold = 3908.038168
+Created D_CUBE_TABLE for dimension 2 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+548962 0
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+548962 0
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+548962 411487
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-2)...
+threshold = 5601.653061
+Created D_CUBE_TABLE for dimension 2 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+411487 0
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+411487 0
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+411487 247449
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-2)...
+threshold = 5795.591549
+Created D_CUBE_TABLE for dimension 2 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+247449 0
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+247449 0
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+247449 106919
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-2)...
+threshold = 5891.642857
+Created D_CUBE_TABLE for dimension 2 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+106919 0
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+106919 0
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+106919 47789
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-2)...
+threshold = 5939.944444
+Created D_CUBE_TABLE for dimension 2 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+47789 0
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+47789 0
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+47789 23954
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-2)...
+threshold = 5973.625000
+Created D_CUBE_TABLE for dimension 2 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+23954 0
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+23954 0
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+23954 6000
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-2)...
+threshold = 5988.500000
+Created D_CUBE_TABLE for dimension 2 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+6000 0
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+6000 0
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+6000 0
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-0)...
+threshold = 6000.000000
+Created D_CUBE_TABLE for dimension 0 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+Reconstruct B0 by R0 and ORDER_TABLE
+Reconstruct B1 by R1 and ORDER_TABLE
+Reconstruct B2 by R2 and ORDER_TABLE
+Deleted from block.
+Created and inserted block table BLOCK_TABLE1.
+0
+Copied table RELATION_TABLE to B_TABLE
+Copied table R0 to B0
+Copied table R1 to B1
+Copied table R2 to B2
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+4554344 4440830
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+4554344 4239973
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+4554344 3268913
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-0)...
+threshold = 480.213412
+Created D_CUBE_TABLE for dimension 0 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+4440830 4138534
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+4440830 4130920
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+4440830 3175484
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-1)...
+threshold = 189.811506
+Created D_CUBE_TABLE for dimension 1 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+4130920 3843999
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+4130920 3607566
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+4130920 2940089
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-1)...
+threshold = 5818.197183
+Created D_CUBE_TABLE for dimension 1 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+3607566 3190386
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+3607566 2957720
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+3607566 2560719
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-0)...
+threshold = 17344.067308
+Created D_CUBE_TABLE for dimension 0 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+3190386 2678446
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+3190386 2774778
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+3190386 2307622
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-1)...
+threshold = 67880.553191
+Created D_CUBE_TABLE for dimension 1 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+2774778 2639373
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+2774778 2162026
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+2774778 2163335
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-0)...
+threshold = 115615.750000
+Created D_CUBE_TABLE for dimension 0 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+2639373 1523798
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+2639373 2141460
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+2639373 2138981
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-2)...
+threshold = 119.153673
+Created D_CUBE_TABLE for dimension 2 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+2138981 1523519
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+2138981 2137599
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+2138981 1249566
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-1)...
+threshold = 427796.200000
+Created D_CUBE_TABLE for dimension 1 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+2137599 1523519
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+2137599 1523532
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+2137599 1244847
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-0)...
+threshold = 356266.500000
+Created D_CUBE_TABLE for dimension 0 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+1523519 1023906
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+1523519 0
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+1523519 932444
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-0)...
+threshold = 761759.500000
+Created D_CUBE_TABLE for dimension 0 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+1023906 0
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+1023906 0
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+1023906 548962
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-2)...
+threshold = 3908.038168
+Created D_CUBE_TABLE for dimension 2 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+548962 0
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+548962 0
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+548962 411487
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-2)...
+threshold = 5601.653061
+Created D_CUBE_TABLE for dimension 2 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+411487 0
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+411487 0
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+411487 247449
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-2)...
+threshold = 5795.591549
+Created D_CUBE_TABLE for dimension 2 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+247449 0
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+247449 0
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+247449 106919
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-2)...
+threshold = 5891.642857
+Created D_CUBE_TABLE for dimension 2 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+106919 0
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+106919 0
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+106919 47789
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-2)...
+threshold = 5939.944444
+Created D_CUBE_TABLE for dimension 2 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+47789 0
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+47789 0
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+47789 23954
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-2)...
+threshold = 5973.625000
+Created D_CUBE_TABLE for dimension 2 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+23954 0
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+23954 0
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+23954 6000
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-2)...
+threshold = 5988.500000
+Created D_CUBE_TABLE for dimension 2 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+6000 0
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+6000 0
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+6000 0
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-0)...
+threshold = 6000.000000
+Created D_CUBE_TABLE for dimension 0 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+Reconstruct B0 by R0 and ORDER_TABLE
+Reconstruct B1 by R1 and ORDER_TABLE
+Reconstruct B2 by R2 and ORDER_TABLE
+Deleted from block.
+Created and inserted block table BLOCK_TABLE2.
+0
+Copied table RELATION_TABLE to B_TABLE
+Copied table R0 to B0
+Copied table R1 to B1
+Copied table R2 to B2
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+4554344 4440830
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+4554344 4239973
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+4554344 3268913
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-0)...
+threshold = 480.213412
+Created D_CUBE_TABLE for dimension 0 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+4440830 4138534
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+4440830 4130920
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+4440830 3175484
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-1)...
+threshold = 189.811506
+Created D_CUBE_TABLE for dimension 1 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+4130920 3843999
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+4130920 3607566
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+4130920 2940089
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-1)...
+threshold = 5818.197183
+Created D_CUBE_TABLE for dimension 1 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+3607566 3190386
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+3607566 2957720
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+3607566 2560719
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-0)...
+threshold = 17344.067308
+Created D_CUBE_TABLE for dimension 0 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+3190386 2678446
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+3190386 2774778
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+3190386 2307622
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-1)...
+threshold = 67880.553191
+Created D_CUBE_TABLE for dimension 1 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+2774778 2639373
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+2774778 2162026
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+2774778 2163335
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-0)...
+threshold = 115615.750000
+Created D_CUBE_TABLE for dimension 0 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+2639373 1523798
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+2639373 2141460
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+2639373 2138981
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-2)...
+threshold = 119.153673
+Created D_CUBE_TABLE for dimension 2 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+2138981 1523519
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+2138981 2137599
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+2138981 1249566
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-1)...
+threshold = 427796.200000
+Created D_CUBE_TABLE for dimension 1 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+2137599 1523519
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+2137599 1523532
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+2137599 1244847
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-0)...
+threshold = 356266.500000
+Created D_CUBE_TABLE for dimension 0 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+1523519 1023906
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+1523519 0
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+1523519 932444
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-0)...
+threshold = 761759.500000
+Created D_CUBE_TABLE for dimension 0 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+1023906 0
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+1023906 0
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+1023906 548962
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-2)...
+threshold = 3908.038168
+Created D_CUBE_TABLE for dimension 2 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+548962 0
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+548962 0
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+548962 411487
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-2)...
+threshold = 5601.653061
+Created D_CUBE_TABLE for dimension 2 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+411487 0
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+411487 0
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+411487 247449
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-2)...
+threshold = 5795.591549
+Created D_CUBE_TABLE for dimension 2 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+247449 0
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+247449 0
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+247449 106919
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-2)...
+threshold = 5891.642857
+Created D_CUBE_TABLE for dimension 2 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+106919 0
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+106919 0
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+106919 47789
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-2)...
+threshold = 5939.944444
+Created D_CUBE_TABLE for dimension 2 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+47789 0
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+47789 0
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+47789 23954
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-2)...
+threshold = 5973.625000
+Created D_CUBE_TABLE for dimension 2 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+23954 0
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+23954 0
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+23954 6000
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-2)...
+threshold = 5988.500000
+Created D_CUBE_TABLE for dimension 2 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+6000 0
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+6000 0
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+6000 0
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-0)...
+threshold = 6000.000000
+Created D_CUBE_TABLE for dimension 0 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+Reconstruct B0 by R0 and ORDER_TABLE
+Reconstruct B1 by R1 and ORDER_TABLE
+Reconstruct B2 by R2 and ORDER_TABLE
+Deleted from block.
+Created and inserted block table BLOCK_TABLE3.
+0
+Copied table RELATION_TABLE to B_TABLE
+Copied table R0 to B0
+Copied table R1 to B1
+Copied table R2 to B2
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+4554344 4440830
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+4554344 4239973
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+4554344 3268913
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-0)...
+threshold = 480.213412
+Created D_CUBE_TABLE for dimension 0 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+4440830 4138534
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+4440830 4130920
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+4440830 3175484
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-1)...
+threshold = 189.811506
+Created D_CUBE_TABLE for dimension 1 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+4130920 3843999
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+4130920 3607566
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+4130920 2940089
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-1)...
+threshold = 5818.197183
+Created D_CUBE_TABLE for dimension 1 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+3607566 3190386
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+3607566 2957720
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+3607566 2560719
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-0)...
+threshold = 17344.067308
+Created D_CUBE_TABLE for dimension 0 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+3190386 2678446
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+3190386 2774778
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+3190386 2307622
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-1)...
+threshold = 67880.553191
+Created D_CUBE_TABLE for dimension 1 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+2774778 2639373
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+2774778 2162026
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+2774778 2163335
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-0)...
+threshold = 115615.750000
+Created D_CUBE_TABLE for dimension 0 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+2639373 1523798
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+2639373 2141460
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+2639373 2138981
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-2)...
+threshold = 119.153673
+Created D_CUBE_TABLE for dimension 2 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+2138981 1523519
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+2138981 2137599
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+2138981 1249566
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-1)...
+threshold = 427796.200000
+Created D_CUBE_TABLE for dimension 1 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+2137599 1523519
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+2137599 1523532
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+2137599 1244847
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-0)...
+threshold = 356266.500000
+Created D_CUBE_TABLE for dimension 0 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+1523519 1023906
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+1523519 0
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+1523519 932444
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-0)...
+threshold = 761759.500000
+Created D_CUBE_TABLE for dimension 0 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+1023906 0
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+1023906 0
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+1023906 548962
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-2)...
+threshold = 3908.038168
+Created D_CUBE_TABLE for dimension 2 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+548962 0
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+548962 0
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+548962 411487
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-2)...
+threshold = 5601.653061
+Created D_CUBE_TABLE for dimension 2 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+411487 0
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+411487 0
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+411487 247449
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-2)...
+threshold = 5795.591549
+Created D_CUBE_TABLE for dimension 2 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+247449 0
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+247449 0
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+247449 106919
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-2)...
+threshold = 5891.642857
+Created D_CUBE_TABLE for dimension 2 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+106919 0
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+106919 0
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+106919 47789
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-2)...
+threshold = 5939.944444
+Created D_CUBE_TABLE for dimension 2 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+47789 0
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+47789 0
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+47789 23954
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-2)...
+threshold = 5973.625000
+Created D_CUBE_TABLE for dimension 2 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+23954 0
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+23954 0
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+23954 6000
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-2)...
+threshold = 5988.500000
+Created D_CUBE_TABLE for dimension 2 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+
+# Calculating attribute-vale masses...
+Dimension = 0, Attribute = src_ip
+Inserted AttrVal Masses of dimension-0 (src_ip) into AttributeValue_Masses_TABLE.
+Dimension = 1, Attribute = dest_ip
+Inserted AttrVal Masses of dimension-1 (dest_ip) into AttributeValue_Masses_TABLE.
+Dimension = 2, Attribute = time_stamp
+Inserted AttrVal Masses of dimension-2 (time_stamp) into AttributeValue_Masses_TABLE.
+
+# Selecting dimension...
+Created d_cube_dimSelection for dimension 0 in increasing order of attrVal_mass.
+6000 0
+Copied table B0 to B0_prime
+Updated B0_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 1 in increasing order of attrVal_mass.
+6000 0
+Copied table B1 to B1_prime
+Updated B1_prime by removing tuples in d_cube_dimSelection.
+Created d_cube_dimSelection for dimension 2 in increasing order of attrVal_mass.
+6000 0
+Copied table B2 to B2_prime
+Updated B2_prime by removing tuples in d_cube_dimSelection.
+
+# Forming set to be removed (dim-0)...
+threshold = 6000.000000
+Created D_CUBE_TABLE for dimension 0 in increasing order of attrVal_mass.
+Copied table D_CUBE_TABLE to D_CUBE_TABLE_static
+
+# Iterating removal values...
+
+# Removing tuples from block...
+Updated B_TABLE by removing tuples in D_CUBE_TABLE_static.
+Get distinct attribute from table B_TABLE to B0
+Get distinct attribute from table B_TABLE to B1
+Get distinct attribute from table B_TABLE to B2
+
+# Reconstructing distinct value sets of block dimensions...
+Reconstruct B0 by R0 and ORDER_TABLE
+Reconstruct B1 by R1 and ORDER_TABLE
+Reconstruct B2 by R2 and ORDER_TABLE
+Deleted from block.
+Created and inserted block table BLOCK_TABLE4.
+0
+Xinruis-MBP:DenseBlockDetection xinruihe$ 
