@@ -120,28 +120,37 @@ def cube_sql_block_create_insert(db_conn, block_table, cube_table, block_tables,
     print "Created and inserted block table %s." % block_table
 
 
-def cube_sql_insert_attrVal_mass(db_conn, B_TABLE, block_table, attVal_Masses_TABLE, dim, attrName):
+def cube_sql_insert_attrVal_mass(db_conn, b_table, block_table, attval_masses_table, dim, attrName):
     cur = db_conn.cursor()
-    query = "INSERT INTO %s" % attVal_Masses_TABLE \
+    query = "INSERT INTO %s" % attval_masses_table \
         + " SELECT %d, A.%s, COUNT(*) AS attrVal_mass" % (dim, attrName) \
-        + " FROM %s AS A, %s AS B WHERE A.%s = B.%s " % (block_table, B_TABLE, attrName, attrName) \
+        + " FROM %s AS A, %s AS B WHERE A.%s = B.%s " % (block_table, b_table, attrName, attrName) \
         + " GROUP BY A.%s" % attrName
     cur.execute(query)
     db_conn.commit()     
     cur.close() 
-    print "Inserted AttrVal Masses of dimension-%d (%s) into %s." % (dim, attrName, attVal_Masses_TABLE)
+    print "Inserted AttrVal Masses of dimension-%d (%s) into %s." % (dim, attrName, attval_masses_table)
 
 
-def cube_select_values_to_remove(db_conn, D_CUBE_TABLE, attVal_Masses_TABLE, threshold, dim):
+def cube_select_values_to_remove(db_conn, d_cube_table, attval_masses_table, threshold, dim):
     cur = db_conn.cursor()
-    cube_sql_table_drop_create(db_conn, D_CUBE_TABLE, "a_value text, attrVal_mass numeric")
-    query = "INSERT INTO %s SELECT a_value, attrVal_mass FROM %s" % (D_CUBE_TABLE, attVal_Masses_TABLE) \
+    cube_sql_table_drop_create(db_conn, d_cube_table, "a_value text, attrVal_mass numeric")
+    query = "INSERT INTO %s SELECT a_value, attrVal_mass FROM %s" % (d_cube_table, attval_masses_table) \
         + " WHERE dimension_index = %d AND attrVal_mass <= %f ORDER BY attrVal_mass" % (dim, threshold)
     cur.execute(query)
     db_conn.commit()                         
     cur.close() 
-    print "Created %s for dimension %d in increasing order of attrVal_mass." % (D_CUBE_TABLE, dim)
+    print "Created %s for dimension %d in increasing order of attrVal_mass." % (d_cube_table, dim)
 
+def cube_sql_dCube_sum(db_conn, d_cube_table):
+    cur = db_conn.cursor()
+    query = "SELECT SUM(attrval_mass) FROM %s"  % d_cube_table 
+    cur.execute(query)
+    delta = cur.fetchone()[0]
+    db_conn.commit()                     
+    cur.close() 
+    # print "Computed attribute-vale masses for %s." % d_cube_table
+    return delta
 
 def cube_sql_fetch_firstRow(db_conn, dest_table):
     cur = db_conn.cursor()

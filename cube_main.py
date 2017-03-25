@@ -52,7 +52,7 @@ def measure_density(db_conn, m_b, block_tables, m_r, att_tables, args):
     print 'Density of Block: ' + str(density)
     return density
 
-def CUBE_not_empty(db_conn, block_tables):
+def Block_not_empty(db_conn, block_tables):
     for block_table in block_tables:
         if cube_sql_mass(db_conn, block_table) > 0:
             return True
@@ -61,27 +61,45 @@ def CUBE_not_empty(db_conn, block_tables):
 def table_not_empty(db_conn, dest_table):
 	return cube_sql_mass(db_conn, dest_table) > 0
 
-def select_dimension(db_conn, block_tables, att_tables, attVal_Masses_TABLE, mass_b, mass_r, args, metric = "cardinality"):
+def select_dimension(db_conn, block_tables, att_tables, att_names, attVal_Masses_TABLE, mass_b, mass_r, args, metric = "cardinality"):
 	if metric == "density":
-		return select_dimension_by_density(db_conn, block_tables, att_tables, attVal_Masses_TABLE, mass_b, mass_r, args)
+		return select_dimension_by_density(db_conn, block_tables, att_tables, att_names, attVal_Masses_TABLE, mass_b, mass_r, args)
 	else:
 		return select_dimension_by_cardinality(db_conn, block_tables)
 
-def select_dimension_by_density(db_conn, block_tables, att_tables, attVal_Masses_TABLE, mass_b, mass_r, args):
+def select_dimension_by_density(db_conn, block_tables, att_tables, att_names, attVal_Masses_TABLE, mass_b, mass_r, args):
 	# parameter initialization 
 	density_tilde = float('-inf')
 	dim = 0
+	maxMass = -1
 
 	for i in range(args.dimension_num):
-		if table_not_empty(db_conn, block_tables[i]):
+		mass_b_i = cube_sql_mass(db_conn, block_tables[i])
+		if mass_b_i > 0:
 			# find set which satisfies constraint to be removed 
 			threshold = mass_b * 1.0 / mass_b_i
-			print "threshold = %f" % threshold
-			cube_select_values_to_remove(db_conn, D_CUBE_TABLE, attVal_Masses_TABLE, threshold, dim_i)
+			d_cube_table = "d_cube_dimSelection"
+			cube_select_values_to_remove(db_conn, d_cube_table, attVal_Masses_TABLE, threshold, i)
 
-	# density_prime = measure_density(db_conn, mass_b, block_tables, mass_r, att_tables, args)
+			# update mass, distinct value set and density
+			delta = cube_sql_dCube_sum(db_conn, d_cube_table)
+			mass_b_prime = mass_b - delta
+			print mass_b, mass_b_prime
 
-	return 1, -1
+			block_table_i_prime = "B%d_prime" % i
+			cube_sql_copy_table(db_conn, block_table_i_prime, block_tables[i])
+			cube_sql_update_block(db_conn, block_table_i_prime, d_cube_table, att_names[i])
+			block_tables_union = [j for j in block_tables]  
+			block_tables_union[i] = block_table_i_prime
+			density_prime = measure_density(db_conn, float(mass_b_prime), block_tables_union, mass_r, att_tables, args)
+
+			# update max density and corresponding dimension index 
+			if density_prime > density_tilde:
+				density_tilde = density_prime
+				dim = i
+				maxMass = mass_b_i
+
+	return dim, maxMass
 
 
 def select_dimension_by_cardinality(db_conn, block_tables):
@@ -95,6 +113,7 @@ def select_dimension_by_cardinality(db_conn, block_tables):
         if currMass > maxMass:
         	maxMass = currMass
         	dim = int(block_table[1:])
+
 	return dim, maxMass
 
 
@@ -120,7 +139,7 @@ def find_single_block(db_conn, RELATION_TABLE, att_tables, mass_r, att_names, co
     r_tilde = 1
 
     # iteratation begins 
-    while CUBE_not_empty(db_conn, block_tables):
+    while Block_not_empty(db_conn, block_tables):
         # compute all possible attribute_value masses
         print "\n# Calculating attribute-vale masses..."
         cols_description = "dimension_index integer, a_value text, attrVal_mass numeric"
@@ -131,9 +150,7 @@ def find_single_block(db_conn, RELATION_TABLE, att_tables, mass_r, att_names, co
         # select dimension with specified metric (default: by cardinality)
         print "\n# Selecting dimension..." 
         # metric methods: density, cardinality(default)
-        dim_i, mass_b_i = select_dimension(db_conn, block_tables, att_tables, attVal_Masses_TABLE, mass_b, mass_r, args, "density")  
-
-        break
+        dim_i, mass_b_i = select_dimension(db_conn, block_tables, att_tables, att_names, attVal_Masses_TABLE, mass_b, mass_r, args, "density")  
 
         # find set which satisfies constraint to be removed 
         print "\n# Forming set to be removed (dim-%d)..." % dim_i
