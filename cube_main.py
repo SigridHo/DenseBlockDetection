@@ -64,8 +64,8 @@ def table_not_empty(db_conn, dest_table):
 	return cube_sql_mass(db_conn, dest_table) > 0
 
 
-def select_dimension(db_conn, block_tables, att_tables, att_names, attVal_Masses_TABLE, mass_b, mass_r, args, metric = "cardinality"):
-	if metric == "density":
+def select_dimension(db_conn, block_tables, att_tables, att_names, attVal_Masses_TABLE, mass_b, mass_r, args):
+	if args.selection == "density":
 		return select_dimension_by_density(db_conn, block_tables, att_tables, att_names, attVal_Masses_TABLE, mass_b, mass_r, args)
 	else:
 		return select_dimension_by_cardinality(db_conn, block_tables)
@@ -153,7 +153,7 @@ def find_single_block(db_conn, RELATION_TABLE, att_tables, mass_r, att_names, co
         # select dimension with specified metric (default: by cardinality)
         print "\n# Selecting dimension..." 
         # metric methods: density, cardinality(default)
-        dim_i, mass_b_i = select_dimension(db_conn, block_tables, att_tables, att_names, attVal_Masses_TABLE, mass_b, mass_r, args, "density")  
+        dim_i, mass_b_i = select_dimension(db_conn, block_tables, att_tables, att_names, attVal_Masses_TABLE, mass_b, mass_r, args)  
 
         # find set which satisfies constraint to be removed 
         print "\n# Forming set to be removed (dim-%d)..." % dim_i
