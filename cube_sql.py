@@ -75,7 +75,7 @@ def cube_sql_mass(db_conn, table_name):
     mass = cur.fetchone()[0]
     db_conn.commit()                            
     cur.close() 
-    # print "Mass of %s: " % table_name + str(mass)
+    print "Mass of %s: " % table_name + str(mass)
     return mass
 
 def cube_sql_delete_from_block(db_conn, table_name, block_tables, att_names, dimension_num):
@@ -123,9 +123,9 @@ def cube_sql_block_create_insert(db_conn, block_table, cube_table, block_tables,
 def cube_sql_insert_attrVal_mass(db_conn, B_TABLE, block_table, attVal_Masses_TABLE, dim, attrName):
     cur = db_conn.cursor()
     query = "INSERT INTO %s" % attVal_Masses_TABLE \
-        + " SELECT %d, %s.%s, COUNT(*) AS attrVal_mass" % (dim, block_table, attrName) \
-        + " FROM %s, %s WHERE %s.%s = %s.%s " % (block_table, B_TABLE, block_table, attrName, B_TABLE, attrName) \
-        + " GROUP BY %s.%s" % (block_table, attrName)
+        + " SELECT %d, A.%s, COUNT(*) AS attrVal_mass" % (dim, attrName) \
+        + " FROM %s AS A, %s AS B WHERE A.%s = B.%s " % (block_table, B_TABLE, attrName, attrName) \
+        + " GROUP BY A.%s" % attrName
     cur.execute(query)
     db_conn.commit()     
     cur.close() 
@@ -174,12 +174,25 @@ def cube_sql_insert_row(db_conn, dest_table, newEntry):
 
 def cube_sql_update_block(db_conn, B_table, D_table, attrName):
     cur = db_conn.cursor()
-    query = "DELETE FROM %s USING %s" % (B_table, D_table) \
-        + " WHERE %s.%s = %s.a_value" % (B_table, attrName, D_table)
+    query = "DELETE FROM %s AS A USING %s AS B" % (B_table, D_table) \
+        + " WHERE A.%s = B.a_value" % attrName
     cur.execute(query)
     db_conn.commit()                            
     cur.close()
     print "Updated %s by removing tuples in %s." % (B_table, D_table)
+
+def cube_sql_reconstruct_block(db_conn, b_table, r_table, order_table, att_name, col_fmt, r_tilde, dim):
+    cur = db_conn.cursor()
+    cube_sql_table_drop_create(db_conn, b_table, col_fmt) 
+    query = "INSERT INTO %s" % b_table \
+        + " SELECT A.%s FROM %s AS A, %s AS B" % (att_name, r_table, order_table) \
+        + " WHERE A.%s = B.a_value AND B.order_a_i >= %d" % (att_name, r_tilde) \
+        + " AND B.dimension_index = %d" % dim
+    cur.execute(query)
+    db_conn.commit()                            
+    cur.close() 
+    print "Reconstruct %s by %s and %s" % (b_table, r_table, order_table)    
+
 
 
 

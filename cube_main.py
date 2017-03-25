@@ -54,7 +54,7 @@ def measure_density(db_conn, m_b, block_tables, m_r, att_tables, args):
 
 def CUBE_not_empty(db_conn, block_tables):
     for block_table in block_tables:
-        if cube_sql_mass(db_conn, CUBE_TABLE) > 0:
+        if cube_sql_mass(db_conn, block_table) > 0:
             return True
     return False
 
@@ -128,9 +128,8 @@ def find_single_block(db_conn, CUBE_TABLE, att_tables, mass_r, att_names, col_fm
 
         # iteratively delete rows of the specific dimsension and attribute value in Block
         print "\n# Iterating removal values..."
-        order_TABLE = "orders"
         cols_description = "a_value text, dimension_index integer, order_a_i integer"
-        cube_sql_table_drop_create(db_conn, order_TABLE, cols_description) 		# create order table
+        cube_sql_table_drop_create(db_conn, ORDER_TABLE, cols_description) 		# create order table
 
         while table_not_empty(db_conn, D_CUBE_TABLE):
         	a_value, attrVal_Mass = cube_sql_fetch_firstRow(db_conn, D_CUBE_TABLE)
@@ -145,7 +144,7 @@ def find_single_block(db_conn, CUBE_TABLE, att_tables, mass_r, att_names, col_fm
         	# update order and density measure
         	density_prime = measure_density(db_conn, mass_b, block_tables, mass_r, att_tables, args)
         	newEntry = ["'%s'" % a_value, str(dim_i), str(r)]
-        	cube_sql_insert_row(db_conn, order_TABLE, newEntry)
+        	cube_sql_insert_row(db_conn, ORDER_TABLE, newEntry)
         	r += 1
         	if density_prime > density_tilde:
         		density_tilde = density_prime
@@ -162,16 +161,20 @@ def find_single_block(db_conn, CUBE_TABLE, att_tables, mass_r, att_names, col_fm
         	col_fmt = col_fmts[n]	
         	cube_sql_distinct_attribute_value(db_conn, block_tables[n], B_TABLE, att_name, col_fmt)
 
-        
+    # reconstruct target block
+	print "\n# Reconstructing distinct value sets of block dimensions..."
+    block_tables_ret = [None] * args.dimension_num
+    for n in range(args.dimension_num):
+		block_tables_ret[n] = 'B' + str(n)
+		att_name = att_names[n]
+		col_fmt = col_fmts[n]
+		block_table_ret = block_tables_ret[n]
+		att_table = att_tables[n]
+		cube_sql_reconstruct_block(db_conn, block_table_ret, att_table, ORDER_TABLE, att_name, col_fmt, r_tilde, dim_i)
 
-
-    # # TO DO: reconstruct target block
-    # block_tables = reconstruct_block()
-
-    	break
 
     # return block_tables
-    return None
+    return block_tables_ret
 
 def main():
     global db_conn
