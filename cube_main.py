@@ -21,6 +21,8 @@ def find_single_block_test(db_conn, RELATION_TABLE, att_tables, dimension_num, m
 
 def measure_density(db_conn, m_b, block_tables, m_r, att_tables, args):
     method = args.density
+    if m_b == 0:
+         return 0
     if method.startswith('a'):  # Arithmetic Average Mass
         sum_size = 0.0  # sum of |B_n|
         for block_table in block_tables:
@@ -43,14 +45,15 @@ def measure_density(db_conn, m_b, block_tables, m_r, att_tables, args):
             b_size = cube_sql_mass(db_conn, block_tables[n])
             r_size = cube_sql_mass(db_conn, att_tables[n])
             product_ratio *= float(b_size) / r_size
-        density += m_r * product_ratio
-        density -= m_b * math.log(product_ratio)
+        if(product_ratio != 0):
+            density += m_r * product_ratio
+            density -= m_b * math.log(product_ratio)
 
     else:
         print 'Unknown density measurement.'
         return 0
 
-    print 'Density of Block: ' + str(density)
+    #print 'Density of Block: ' + str(density)
     return density
 
 def Block_not_empty(db_conn, block_tables):
@@ -267,8 +270,8 @@ def main():
             cube_sql_delete_from_block(db_conn, RELATION_TABLE, block_tables, att_names, args.dimension_num)
             results[i] = BLOCK_TABLE + str(i)
             cube_sql_block_create_insert(db_conn, results[i], ORI_TABLE, block_tables, att_names, args.dimension_num, cols_description)
-            #m_r = cube_sql_mass(db_conn, results[i])
-            #print m_r
+            test = cube_sql_mass(db_conn, results[i])
+            print test
 
     except:
         print "Unexpected error:", sys.exc_info()[0]    
