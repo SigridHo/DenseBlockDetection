@@ -116,7 +116,7 @@ def cube_sql_block_create_insert(db_conn, block_table, ori_table, block_tables, 
         else:
             query += ori_table + "." + att_names[i] + " FROM " + ori_table
     for i in range(dimension_num):
-            query += ", " + block_tables[i]
+        query += ", " + block_tables[i]
     query += " WHERE "
     for i in range(dimension_num):
         if i != dimension_num - 1:
