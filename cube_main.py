@@ -230,7 +230,7 @@ def find_single_block(db_conn, RELATION_TABLE, relation_tables, mass_r, att_name
     block_tables_ret = [None] * args.dimension_num
     # print r_tilde
     # print density_tilde
-    cube_sql_print_table(db_conn, ORDER_TABLE)
+    # cube_sql_print_table(db_conn, ORDER_TABLE)
 
     for n in range(args.dimension_num):
         block_tables_ret[n] = 'B' + str(n)
