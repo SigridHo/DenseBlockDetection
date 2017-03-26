@@ -44,7 +44,7 @@ def cube_sql_copy_table(db_conn, dest_table, src_table, drop=True):
     cur.execute("CREATE TABLE %s AS TABLE %s" % (dest_table, src_table))
     db_conn.commit()
     cur.close()
-    print "Copied table %s to %s" % (src_table, dest_table)
+    # print "Copied table %s to %s" % (src_table, dest_table)
 
 
 def cube_sql_print_table(db_conn, table_name):
@@ -102,7 +102,7 @@ def cube_sql_delete_from_block(db_conn, table_name, block_tables, att_names, dim
     cur.execute(query)
     db_conn.commit()                            
     cur.close()
-    print "Deleted from block." 
+    # print "Deleted from block." 
 
 
 def cube_sql_block_create_insert(db_conn, block_table, ori_table, block_tables, att_names, dimension_num, cols_description):
@@ -139,7 +139,7 @@ def cube_sql_insert_attrVal_mass(db_conn, b_table, block_table, attval_masses_ta
     cur.execute(query)
     db_conn.commit()     
     cur.close() 
-    print "Inserted AttrVal Masses of dimension-%d (%s) into %s." % (dim, attrName, attval_masses_table)
+    # print "Inserted AttrVal Masses of dimension-%d (%s) into %s." % (dim, attrName, attval_masses_table)
 
 def cube_select_values_to_remove(db_conn, d_cube_table, attval_masses_table, threshold, dim):
     cur = db_conn.cursor()
@@ -149,7 +149,7 @@ def cube_select_values_to_remove(db_conn, d_cube_table, attval_masses_table, thr
     cur.execute(query)
     db_conn.commit()                         
     cur.close() 
-    print "Created %s for dimension %d in increasing order of attrVal_mass." % (d_cube_table, dim)
+    # print "Created %s for dimension %d in increasing order of attrVal_mass." % (d_cube_table, dim)
 
 
 def cube_sql_dCube_sum(db_conn, d_cube_table):
