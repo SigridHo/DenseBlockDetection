@@ -73,7 +73,7 @@ def cube_sql_distinct_attribute_value(db_conn, dest_table, src_table, att_name, 
     cur.execute ("INSERT INTO %s(%s)" % (dest_table, att_name) + " SELECT DISTINCT ON (%s) %s FROM %s" % (att_name, att_name, src_table))
     db_conn.commit()                            
     cur.close() 
-    print "Get distinct attribute from table %s to %s" % (src_table, dest_table)
+    # print "Get distinct attribute from table %s to %s" % (src_table, dest_table)
 
 
 def cube_sql_mass(db_conn, table_name):
@@ -127,7 +127,7 @@ def cube_sql_block_create_insert(db_conn, block_table, ori_table, block_tables, 
     cur.execute(query)
     db_conn.commit()                            
     cur.close() 
-    print "Created and inserted block table %s." % block_table
+    # print "Created and inserted block table %s." % block_table
 
 
 def cube_sql_insert_attrVal_mass(db_conn, b_table, block_table, attval_masses_table, dim, attrName):
@@ -201,7 +201,7 @@ def cube_sql_update_block(db_conn, B_table, D_table, attrName):
     cur.execute(query)
     db_conn.commit()                            
     cur.close()
-    print "Updated %s by removing tuples in %s." % (B_table, D_table)
+    # print "Updated %s by removing tuples in %s." % (B_table, D_table)
 
 
 def cube_sql_reconstruct_block(db_conn, b_table, r_table, order_table, att_name, col_fmt, r_tilde, dim):
