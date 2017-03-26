@@ -21,25 +21,27 @@ def find_single_block_test(db_conn, RELATION_TABLE, relation_tables, dimension_n
 
 def measure_density(db_conn, m_b, block_tables, m_r, relation_tables, args):
     method = args.density
+    density = 0.0
     if method.startswith('a'):  # Arithmetic Average Mass
         if m_b == 0:
-            return 0
+            return 0.0
         sum_size = 0.0  # sum of |B_n|
         for block_table in block_tables:
             sum_size += cube_sql_mass(db_conn, block_table)
-        density = m_b / sum_size * args.dimension_num
+        density = m_b * 1.0 * args.dimension_num / sum_size 
 
     elif method.startswith('g'): # Geometric Average Mass
         product_size = 1.0  # product of |B_n|
         if m_b == 0:
-             return 0
+             return 0.0
         for block_table in block_tables:
             product_size *= cube_sql_mass(db_conn, block_table)
-        product_size = pow(product_size, 1.0/args.dimension_num)
-        if product_size == 0:
-            density = 0
+
+        denominator = pow(product_size, 1.0 / args.dimension_num)
+        if denominator == 0:
+            density = 0.0
         else:
-            density = m_b / product_size
+            density = m_b * 1.0 / denominator
 
     elif method.startswith('s'): # Suspicousness
         ratio = float(m_b) / m_r
@@ -52,13 +54,13 @@ def measure_density(db_conn, m_b, block_tables, m_r, relation_tables, args):
             b_size = cube_sql_mass(db_conn, block_tables[n])
             r_size = cube_sql_mass(db_conn, relation_tables[n])
             product_ratio *= float(b_size) / r_size
-        if(product_ratio != 0):
+        if product_ratio != 0:
             density += m_r * product_ratio
             density -= m_b * math.log(product_ratio)
 
     else:
         print 'Unknown density measurement.'
-        return 0
+        return 0.0
 
     #print 'Density of Block: ' + str(density)
     return density
