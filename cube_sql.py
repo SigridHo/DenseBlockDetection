@@ -215,5 +215,5 @@ def cube_sql_reconstruct_block(db_conn, b_table, r_table, order_table, att_name,
     cur.execute(query)
     db_conn.commit()                            
     cur.close() 
-    print "Reconstruct %s by %s and %s" % (b_table, r_table, order_table)    
+    # print "Reconstruct %s by %s and %s" % (b_table, r_table, order_table)    
 

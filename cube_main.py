@@ -207,7 +207,7 @@ def find_single_block(db_conn, RELATION_TABLE, relation_tables, mass_r, att_name
             cube_sql_delete_rows(db_conn, block_tables[dim_i], conditions)
             mass_b -= long(attrVal_Mass)
             #print 'mass_B: ' + str(mass_b)
-            
+
             # update order and density measure
             density_prime = measure_density(db_conn, mass_b, block_tables, mass_r, relation_tables, args)
             newEntry = ["'%s'" % a_value, str(dim_i), str(r)]
@@ -266,8 +266,15 @@ def main():
                          help='dimension selection policy.Support density, cardinality.')
     args = parser.parse_args()
     try:
+        # overall timer
+        overall_start = time.time() 
+
         ''' initialize the database connection '''
         db_conn = cube_db_initialize()
+
+        # table to store the elapsed time for finding each block 
+        cols_description = "block_index integer, elapsed_time numeric" 
+        cube_sql_table_drop_create(db_conn, TIME_TABLE, cols_description)
 
         ''' initialize tables and copy original relations '''
         cols_description = "src_ip text, dest_ip text, time_stamp text"
@@ -296,6 +303,9 @@ def main():
         ''' find single blocks and retrieve blocks from origianl data '''
         results = [None] * args.block_num
         for i in range(args.block_num):
+            # timer for each block detection 
+            block_start = time.time() 
+
             m_r = cube_sql_mass(db_conn, RELATION_TABLE)
             block_tables = [None] * args.dimension_num # B_n
 
@@ -325,6 +335,17 @@ def main():
             print 'Result: '
             print 'Density: ' + str(result_density)
             print 'Columns: ' + str(cube_sql_mass(db_conn, results[i]))
+
+            block_end = time.time()
+            block_elapsed_time = block_end - block_start
+            print "Block Elapsed Time: %fs" % block_elapsed_time
+            time_entry = [str(i), str(block_elapsed_time)] 
+            cube_sql_insert_row(db_conn, TIME_TABLE, time_entry)
+ 
+
+        # overall timer
+        overall_end = time.time()
+        print "Total Elapsed Time: %fs" % (overall_end - overall_start) 
 
     except:
         print "Unexpected error:", sys.exc_info()[0]    
