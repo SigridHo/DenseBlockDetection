@@ -54,8 +54,8 @@ def cube_sql_print_table(db_conn, table_name):
     for x in cur:
         print x
         index += 1
-        if index > 20:   # print the top lines to avoid exhausted table-printing 
-            break 
+        #if index > 20:   # print the top lines to avoid exhausted table-printing 
+        #    break 
     cur.close();
 
 
@@ -132,14 +132,13 @@ def cube_sql_block_create_insert(db_conn, block_table, cube_table, block_tables,
 def cube_sql_insert_attrVal_mass(db_conn, b_table, block_table, attval_masses_table, dim, attrName):
     cur = db_conn.cursor()
     query = "INSERT INTO %s" % attval_masses_table \
-        + " SELECT %d, A.%s, COUNT(*) AS attrVal_mass" % (dim, attrName) \
+        + " SELECT %d, B.%s, COUNT(*) AS attrVal_mass" % (dim, attrName) \
         + " FROM %s AS A, %s AS B WHERE A.%s = B.%s " % (block_table, b_table, attrName, attrName) \
-        + " GROUP BY A.%s" % attrName
+        + " GROUP BY B.%s" % attrName
     cur.execute(query)
     db_conn.commit()     
     cur.close() 
     print "Inserted AttrVal Masses of dimension-%d (%s) into %s." % (dim, attrName, attval_masses_table)
-
 
 def cube_select_values_to_remove(db_conn, d_cube_table, attval_masses_table, threshold, dim):
     cur = db_conn.cursor()
