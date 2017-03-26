@@ -105,24 +105,24 @@ def cube_sql_delete_from_block(db_conn, table_name, block_tables, att_names, dim
     print "Deleted from block." 
 
 
-def cube_sql_block_create_insert(db_conn, block_table, cube_table, block_tables, att_names, dimension_num, cols_description):
+def cube_sql_block_create_insert(db_conn, block_table, ori_table, block_tables, att_names, dimension_num, cols_description):
     cur = db_conn.cursor()
     cube_sql_table_drop_create(db_conn, block_table, cols_description)
     insert_cols = ", ".join(att_names)
     query = "INSERT INTO %s(%s)" % (block_table, insert_cols) + " SELECT "
     for i in range(dimension_num):
         if i != dimension_num - 1:
-            query += cube_table + "." + att_names[i] + ", "
+            query += ori_table + "." + att_names[i] + ", "
         else:
-            query += cube_table + "." + att_names[i] + " FROM " + cube_table
+            query += ori_table + "." + att_names[i] + " FROM " + ori_table
     for i in range(dimension_num):
             query += ", " + block_tables[i]
     query += " WHERE "
     for i in range(dimension_num):
         if i != dimension_num - 1:
-            query += cube_table + "." + att_names[i] + " = " + block_tables[i] + "." + att_names[i] + " AND "
+            query += ori_table + "." + att_names[i] + " = " + block_tables[i] + "." + att_names[i] + " AND "
         else:
-            query += cube_table + "." + att_names[i] + " = " + block_tables[i] + "." + att_names[i]
+            query += ori_table + "." + att_names[i] + " = " + block_tables[i] + "." + att_names[i]
     query += " ORDER BY " + ",".join(attr for attr in att_names)
     cur.execute(query)
     db_conn.commit()                            

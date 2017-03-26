@@ -264,7 +264,7 @@ def main():
 
         ''' create tables for N dimension attributes to store the distinct values '''
         relation_tables = [None] * args.dimension_num    # R_n
-        att_names = cols_name.split(", ")    
+        att_names = cols_name.split(", ")  
         col_fmts = cols_description.split(", ")           # modified for better generalization
         for n in range(args.dimension_num):
             relation_tables[n] = 'R' + str(n)
