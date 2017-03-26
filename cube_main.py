@@ -295,6 +295,9 @@ def main():
 
         ''' find single blocks and retrieve blocks from origianl data '''
         results = [None] * args.block_num
+        global REPORT_TABLE
+        report_description = "block_name text, density float"
+        cube_sql_table_drop_create(db_conn, REPORT_TABLE, report_description, drop=True)
         for i in range(args.block_num):
             m_r = cube_sql_mass(db_conn, RELATION_TABLE)
             block_tables = [None] * args.dimension_num # B_n
@@ -320,11 +323,13 @@ def main():
                 att_name = att_names[n]
                 col_fmt = col_fmts[n]
                 cube_sql_distinct_attribute_value(db_conn, result_block_tables[n], results[i], att_name, col_fmt)
-                # print cube_sql_mass(db_conn, result_block_tables[n])
+                #print cube_sql_mass(db_conn, result_block_tables[n])
             result_density = measure_density(db_conn, result_mass_b, result_block_tables, mass_ori, ori_tables, args)
-            print 'Result: '
-            print 'Density: ' + str(result_density)
-            print 'Columns: ' + str(cube_sql_mass(db_conn, results[i]))
+            #print 'Result: '
+            #print 'Density: ' + str(result_density)
+            newEntry = ["'%s'" % results[i], str(result_density)]
+            cube_sql_insert_row(db_conn, REPORT_TABLE, newEntry)
+        cube_sql_print_table(db_conn, REPORT_TABLE)
 
     except:
         print "Unexpected error:", sys.exc_info()[0]    
