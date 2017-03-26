@@ -151,6 +151,7 @@ def find_single_block(db_conn, RELATION_TABLE, att_tables, mass_r, att_names, co
     r = 1
     r_tilde = 1
 
+    # initialize ORDER table 
     cols_description = "a_value text, dimension_index integer, order_a_i integer"
     cube_sql_table_drop_create(db_conn, ORDER_TABLE, cols_description)         # create order table
 
