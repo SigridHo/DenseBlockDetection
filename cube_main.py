@@ -22,12 +22,16 @@ def find_single_block_test(db_conn, RELATION_TABLE, relation_tables, dimension_n
 def measure_density(db_conn, m_b, block_tables, m_r, relation_tables, args):
     method = args.density
     density = 0.0
+    #print m_b
     if method.startswith('a'):  # Arithmetic Average Mass
         if m_b == 0:
             return 0.0
         sum_size = 0.0  # sum of |B_n|
         for block_table in block_tables:
-            sum_size += cube_sql_mass(db_conn, block_table)
+            inc = cube_sql_mass(db_conn, block_table)
+            if inc == 0:
+                return 0;
+            sum_size += inc 
         density = m_b * 1.0 * args.dimension_num / sum_size 
 
     elif method.startswith('g'): # Geometric Average Mass
@@ -36,12 +40,10 @@ def measure_density(db_conn, m_b, block_tables, m_r, relation_tables, args):
              return 0.0
         for block_table in block_tables:
             product_size *= cube_sql_mass(db_conn, block_table)
-
+        if product_size == 0:
+            return 0
         denominator = pow(product_size, 1.0 / args.dimension_num)
-        if denominator == 0:
-            density = 0.0
-        else:
-            density = m_b * 1.0 / denominator
+        density = m_b * 1.0 / denominator
 
     elif method.startswith('s'): # Suspicousness
         ratio = float(m_b) / m_r
@@ -65,11 +67,11 @@ def measure_density(db_conn, m_b, block_tables, m_r, relation_tables, args):
     print 'Density of Block: ' + str(density)
     return density
 
-def Block_not_empty(db_conn, block_tables):
-    for block_table in block_tables:
-        if cube_sql_mass(db_conn, block_table) > 0:
-            return True
-    return False
+def Block_not_empty(db_conn, block_table):
+    if cube_sql_mass(db_conn, block_table) > 0:
+        return True
+    else:
+        return False
 
 
 def table_not_empty(db_conn, dest_table):
@@ -157,8 +159,20 @@ def find_single_block(db_conn, RELATION_TABLE, relation_tables, mass_r, att_name
     cols_description = "a_value text, dimension_index integer, order_a_i integer"
     cube_sql_table_drop_create(db_conn, ORDER_TABLE, cols_description)         # create order table
 
+
+    #########################################################
+    # Change empty check to B-table
     # iteratation begins 
-    while Block_not_empty(db_conn, block_tables):
+    while Block_not_empty(db_conn, B_TABLE):
+        #########################################################
+        # Move the B_n update here
+        block_tables = [None] * args.dimension_num
+        for n in range(args.dimension_num):
+            block_tables[n] = 'B' + str(n)
+            att_name = att_names[n]
+            col_fmt = col_fmts[n]    
+            cube_sql_distinct_attribute_value(db_conn, block_tables[n], B_TABLE, att_name, col_fmt)
+
         # compute all possible attribute_value masses
         print "\n# Calculating attribute-vale masses..."
         cols_description = "dimension_index integer, a_value text, attrVal_mass numeric"
@@ -183,7 +197,7 @@ def find_single_block(db_conn, RELATION_TABLE, relation_tables, mass_r, att_name
 
         # iteratively delete rows of the specific dimsension and attribute value in Block
         print "\n# Iterating removal values..."
-
+        #cube_sql_print_table(db_conn, D_CUBE_TABLE)
         while table_not_empty(db_conn, D_CUBE_TABLE):
             a_value, attrVal_Mass = cube_sql_fetch_firstRow(db_conn, D_CUBE_TABLE)
             conditions = ["a_value = '%s'" % a_value, "attrVal_Mass = %s" % attrVal_Mass]  # a list of conditions 
@@ -193,7 +207,7 @@ def find_single_block(db_conn, RELATION_TABLE, relation_tables, mass_r, att_name
             conditions = ["%s = '%s'" % (att_names[dim_i], a_value)]
             cube_sql_delete_rows(db_conn, block_tables[dim_i], conditions)
             mass_b -= long(attrVal_Mass)
-
+            #print 'mass_B: ' + str(mass_b)
             # update order and density measure
             density_prime = measure_density(db_conn, mass_b, block_tables, mass_r, relation_tables, args)
             newEntry = ["'%s'" % a_value, str(dim_i), str(r)]
@@ -207,25 +221,26 @@ def find_single_block(db_conn, RELATION_TABLE, relation_tables, mass_r, att_name
         print "\n# Removing tuples from block..."
         attrName = att_names[dim_i]
         cube_sql_update_block(db_conn, B_TABLE, D_CUBE_Static_TABLE, attrName)
-        block_tables = [None] * args.dimension_num
-        for n in range(args.dimension_num):
-            block_tables[n] = 'B' + str(n)
-            att_name = att_names[n]
-            col_fmt = col_fmts[n]    
-            cube_sql_distinct_attribute_value(db_conn, block_tables[n], B_TABLE, att_name, col_fmt)
+        #cube_sql_print_table(db_conn, B_TABLE)
+        ##############################################
+        # Move the B_n update to the beginning of the loop
 
     # reconstruct target block
     print "\n# Reconstructing distinct value sets of block dimensions..."
     block_tables_ret = [None] * args.dimension_num
     print r_tilde
-    #cube_sql_print_table(db_conn, ORDER_TABLE)
+    print density_tilde
+    cube_sql_print_table(db_conn, ORDER_TABLE)
     for n in range(args.dimension_num):
         block_tables_ret[n] = 'B' + str(n)
         att_name = att_names[n]
         col_fmt = col_fmts[n]
         block_table_ret = block_tables_ret[n]
         relation_table = relation_tables[n]
+        ##############################################
+        #reconstsruction is modified in sql file
         cube_sql_reconstruct_block(db_conn, block_table_ret, relation_table, ORDER_TABLE, att_name, col_fmt, r_tilde, n)
+        #print block_table_ret
         #cube_sql_print_table(db_conn, block_table_ret)
     return block_tables_ret     # return block_tables
 

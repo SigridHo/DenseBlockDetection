@@ -206,7 +206,8 @@ def cube_sql_update_block(db_conn, B_table, D_table, attrName):
 
 def cube_sql_reconstruct_block(db_conn, b_table, r_table, order_table, att_name, col_fmt, r_tilde, dim):
     cur = db_conn.cursor()
-    cube_sql_table_drop_create(db_conn, b_table, col_fmt) 
+    ##################################
+    #cube_sql_table_drop_create(db_conn, b_table, col_fmt) 
     query = "INSERT INTO %s" % b_table \
         + " SELECT A.%s FROM %s AS A, %s AS B" % (att_name, r_table, order_table) \
         + " WHERE A.%s = B.a_value AND B.order_a_i >= %d" % (att_name, r_tilde) \
