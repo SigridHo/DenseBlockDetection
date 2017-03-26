@@ -250,6 +250,7 @@ def main():
     global RELATION_TABLE  # R
     global ORI_TABLE   # R_ori
     global BLOCK_TABLE # B_ori
+    global REPORT_TABLE
     # Command Line processing
     parser = argparse.ArgumentParser(description="Dense Block Detection")
     parser.add_argument ('--file', dest='input_file', type=str, required=True,
@@ -272,9 +273,9 @@ def main():
         ''' initialize the database connection '''
         db_conn = cube_db_initialize()
 
-        # table to store the elapsed time for finding each block 
-        cols_description = "block_index integer, elapsed_time numeric" 
-        cube_sql_table_drop_create(db_conn, TIME_TABLE, cols_description)
+        # table to store block statistics for report (density, elapsed time 
+        report_description = "block_index integer, density float, elapsed_time numeric" 
+        cube_sql_table_drop_create(db_conn, REPORT_TABLE, report_description)
 
         ''' initialize tables and copy original relations '''
         cols_description = "src_ip text, dest_ip text, time_stamp text"
@@ -302,9 +303,6 @@ def main():
 
         ''' find single blocks and retrieve blocks from origianl data '''
         results = [None] * args.block_num
-        global REPORT_TABLE
-        report_description = "block_name text, density float"
-        cube_sql_table_drop_create(db_conn, REPORT_TABLE, report_description, drop=True)
         for i in range(args.block_num):
             # timer for each block detection 
             block_start = time.time() 
@@ -337,16 +335,14 @@ def main():
             result_density = measure_density(db_conn, result_mass_b, result_block_tables, mass_ori, ori_tables, args)
             #print 'Result: '
             #print 'Density: ' + str(result_density)
-            newEntry = ["'%s'" % results[i], str(result_density)]
-            cube_sql_insert_row(db_conn, REPORT_TABLE, newEntry)
-            cube_sql_print_table(db_conn, REPORT_TABLE)
 
+            # add block statistcs into table
             block_end = time.time()
             block_elapsed_time = block_end - block_start
             print "Block Elapsed Time: %fs" % block_elapsed_time
-            time_entry = [str(i), str(block_elapsed_time)] 
-            cube_sql_insert_row(db_conn, TIME_TABLE, time_entry)
- 
+            newEntry = [str(i), str(result_density), str(block_elapsed_time)]
+            cube_sql_insert_row(db_conn, REPORT_TABLE, newEntry)
+            cube_sql_print_table(db_conn, REPORT_TABLE)
 
         # overall timer
         overall_end = time.time()
