@@ -232,7 +232,7 @@ def find_single_block(db_conn, RELATION_TABLE, relation_tables, mass_r, att_name
     print r_tilde
     print density_tilde
     cube_sql_print_table(db_conn, ORDER_TABLE)
-    
+
     for n in range(args.dimension_num):
         block_tables_ret[n] = 'B' + str(n)
         att_name = att_names[n]
@@ -308,6 +308,7 @@ def main():
             results[i] = BLOCK_TABLE + str(i)
             cube_sql_block_create_insert(db_conn, results[i], ORI_TABLE, block_tables, att_names, args.dimension_num, cols_description)
             cube_sql_print_table(db_conn, results[i])
+            print cube_sql_mass(db_conn, results[i])
     except:
         print "Unexpected error:", sys.exc_info()[0]    
         raise 
