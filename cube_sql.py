@@ -123,6 +123,7 @@ def cube_sql_block_create_insert(db_conn, block_table, cube_table, block_tables,
             query += cube_table + "." + att_names[i] + " = " + block_tables[i] + "." + att_names[i] + " AND "
         else:
             query += cube_table + "." + att_names[i] + " = " + block_tables[i] + "." + att_names[i]
+    query += " ORDER BY " + ",".join(attr for attr in att_names)
     cur.execute(query)
     db_conn.commit()                            
     cur.close() 
