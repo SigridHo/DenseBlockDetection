@@ -277,6 +277,8 @@ def main():
         cube_sql_load_table_from_file(db_conn, RELATION_TABLE, cols_name, args.input_file, args.delimiter)
 
         cube_sql_copy_table(db_conn, ORI_TABLE, RELATION_TABLE)
+        mass_ori = cube_sql_mass(db_conn, ORI_TABLE)
+        ori_tables = [None] * args.dimension_num
         # cube_sql_print_table(db_conn, RELATION_TABLE)
 
         ''' create tables for N dimension attributes to store the distinct values '''
@@ -285,9 +287,11 @@ def main():
         col_fmts = cols_description.split(", ")           # modified for better generalization
         for n in range(args.dimension_num):
             relation_tables[n] = 'R' + str(n)
+            ori_tables[n] = 'ORI' + str(n)
             att_name = att_names[n]
             col_fmt = col_fmts[n]
             cube_sql_distinct_attribute_value(db_conn, relation_tables[n], RELATION_TABLE, att_name, col_fmt)
+            cube_sql_copy_table(db_conn, ori_tables[n], relation_tables[n])
         # cube_sql_print_table(db_conn, "R1")
 
         ''' find single blocks and retrieve blocks from origianl data '''
@@ -308,6 +312,18 @@ def main():
             results[i] = BLOCK_TABLE + str(i)
             cube_sql_block_create_insert(db_conn, results[i], ORI_TABLE, block_tables, att_names, args.dimension_num, cols_description)
             cube_sql_print_table(db_conn, results[i])
+            result_mass_b = cube_sql_mass(db_conn, results[i])
+            result_block_tables = [None] * args.dimension_num
+            for n in range(args.dimension_num):
+                result_block_tables[n] = 'RESULT_B' + str(n)
+                att_name = att_names[n]
+                col_fmt = col_fmts[n]
+                cube_sql_distinct_attribute_value(db_conn, result_block_tables[n], results[i], att_name, col_fmt)
+                print cube_sql_mass(db_conn, result_block_tables[n])
+            result_density = measure_density(db_conn, result_mass_b, result_block_tables, mass_ori, ori_tables, args)
+            print 'Result: '
+            print 'Density: ' + str(result_density)
+            print 'Columns: ' + str(cube_sql_mass(db_conn, results[i]))
     except:
         print "Unexpected error:", sys.exc_info()[0]    
         raise 
