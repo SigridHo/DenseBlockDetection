@@ -274,7 +274,7 @@ def main():
         db_conn = cube_db_initialize()
 
         # table to store block statistics for report (density, elapsed time 
-        report_description = "block_index integer, density float, elapsed_time numeric" 
+        report_description = "block_index integer, density float, entryCount integer, elapsed_time numeric" 
         cube_sql_table_drop_create(db_conn, REPORT_TABLE, report_description)
 
         ''' initialize tables and copy original relations '''
@@ -340,7 +340,7 @@ def main():
             block_end = time.time()
             block_elapsed_time = block_end - block_start
             print "Block Elapsed Time: %fs" % block_elapsed_time
-            newEntry = [str(i), str(result_density), str(block_elapsed_time)]
+            newEntry = [str(i), str(result_density), str(result_mass_b), str(block_elapsed_time)]
             cube_sql_insert_row(db_conn, REPORT_TABLE, newEntry)
             cube_sql_print_table(db_conn, REPORT_TABLE)
 
