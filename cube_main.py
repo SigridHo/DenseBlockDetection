@@ -101,7 +101,7 @@ def select_dimension_by_density(db_conn, block_tables, relation_tables, att_name
             # update mass, distinct value set and density
             delta = cube_sql_dCube_sum(db_conn, d_cube_table)
             mass_b_prime = mass_b - delta
-            print mass_b, mass_b_prime
+            # print mass_b, mass_b_prime
 
             block_table_i_prime = "B%d_prime" % i
             cube_sql_copy_table(db_conn, block_table_i_prime, block_tables[i])
@@ -189,7 +189,7 @@ def find_single_block(db_conn, RELATION_TABLE, relation_tables, mass_r, att_name
         # find set which satisfies constraint to be removed 
         print "\n# Forming set to be removed (dim-%d)..." % dim_i
         threshold = mass_b * 1.0 / mass_b_i
-        print "threshold = %f" % threshold
+        # print "threshold = %f" % threshold
         cube_select_values_to_remove(db_conn, D_CUBE_TABLE, attVal_Masses_TABLE, threshold, dim_i)
         D_CUBE_Static_TABLE = "D_CUBE_TABLE_static"   # duplicate a static copy for later operations
         cube_sql_copy_table(db_conn, D_CUBE_Static_TABLE, D_CUBE_TABLE)
@@ -206,9 +206,8 @@ def find_single_block(db_conn, RELATION_TABLE, relation_tables, mass_r, att_name
             conditions = ["%s = '%s'" % (att_names[dim_i], a_value)]
             cube_sql_delete_rows(db_conn, block_tables[dim_i], conditions)
             mass_b -= long(attrVal_Mass)
-            # print "!!!!!!!! %d" % mass_b
-
             #print 'mass_B: ' + str(mass_b)
+            
             # update order and density measure
             density_prime = measure_density(db_conn, mass_b, block_tables, mass_r, relation_tables, args)
             newEntry = ["'%s'" % a_value, str(dim_i), str(r)]
@@ -229,8 +228,8 @@ def find_single_block(db_conn, RELATION_TABLE, relation_tables, mass_r, att_name
     # reconstruct target block
     print "\n# Reconstructing distinct value sets of block dimensions..."
     block_tables_ret = [None] * args.dimension_num
-    print r_tilde
-    print density_tilde
+    # print r_tilde
+    # print density_tilde
     cube_sql_print_table(db_conn, ORDER_TABLE)
 
     for n in range(args.dimension_num):
