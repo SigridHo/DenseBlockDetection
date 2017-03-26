@@ -320,7 +320,7 @@ def main():
                 att_name = att_names[n]
                 col_fmt = col_fmts[n]
                 cube_sql_distinct_attribute_value(db_conn, result_block_tables[n], results[i], att_name, col_fmt)
-                print cube_sql_mass(db_conn, result_block_tables[n])
+                # print cube_sql_mass(db_conn, result_block_tables[n])
             result_density = measure_density(db_conn, result_mass_b, result_block_tables, mass_ori, ori_tables, args)
             print 'Result: '
             print 'Density: ' + str(result_density)
