@@ -62,7 +62,7 @@ def measure_density(db_conn, m_b, block_tables, m_r, relation_tables, args):
         print 'Unknown density measurement.'
         return 0.0
 
-    #print 'Density of Block: ' + str(density)
+    print 'Density of Block: ' + str(density)
     return density
 
 def Block_not_empty(db_conn, block_tables):
