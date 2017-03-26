@@ -339,7 +339,7 @@ def main():
             #print 'Density: ' + str(result_density)
             newEntry = ["'%s'" % results[i], str(result_density)]
             cube_sql_insert_row(db_conn, REPORT_TABLE, newEntry)
-        cube_sql_print_table(db_conn, REPORT_TABLE)
+            cube_sql_print_table(db_conn, REPORT_TABLE)
 
             block_end = time.time()
             block_elapsed_time = block_end - block_start
