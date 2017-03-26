@@ -217,3 +217,11 @@ def cube_sql_reconstruct_block(db_conn, b_table, r_table, order_table, att_name,
     cur.close() 
     # print "Reconstruct %s by %s and %s" % (b_table, r_table, order_table)    
 
+def cube_sql_bucket(db_conn, table_name):
+    cur = db_conn.cursor()
+    query = "UPDATE %s SET time_stamp = " % table_name
+    query += "SUBSTRING"
+    query += "(time_stamp from '.*:')" 
+    cur.execute(query)
+    db_conn.commit()
+    cur.close()

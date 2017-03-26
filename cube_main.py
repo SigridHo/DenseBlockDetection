@@ -283,6 +283,10 @@ def main():
         cols_name = "src_ip, dest_ip, time_stamp"
         cube_sql_load_table_from_file(db_conn, RELATION_TABLE, cols_name, args.input_file, args.delimiter)
 
+        cube_sql_bucket(db_conn, RELATION_TABLE)
+        #cube_sql_print_table(db_conn, RELATION_TABLE)
+
+
         cube_sql_copy_table(db_conn, ORI_TABLE, RELATION_TABLE)
         mass_ori = cube_sql_mass(db_conn, ORI_TABLE)
         ori_tables = [None] * args.dimension_num
@@ -321,7 +325,7 @@ def main():
 
             results[i] = BLOCK_TABLE + str(i)
             cube_sql_block_create_insert(db_conn, results[i], ORI_TABLE, block_tables, att_names, args.dimension_num, cols_description)
-            # cube_sql_print_table(db_conn, results[i])
+            #cube_sql_print_table(db_conn, results[i])
             # print cube_sql_mass(db_conn, results[i])
 
             result_mass_b = cube_sql_mass(db_conn, results[i])
