@@ -89,13 +89,13 @@ def select_dimension_by_density(db_conn, block_tables, relation_tables, att_name
     density_tilde = float('-inf')
     dim = 0
     maxMass = cube_sql_mass(db_conn, block_tables[0])
+    d_cube_table = "d_cube_dimSelection"
 
     for i in range(args.dimension_num):
         mass_b_i = cube_sql_mass(db_conn, block_tables[i])
         if mass_b_i > 0:
             # find set which satisfies constraint to be removed 
             threshold = mass_b * 1.0 / mass_b_i
-            d_cube_table = "d_cube_dimSelection"
             cube_select_values_to_remove(db_conn, d_cube_table, ATTVAL_MASSES_TABLE, threshold, i)
 
             # update mass, distinct value set and density
@@ -115,6 +115,9 @@ def select_dimension_by_density(db_conn, block_tables, relation_tables, att_name
                 density_tilde = density_prime
                 dim = i
                 maxMass = mass_b_i
+
+    # drop auxilary tables which are no longer needed to save disk space
+    cube_sql_table_drop(db_conn, d_cube_table)
 
     return dim, maxMass
 
