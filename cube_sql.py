@@ -22,6 +22,16 @@ def cube_sql_table_drop_create(db_conn, table_name, create_sql_cols, drop=True):
     db_conn.commit()
     cur.close()
 
+# Drop table    
+def cube_sql_table_drop(db_conn, table_name):
+    cur = db_conn.cursor()
+    try:
+        cur.execute("DROP TABLE %s" % table_name)
+    except psycopg2.Error:
+        # Ignore the error
+        db_conn.commit()        
+    db_conn.commit()
+    cur.close()
 
 # Load table from file 
 def cube_sql_load_table_from_file(db_conn, table_name, col_fmt, file_name, delim, drop=True):

@@ -316,6 +316,10 @@ def main():
 
             block_tables = find_single_block(db_conn, RELATION_TABLE, relation_tables, m_r, att_names, col_fmts, args)
 
+            # drop auxilary tables which are no longer needed to save disk space
+            
+
+
             cube_sql_delete_from_block(db_conn, RELATION_TABLE, block_tables, att_names, args.dimension_num)
             for n in range(args.dimension_num):
                 relation_tables[n] = 'R' + str(n)
