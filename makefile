@@ -10,7 +10,7 @@ PATH 	  := $(subst $(SPACE),\ ,$(ABS_PATH))
 PREFIX 	  := python cube_main.py --file $(PATH)/datasets/darpa.csv --N 3
 
 run:
-	$(PREFIX) --k 5 --density geometric --selection cardinality
+	$(PREFIX) --k 5 --density arithmetic --selection cardinality
 
 k=5.density=g.selection=c: $(PREFIX) --k 5 --density geometric --selection cardinality
 
