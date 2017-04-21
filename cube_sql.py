@@ -3,7 +3,8 @@ import psycopg2
 import sys
 from cube_params import *
 
-def cube_db_initialize():
+def cube_db_initialize(): 
+    #localhost /tmp
     db_conn = psycopg2.connect("host='localhost' dbname=%s user=%s password=%s port=%d" % (CUBE_DB, CUBE_DB_USER, CUBE_DB_PASS, CUBE_DB_PORT))
     # db_conn = psycopg2.connect("host='/tmp' dbname=%s user=%s password=%s port=%d" % (CUBE_DB, CUBE_DB_USER, CUBE_DB_PASS, CUBE_DB_PORT))
     print "Connected To Database"
@@ -168,6 +169,8 @@ def cube_sql_dCube_sum(db_conn, d_cube_table):
     query = "SELECT SUM(attrval_mass) FROM %s"  % d_cube_table 
     cur.execute(query)
     delta = cur.fetchone()[0]
+    #if delta is None:
+    #    delta = 0
     db_conn.commit()                     
     cur.close() 
     # print "Computed attribute-vale masses for %s." % d_cube_table

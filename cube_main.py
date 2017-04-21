@@ -96,6 +96,9 @@ def select_dimension_by_density(db_conn, block_tables, relation_tables, att_name
         if mass_b_i > 0:
             # find set which satisfies constraint to be removed 
             threshold = mass_b * 1.0 / mass_b_i
+            #print mass_b
+            #print mass_b_i
+            #print 'threshold: ' + str(threshold)
             cube_select_values_to_remove(db_conn, d_cube_table, ATTVAL_MASSES_TABLE, threshold, i)
 
             # update mass, distinct value set and density
@@ -295,7 +298,7 @@ def main():
         cols_name = "src_ip, dest_ip, time_stamp"
         cube_sql_load_table_from_file(db_conn, RELATION_TABLE, cols_name, args.input_file, args.delimiter)
 
-        cube_sql_bucketize(db_conn, RELATION_TABLE)
+        #cube_sql_bucketize(db_conn, RELATION_TABLE)
         #cube_sql_print_table(db_conn, RELATION_TABLE)
 
         cube_sql_copy_table(db_conn, ORI_TABLE, RELATION_TABLE)
@@ -328,6 +331,7 @@ def main():
             block_tables = find_single_block(db_conn, RELATION_TABLE, relation_tables, m_r, att_names, col_fmts, args)        
 
             cube_sql_delete_from_block(db_conn, RELATION_TABLE, block_tables, att_names, args.dimension_num)
+            
             for n in range(args.dimension_num):
                 relation_tables[n] = 'R' + str(n)
                 att_name = att_names[n]
