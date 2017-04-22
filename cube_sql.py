@@ -58,6 +58,17 @@ def cube_sql_copy_table(db_conn, dest_table, src_table, drop=True):
     cur.close()
     # print "Copied table %s to %s" % (src_table, dest_table)
 
+# Keep only the unique entries from a table and save as a new one
+def cube_sql_distinct_entries(db_conn, src_table, dest_table):
+    cur = db_conn.cursor()
+    try:
+        cur.execute("DROP TABLE %s" % dest_table)
+    except psycopg2.Error:
+        db_conn.commit()        
+    cur.execute ("CREATE TABLE %s AS SELECT DISTINCT * FROM %s" % (dest_table, src_table))
+    db_conn.commit()                            
+    cur.close() 
+
 
 def cube_sql_print_table(db_conn, table_name):
     cur = db_conn.cursor();

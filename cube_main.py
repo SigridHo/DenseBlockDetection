@@ -300,9 +300,10 @@ def main():
             cols_name += "A" + str(i) + ", "
         cols_description = cols_description[:-2]
         cols_name = cols_name[:-2]
-        cube_sql_table_drop_create(db_conn, RELATION_TABLE, cols_description)
-        cube_sql_load_table_from_file(db_conn, RELATION_TABLE, cols_name, args.input_file, args.delimiter)
-
+        RAW_RELATION_TABLE = "RAW_RELATION_TABLE"
+        cube_sql_table_drop_create(db_conn, RAW_RELATION_TABLE, cols_description)
+        cube_sql_load_table_from_file(db_conn, RAW_RELATION_TABLE, cols_name, args.input_file, args.delimiter)
+        cube_sql_distinct_entries(db_conn, RAW_RELATION_TABLE, RELATION_TABLE)
         #cube_sql_bucketize(db_conn, RELATION_TABLE)
         #cube_sql_print_table(db_conn, RELATION_TABLE)
 
