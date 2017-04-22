@@ -293,9 +293,14 @@ def main():
         cube_sql_table_drop_create(db_conn, REPORT_TABLE, report_description)
 
         ''' initialize tables and copy original relations '''
-        cols_description = "src_ip text, dest_ip text, time_stamp text"
+        cols_description = ""
+        cols_name = ""
+        for i in range(args.dimension_num):
+            cols_description += "A" + str(i) + " text, "
+            cols_name += "A" + str(i) + ", "
+        cols_description = cols_description[:-2]
+        cols_name = cols_name[:-2]
         cube_sql_table_drop_create(db_conn, RELATION_TABLE, cols_description)
-        cols_name = "src_ip, dest_ip, time_stamp"
         cube_sql_load_table_from_file(db_conn, RELATION_TABLE, cols_name, args.input_file, args.delimiter)
 
         #cube_sql_bucketize(db_conn, RELATION_TABLE)
