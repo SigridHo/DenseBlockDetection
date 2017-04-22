@@ -23,42 +23,43 @@ def measure_density(db_conn, m_b, block_tables, m_r, relation_tables, args):
     method = args.density
     density = 0.0
     #print m_b
-    if method.startswith('a'):  # Arithmetic Average Mass
+    if method.startswith('ari'):  # Arithmetic Average Mass
         if m_b == 0:
             return 0.0
         sum_size = 0.0  # sum of |B_n|
         for block_table in block_tables:
             inc = cube_sql_mass(db_conn, block_table)
-            if inc == 0:
-                return 0;
+            # if inc == 0:
+            #     return 0
             sum_size += inc 
+        if sum_size == 0:
+        	return -1
         density = m_b * 1.0 * args.dimension_num / sum_size 
 
-    elif method.startswith('g'): # Geometric Average Mass
+    elif method.startswith('geo'): # Geometric Average Mass
         product_size = 1.0  # product of |B_n|
         if m_b == 0:
              return 0.0
         for block_table in block_tables:
             product_size *= cube_sql_mass(db_conn, block_table)
         if product_size == 0:
-            return 0
+            return -1
         denominator = pow(product_size, 1.0 / args.dimension_num)
         density = m_b * 1.0 / denominator
 
-    elif method.startswith('s'): # Suspicousness
-        ratio = float(m_b) / m_r
-        if ratio == 0:
-            density = 0.0
-        else:
-            density = m_b * (math.log(ratio) - 1)
+    elif method.startswith('sus'): # Suspicousness
+    	if m_b == 0:
+    		return -1
+        density = m_b * (math.log(float(m_b) / m_r) - 1)
         product_ratio = 1.0   # product of |B_n| / |R_n|
         for n in range(args.dimension_num):
             b_size = cube_sql_mass(db_conn, block_tables[n])
             r_size = cube_sql_mass(db_conn, relation_tables[n])
             product_ratio *= float(b_size) / r_size
         if product_ratio != 0:
-            density += m_r * product_ratio
-            density -= m_b * math.log(product_ratio)
+            density += m_r * product_ratio - m_b * math.log(product_ratio)
+        else:
+        	return -1
 
     else:
         print 'Unknown density measurement.'
@@ -133,7 +134,7 @@ def select_dimension_by_cardinality(db_conn, block_tables):
     # find dimension with maximum mass
     for block_table in block_tables:
         currMass = cube_sql_mass(db_conn, block_table)
-        if currMass > maxMass:
+        if currMass >= maxMass:
             maxMass = currMass
             dim = int(block_table[1:])
 
