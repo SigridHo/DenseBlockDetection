@@ -105,11 +105,7 @@ def cube_sql_mass(db_conn, table_name):
     mass = cur.fetchone()[0]
     db_conn.commit()                            
     cur.close() 
-<<<<<<< HEAD
-    # print "Mass of %s: " % table_name + str(mass)
-=======
     #print "Mass of %s: " % table_name + str(mass)
->>>>>>> eb84209433cbb6706b9d9499a2d2e4a919b7a2dd
     return mass
 
 
