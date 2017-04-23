@@ -1,7 +1,2 @@
 POLICY, DENSITY, NUM_BLOCKS, METHOD, TOTAL_TIME, FP_RATE, TP_RATE
-density, ari, k=5, copy, 6166.974638s, 0.001170681125, 0.436067395495
-density, geo, k=5, copy, 5912.461074s
-density, sus, k=5, copy, 5687.522519s
-cardinality, ari, k=5, copy, 3321.362092s
-cardinality, ari, k=5, marker, 3938.186778s
-cardinality, geo, k=5, copy, 3872.277224s
+
