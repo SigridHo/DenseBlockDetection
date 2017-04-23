@@ -141,6 +141,7 @@ def cube_sql_mass(db_conn, table_name):
     return mass
 
 
+
 def cube_sql_delete_from_block(db_conn, table_name, block_tables, att_names, dimension_num):
     cur = db_conn.cursor()
     query = "DELETE FROM " + table_name + " USING "
@@ -300,3 +301,13 @@ def cube_sql_bucketize(db_conn, table_name):
     cur.execute(query)
     db_conn.commit()
     cur.close()
+
+def cube_sql_fetchRows(db_conn, table_name):
+    cur = db_conn.cursor()
+    query = "SELECT * FROM %s" % table_name 
+    cur.execute(query)
+    rows = cur.fetchall()
+    db_conn.commit()                     
+    cur.close() 
+    # print "Fetched all rows for %s." % table_name
+    return rows
