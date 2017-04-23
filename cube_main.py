@@ -362,7 +362,8 @@ def main():
             Rn_mass[n] = cube_sql_mass(db_conn, relation_tables[n])
             ORIn_mass[n] = Rn_mass[n]
 
-        cube_sql_print_table(db_conn, "R1")
+        # cube_sql_print_table(db_conn, "R1")
+        cube_sql_mass(db_conn, 'R1')
 
         # ''' find single blocks and retrieve blocks from origianl data '''
         # results = [None] * args.block_num
