@@ -38,7 +38,7 @@ def cube_sql_table_drop(db_conn, table_name):
 # Load table from file 
 def cube_sql_load_table_from_file(db_conn, table_name, col_fmt, file_name, delim, drop=True):
     cur = db_conn.cursor()
-    cur.execute("COPY %s(%s) FROM '%s' WITH (FORMAT CSV, DELIMITER '%s', NULL '0')" % (table_name, col_fmt, file_name, delim))   
+    cur.execute("COPY %s(%s) FROM '%s' DELIMITER AS '%s' CSV" % (table_name, col_fmt, file_name, delim))   
     db_conn.commit()
     cur.close()
     print "Loaded data from %s" % (file_name)
