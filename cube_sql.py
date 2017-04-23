@@ -77,8 +77,8 @@ def cube_sql_print_table(db_conn, table_name):
     for x in cur:
         print x
         index += 1
-        if index > 20:   # print the top lines to avoid exhausted table-printing 
-           break 
+        # if index > 20:   # print the top lines to avoid exhausted table-printing 
+        #    break 
     cur.close();
 
 
@@ -105,7 +105,7 @@ def cube_sql_mass(db_conn, table_name):
     mass = cur.fetchone()[0]
     db_conn.commit()                            
     cur.close() 
-    print "Mass of %s: " % table_name + str(mass)
+    # print "Mass of %s: " % table_name + str(mass)
     return mass
 
 

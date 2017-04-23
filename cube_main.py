@@ -162,15 +162,15 @@ def find_single_block(db_conn, RELATION_TABLE, relation_tables, mass_r, att_name
    
     mass_b = mass_r
     block_tables = [None] * args.dimension_num
-    # 0422
     Bn_mass = [None] * args.dimension_num
     #Rn_mass = [None] * args.dimension_num
+    
     for n in range(args.dimension_num):
         block_tables[n] = 'B' + str(n)
         cube_sql_copy_table(db_conn, block_tables[n], relation_tables[n])
         Bn_mass[n] = Rn_mass[n]
+    
     density_tilde = measure_density(mass_b, Bn_mass, mass_r, Rn_mass, args)
-    print "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!", density_tilde
     r = 1
     r_tilde = 1
 
@@ -180,7 +180,7 @@ def find_single_block(db_conn, RELATION_TABLE, relation_tables, mass_r, att_name
 
     while mass_b > 0:
         for n in range(args.dimension_num):
-        #    block_tables[n] = 'B' + str(n)
+            block_tables[n] = 'B' + str(n)
             att_name = att_names[n]
             col_fmt = col_fmts[n]    
             cube_sql_distinct_attribute_value(db_conn, block_tables[n], B_TABLE, att_name, col_fmt)
@@ -188,10 +188,9 @@ def find_single_block(db_conn, RELATION_TABLE, relation_tables, mass_r, att_name
         # compute all possible attribute_value masses
         print "\n# Calculating attribute-vale masses..."
         cols_description = "dimension_index integer, a_value text, attrVal_mass numeric"
-        # ATTVAL_MASSES_TABLE = "AttributeValue_Masses_TABLE"
         cube_sql_table_drop_create(db_conn, ATTVAL_MASSES_TABLE, cols_description)
         compute_attribute_value_masses(db_conn, B_TABLE, block_tables, ATTVAL_MASSES_TABLE, att_names)
-        cube_sql_print_table(db_conn, ATTVAL_MASSES_TABLE)
+        # cube_sql_print_table(db_conn, ATTVAL_MASSES_TABLE)
 
         # select dimension with specified metric (default: by cardinality)
         print "\n# Selecting dimension..." 
@@ -201,10 +200,8 @@ def find_single_block(db_conn, RELATION_TABLE, relation_tables, mass_r, att_name
         # find set which satisfies constraint to be removed 
         print "\n# Forming set to be removed (dim-%d)..." % dim_i
         threshold = mass_b * 1.0 / mass_b_i
-        #print threshold
         # print "threshold = %f" % threshold
         cube_select_values_to_remove(db_conn, D_CUBE_TABLE, ATTVAL_MASSES_TABLE, threshold, dim_i)
-        # D_CUBE_STATIC_TABLE = "D_CUBE_TABLE_static"   # duplicate a static copy for later operations
         cube_sql_copy_table(db_conn, D_CUBE_STATIC_TABLE, D_CUBE_TABLE)
 
         # iteratively delete rows of the specific dimsension and attribute value in Block
@@ -220,8 +217,8 @@ def find_single_block(db_conn, RELATION_TABLE, relation_tables, mass_r, att_name
             cube_sql_delete_rows(db_conn, block_tables[dim_i], conditions)
             mass_b -= long(attrVal_Mass)
             #print 'mass_B: ' + str(mass_b)
-            # 0422
             Bn_mass[dim_i] -= 1
+
             # update order and density measure
             density_prime = measure_density(mass_b, Bn_mass, mass_r, Rn_mass, args)
             newEntry = ["'%s'" % a_value, str(dim_i), str(r)]
@@ -237,14 +234,14 @@ def find_single_block(db_conn, RELATION_TABLE, relation_tables, mass_r, att_name
         cube_sql_update_block(db_conn, B_TABLE, D_CUBE_STATIC_TABLE, attrName)
         mass_b = cube_sql_mass(db_conn, B_TABLE)
         #cube_sql_print_table(db_conn, B_TABLE)
+        
         ##############################################
         # Move the B_n update to the beginning of the loop
 
     # reconstruct target block
     print "\n# Reconstructing distinct value sets of block dimensions..."
     block_tables_ret = [None] * args.dimension_num
-    # print r_tilde
-    # print density_tilde
+    # print r_tilde, density_tilde
     # cube_sql_print_table(db_conn, ORDER_TABLE)
 
     for n in range(args.dimension_num):
@@ -254,7 +251,7 @@ def find_single_block(db_conn, RELATION_TABLE, relation_tables, mass_r, att_name
         block_table_ret = block_tables_ret[n]
         relation_table = relation_tables[n]
         ##############################################
-        #reconstsruction is modified in sql file
+        # reconstsruction is modified in sql file
         cube_sql_reconstruct_block(db_conn, block_table_ret, relation_table, ORDER_TABLE, att_name, col_fmt, r_tilde, n)
         #print block_table_ret
         #cube_sql_print_table(db_conn, block_table_ret)
@@ -311,8 +308,9 @@ def main():
         cols_description = cols_description[:-2]
         cols_name = cols_name[:-2]
         #cols_description = "src_ip text, dest_ip text, time_stamp text"
-        cube_sql_table_drop_create(db_conn, RELATION_TABLE, cols_description)
         #cols_name = "src_ip, dest_ip, time_stamp"
+
+        cube_sql_table_drop_create(db_conn, RELATION_TABLE, cols_description)
         cube_sql_load_table_from_file(db_conn, RELATION_TABLE, cols_name, args.input_file, args.delimiter)
 
         # RAW_RELATION_TABLE = "RAW_RELATION_TABLE"
@@ -324,7 +322,6 @@ def main():
         #cube_sql_print_table(db_conn, RELATION_TABLE)
 
         cube_sql_copy_table(db_conn, ORI_TABLE, RELATION_TABLE)
-
 
         ''' Marker Method: Add Marker column''' 
         # marker_description = "MARKER text"
@@ -378,7 +375,7 @@ def main():
                 relation_tables[n] = 'R' + str(n)
                 att_name = att_names[n]
                 col_fmt = col_fmts[n]
-                
+
                 ''' Marker Method: get attribute'''
                 # cube_sql_distinct_attribute_value_marker(db_conn, relation_tables[n], RELATION_TABLE, att_name, col_fmt, marker_cons)
                 cube_sql_distinct_attribute_value(db_conn, relation_tables[n], RELATION_TABLE, att_name, col_fmt)
