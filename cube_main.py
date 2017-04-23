@@ -59,7 +59,7 @@ def measure_density(m_b, Bn_mass, m_r, Rn_mass, args):
             density += m_r * product_ratio - m_b * math.log(product_ratio)
         else:
             return -1
-            
+
     else:
         print 'Unknown density measurement.'
         return 0.0
@@ -197,22 +197,45 @@ def find_single_block(db_conn, RELATION_TABLE, relation_tables, mass_r, att_name
         print "\n# Forming set to be removed (dim-%d)..." % dim_i
         threshold = mass_b * 1.0 / mass_b_i
         # print "threshold = %f" % threshold
-        cube_select_values_to_remove(db_conn, D_CUBE_TABLE, ATTVAL_MASSES_TABLE, threshold, dim_i)
-        cube_sql_copy_table(db_conn, D_CUBE_STATIC_TABLE, D_CUBE_TABLE)
+        
+        # # ------>
+        # cube_select_values_to_remove(db_conn, D_CUBE_TABLE, ATTVAL_MASSES_TABLE, threshold, dim_i)
+        # cube_sql_copy_table(db_conn, D_CUBE_STATIC_TABLE, D_CUBE_TABLE)
+
+        # # iteratively delete rows of the specific dimsension and attribute value in Block
+        # print "\n# Iterating removal values..."
+        # #cube_sql_print_table(db_conn, D_CUBE_TABLE)
+        # while table_not_empty(db_conn, D_CUBE_TABLE):
+        #     a_value, attrVal_Mass = cube_sql_fetch_firstRow(db_conn, D_CUBE_TABLE)
+        #     conditions = ["a_value = '%s'" % a_value, "attrVal_Mass = %s" % attrVal_Mass]  # a list of conditions 
+        #     cube_sql_delete_rows(db_conn, D_CUBE_TABLE, conditions)
+            
+        #     # update block_i and mass_b
+        #     conditions = ["%s = '%s'" % (att_names[dim_i], a_value)]
+        #     cube_sql_delete_rows(db_conn, block_tables[dim_i], conditions)
+        #     mass_b -= long(attrVal_Mass)
+        #     #print 'mass_B: ' + str(mass_b)
+        #     Bn_mass[dim_i] -= 1
+
+        #     # update order and density measure
+        #     density_prime = measure_density(mass_b, Bn_mass, mass_r, Rn_mass, args)
+        #     newEntry = ["'%s'" % a_value, str(dim_i), str(r)]
+        #     cube_sql_insert_row(db_conn, ORDER_TABLE, newEntry)
+        #     r += 1
+        #     if density_prime > density_tilde:
+        #         density_tilde = density_prime
+        #         r_tilde = r
+        # # -------<
 
         # iteratively delete rows of the specific dimsension and attribute value in Block
-        print "\n# Iterating removal values..."
-        #cube_sql_print_table(db_conn, D_CUBE_TABLE)
-        while table_not_empty(db_conn, D_CUBE_TABLE):
-            a_value, attrVal_Mass = cube_sql_fetch_firstRow(db_conn, D_CUBE_TABLE)
-            conditions = ["a_value = '%s'" % a_value, "attrVal_Mass = %s" % attrVal_Mass]  # a list of conditions 
-            cube_sql_delete_rows(db_conn, D_CUBE_TABLE, conditions)
-            
+        # April 23: store and iterate over the removal values in memory
+        cube_select_values_to_remove(db_conn, D_CUBE_TABLE, ATTVAL_MASSES_TABLE, threshold, dim_i)
+        set_dCube = cube_sql_fetchRows(db_conn, D_CUBE_TABLE)
+        for a_value, attrVal_Mass in set_dCube:
             # update block_i and mass_b
             conditions = ["%s = '%s'" % (att_names[dim_i], a_value)]
-            cube_sql_delete_rows(db_conn, block_tables[dim_i], conditions)
+            cube_sql_delete_rows(db_conn, block_tables[dim_i], conditions)            # update block_i and mass_b
             mass_b -= long(attrVal_Mass)
-            #print 'mass_B: ' + str(mass_b)
             Bn_mass[dim_i] -= 1
 
             # update order and density measure
@@ -224,10 +247,14 @@ def find_single_block(db_conn, RELATION_TABLE, relation_tables, mass_r, att_name
                 density_tilde = density_prime
                 r_tilde = r
 
+
         # remove tuples from block (and update block_tables)
         print "\n# Removing tuples from block..."
         attrName = att_names[dim_i]
-        cube_sql_update_block(db_conn, B_TABLE, D_CUBE_STATIC_TABLE, attrName)
+
+        # cube_sql_update_block(db_conn, B_TABLE, D_CUBE_STATIC_TABLE, attrName)
+        cube_sql_update_block(db_conn, B_TABLE, D_CUBE_TABLE, attrName) # April 23
+
         mass_b = cube_sql_mass(db_conn, B_TABLE)
         #cube_sql_print_table(db_conn, B_TABLE)
         

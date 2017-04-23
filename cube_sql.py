@@ -174,7 +174,6 @@ def cube_select_values_to_remove(db_conn, d_cube_table, attval_masses_table, thr
     cur.close() 
     # print "Created %s for dimension %d in increasing order of attrVal_mass." % (d_cube_table, dim)
 
-
 def cube_sql_dCube_sum(db_conn, d_cube_table):
     cur = db_conn.cursor()
     query = "SELECT SUM(attrval_mass) FROM %s"  % d_cube_table 
