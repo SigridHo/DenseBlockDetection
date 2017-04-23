@@ -40,24 +40,25 @@ def readLabels(file):
         else: 
             labels[key] = label
 
-def plotROC(num_benign, num_attack):
-    # computing statistics
-    true_num_benign = 0
+# def plotROC():
+#     # plot the ROC curve 
+
+
+def computeStat(num_benign, num_attack):
+    total_num_benign = 0
     benignLabels = ["-", "normal."]
-    temp = 0
 
     records = labels.keys()
     for key in records:
         if labels[key] in benignLabels:
-            true_num_benign += 1
-        else:
-            temp += 1
+            total_num_benign += 1
 
-    true_num_attack = len(labels) - true_num_benign
+    total_num_attack = len(labels) - total_num_benign
 
-
-    # plot the ROC curve 
-    
+    falsePostive_rate = num_benign * 1.0 / total_num_benign
+    truePositive_rate = num_attack * 1.0 / total_num_attack
+    print "num_blocks, fp_rate, tp_rate" 
+    print "%d, %.12f, %.12f" % (sys.argv[2], falsePostive_rate, truePositive_rate)
 
 
 def main():
@@ -71,7 +72,8 @@ def main():
         global db_conn
         db_conn = cube_db_initialize()
         num_benign, num_attack = readBlocks(numBlocks)
-        plotROC(num_benign, num_attack)
+        computeStat(num_benign, num_attack)
+        # plotROC(num_benign, num_attack)
 
     except:
         print "Unexpected error:", sys.exc_info()[0]    
