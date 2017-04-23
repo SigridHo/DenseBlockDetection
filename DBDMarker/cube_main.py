@@ -267,10 +267,10 @@ def find_single_block(db_conn, RELATION_TABLE, relation_tables, mass_r, att_name
 
 
     # drop auxilary tables which are no longer needed to save disk space
-    cube_sql_table_drop(db_conn, ATTVAL_MASSES_TABLE)
-    cube_sql_table_drop(db_conn, D_CUBE_TABLE)   
-    cube_sql_table_drop(db_conn, D_CUBE_STATIC_TABLE)   
-    cube_sql_table_drop(db_conn, ORDER_TABLE)   
+    # cube_sql_table_drop(db_conn, ATTVAL_MASSES_TABLE)
+    # cube_sql_table_drop(db_conn, D_CUBE_TABLE)   
+    # cube_sql_table_drop(db_conn, D_CUBE_STATIC_TABLE)   
+    # cube_sql_table_drop(db_conn, ORDER_TABLE)   
 
     return block_tables_ret     # return block_tables
 
@@ -321,8 +321,14 @@ def main():
         #cols_name = "src_ip, dest_ip, time_stamp"
         cube_sql_load_table_from_file(db_conn, RELATION_TABLE, cols_name, args.input_file, args.delimiter)
 
+        # RAW_RELATION_TABLE = "RAW_RELATION_TABLE"
+        # cube_sql_table_drop_create(db_conn, RAW_RELATION_TABLE, cols_description)
+        # cube_sql_load_table_from_file(db_conn, RAW_RELATION_TABLE, cols_name, args.input_file, args.delimiter)
+        # cube_sql_distinct_entries(db_conn, RAW_RELATION_TABLE, RELATION_TABLE)
+        
         #cube_sql_bucketize(db_conn, RELATION_TABLE)
         #cube_sql_print_table(db_conn, RELATION_TABLE)
+
         cube_sql_copy_table(db_conn, ORI_TABLE, RELATION_TABLE)
 
         marker_description = "MARKER text"

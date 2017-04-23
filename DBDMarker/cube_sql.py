@@ -9,7 +9,17 @@ def cube_db_initialize():
     # db_conn = psycopg2.connect("host='/tmp' dbname=%s user=%s password=%s port=%d" % (CUBE_DB, CUBE_DB_USER, CUBE_DB_PASS, CUBE_DB_PORT))
     print "Connected To Database"
     return db_conn
-
+    
+# Keep only the unique entries from a table and save as a new one
+def cube_sql_distinct_entries(db_conn, src_table, dest_table):
+    cur = db_conn.cursor()
+    try:
+        cur.execute("DROP TABLE %s" % dest_table)
+    except psycopg2.Error:
+        db_conn.commit()        
+    cur.execute ("CREATE TABLE %s AS SELECT DISTINCT * FROM %s" % (dest_table, src_table))
+    db_conn.commit()                            
+    cur.close() 
 
 # Drop and recreate table    
 def cube_sql_table_drop_create(db_conn, table_name, create_sql_cols, drop=True):
