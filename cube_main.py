@@ -116,10 +116,12 @@ def select_dimension_by_density(db_conn, block_tables, relation_tables, att_name
 
             # update max density and corresponding dimension index 
             if density_prime > density_tilde:
+            	# print density_prime, density_tilde, dim 
                 density_tilde = density_prime
                 dim = i
                 maxMass = mass_b_i
 
+    maxMass = cube_sql_mass(db_conn, block_tables[dim])
     # drop auxilary tables which are no longer needed to save disk space
     cube_sql_table_drop(db_conn, d_cube_table)
 
