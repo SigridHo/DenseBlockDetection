@@ -362,72 +362,72 @@ def main():
             Rn_mass[n] = cube_sql_mass(db_conn, relation_tables[n])
             ORIn_mass[n] = Rn_mass[n]
 
-        # cube_sql_print_table(db_conn, "R1")
+        cube_sql_print_table(db_conn, "R1")
 
-        ''' find single blocks and retrieve blocks from origianl data '''
-        results = [None] * args.block_num
-        for i in range(args.block_num):
-            # timer for each block detection 
-            block_start = time.time() 
+        # ''' find single blocks and retrieve blocks from origianl data '''
+        # results = [None] * args.block_num
+        # for i in range(args.block_num):
+        #     # timer for each block detection 
+        #     block_start = time.time() 
 
-            # 0422
-            if i == 0:
-                m_r = mass_ori
-            else:
-                ''' Marker Method'''
-                # m_r = cube_sql_mass_marker(db_conn, RELATION_TABLE, marker_cons)
-                m_r = cube_sql_mass(db_conn, RELATION_TABLE)
+        #     # 0422
+        #     if i == 0:
+        #         m_r = mass_ori
+        #     else:
+        #         ''' Marker Method'''
+        #         # m_r = cube_sql_mass_marker(db_conn, RELATION_TABLE, marker_cons)
+        #         m_r = cube_sql_mass(db_conn, RELATION_TABLE)
             
-            block_tables = [None] * args.dimension_num # B_n
-            block_tables = find_single_block(db_conn, RELATION_TABLE, relation_tables, m_r, att_names, col_fmts, Rn_mass, args)        
+        #     block_tables = [None] * args.dimension_num # B_n
+        #     block_tables = find_single_block(db_conn, RELATION_TABLE, relation_tables, m_r, att_names, col_fmts, Rn_mass, args)        
 
-            #cube_sql_delete_from_block(db_conn, RELATION_TABLE, block_tables, att_names, args.dimension_num)
+        #     #cube_sql_delete_from_block(db_conn, RELATION_TABLE, block_tables, att_names, args.dimension_num)
             
-            ''' Marker Method: update marker'''
-            # setting = "MARKER = '1' "
-            # cube_sql_update_marker(db_conn, RELATION_TABLE, block_tables, att_names, args.dimension_num, setting)
-            cube_sql_delete_from_block(db_conn, RELATION_TABLE, block_tables, att_names, args.dimension_num)
+        #     ''' Marker Method: update marker'''
+        #     # setting = "MARKER = '1' "
+        #     # cube_sql_update_marker(db_conn, RELATION_TABLE, block_tables, att_names, args.dimension_num, setting)
+        #     cube_sql_delete_from_block(db_conn, RELATION_TABLE, block_tables, att_names, args.dimension_num)
             
-            for n in range(args.dimension_num):
-                relation_tables[n] = 'R' + str(n)
-                att_name = att_names[n]
-                col_fmt = col_fmts[n]
-                ''' Marker Method: get attribute'''
-                # cube_sql_distinct_attribute_value_marker(db_conn, relation_tables[n], RELATION_TABLE, att_name, col_fmt, marker_cons)
-                cube_sql_distinct_attribute_value(db_conn, relation_tables[n], RELATION_TABLE, att_name, col_fmt)
-                Rn_mass[n] = cube_sql_mass(db_conn, relation_tables[n])
+        #     for n in range(args.dimension_num):
+        #         relation_tables[n] = 'R' + str(n)
+        #         att_name = att_names[n]
+        #         col_fmt = col_fmts[n]
+        #         ''' Marker Method: get attribute'''
+        #         # cube_sql_distinct_attribute_value_marker(db_conn, relation_tables[n], RELATION_TABLE, att_name, col_fmt, marker_cons)
+        #         cube_sql_distinct_attribute_value(db_conn, relation_tables[n], RELATION_TABLE, att_name, col_fmt)
+        #         Rn_mass[n] = cube_sql_mass(db_conn, relation_tables[n])
 
 
-            results[i] = BLOCK_TABLE + str(i)
-            cube_sql_block_create_insert(db_conn, results[i], ORI_TABLE, block_tables, att_names, args.dimension_num, cols_description)
-            #cube_sql_print_table(db_conn, results[i])
-            # print cube_sql_mass(db_conn, results[i])
+        #     results[i] = BLOCK_TABLE + str(i)
+        #     cube_sql_block_create_insert(db_conn, results[i], ORI_TABLE, block_tables, att_names, args.dimension_num, cols_description)
+        #     #cube_sql_print_table(db_conn, results[i])
+        #     # print cube_sql_mass(db_conn, results[i])
 
-            result_mass_b = cube_sql_mass(db_conn, results[i])
-            result_block_tables = [None] * args.dimension_num
-            resultn_mass = [None] * args.dimension_num
-            for n in range(args.dimension_num):
-                result_block_tables[n] = 'RESULT_B' + str(n)
-                att_name = att_names[n]
-                col_fmt = col_fmts[n]
-                cube_sql_distinct_attribute_value(db_conn, result_block_tables[n], results[i], att_name, col_fmt)
-                resultn_mass[n] = cube_sql_mass(db_conn, result_block_tables[n])
-                #print cube_sql_mass(db_conn, result_block_tables[n])
-            result_density = measure_density(result_mass_b, resultn_mass, mass_ori, ORIn_mass, args)
-            #print 'Result: '
-            #print 'Density: ' + str(result_density)
+        #     result_mass_b = cube_sql_mass(db_conn, results[i])
+        #     result_block_tables = [None] * args.dimension_num
+        #     resultn_mass = [None] * args.dimension_num
+        #     for n in range(args.dimension_num):
+        #         result_block_tables[n] = 'RESULT_B' + str(n)
+        #         att_name = att_names[n]
+        #         col_fmt = col_fmts[n]
+        #         cube_sql_distinct_attribute_value(db_conn, result_block_tables[n], results[i], att_name, col_fmt)
+        #         resultn_mass[n] = cube_sql_mass(db_conn, result_block_tables[n])
+        #         #print cube_sql_mass(db_conn, result_block_tables[n])
+        #     result_density = measure_density(result_mass_b, resultn_mass, mass_ori, ORIn_mass, args)
+        #     #print 'Result: '
+        #     #print 'Density: ' + str(result_density)
 
-            # add block statistcs into table
-            block_end = time.time()
-            block_elapsed_time = block_end - block_start
-            print "Block Elapsed Time: %fs" % block_elapsed_time
-            newEntry = [str(i), str(result_density), str(result_mass_b), str(block_elapsed_time)]
-            cube_sql_insert_row(db_conn, REPORT_TABLE, newEntry)
-            cube_sql_print_table(db_conn, REPORT_TABLE)
+        #     # add block statistcs into table
+        #     block_end = time.time()
+        #     block_elapsed_time = block_end - block_start
+        #     print "Block Elapsed Time: %fs" % block_elapsed_time
+        #     newEntry = [str(i), str(result_density), str(result_mass_b), str(block_elapsed_time)]
+        #     cube_sql_insert_row(db_conn, REPORT_TABLE, newEntry)
+        #     cube_sql_print_table(db_conn, REPORT_TABLE)
 
-        # overall timer
-        overall_end = time.time()
-        print "Total Elapsed Time: %fs" % (overall_end - overall_start) 
+        # # overall timer
+        # overall_end = time.time()
+        # print "Total Elapsed Time: %fs" % (overall_end - overall_start) 
 
     except:
         print "Unexpected error:", sys.exc_info()[0]    
