@@ -259,3 +259,17 @@ def cube_sql_fetchRows(db_conn, table_name):
     cur.close() 
     # print "Fetched all rows for %s." % table_name
     return rows
+
+def cube_sql_fetchSize(db_conn, table_name, num_dim):
+    size = ""
+    cur = db_conn.cursor()
+    for i in range(num_dim):  
+        query = "SELECT COUNT(*) FROM (SELECT DISTINCT a%s FROM %s) as A" % (i, table_name)
+        cur.execute(query)
+        curr_size = cur.fetchone()
+        size += str(curr_size) + "x"
+        db_conn.commit()                     
+    cur.close() 
+    size = size[-1]
+    return size
+

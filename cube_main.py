@@ -318,7 +318,7 @@ def main():
         db_conn = cube_db_initialize()
 
         # table to store block statistics for report (density, elapsed time 
-        report_description = "block_index integer, density float, entryCount integer, elapsed_time numeric" 
+        report_description = "block_index integer, volume text, density float, entryCount integer, elapsed_time numeric" 
         cube_sql_table_drop_create(db_conn, REPORT_TABLE, report_description)
 
         ''' initialize tables and copy original relations '''
@@ -413,12 +413,14 @@ def main():
             result_mass_b = cube_sql_mass(db_conn, results[i])
             result_block_tables = [None] * args.dimension_num
             resultn_mass = [None] * args.dimension_num
+            cube_size = ""
             for n in range(args.dimension_num):
                 result_block_tables[n] = 'RESULT_B' + str(n)
                 att_name = att_names[n]
                 col_fmt = col_fmts[n]
                 cube_sql_distinct_attribute_value(db_conn, result_block_tables[n], results[i], att_name, col_fmt)
                 resultn_mass[n] = cube_sql_mass(db_conn, result_block_tables[n])
+                cube_size += str(resultn_mass[n]) + "X"
                 #print cube_sql_mass(db_conn, result_block_tables[n])
             result_density = measure_density(result_mass_b, resultn_mass, mass_ori, ORIn_mass, args)
 
@@ -426,7 +428,8 @@ def main():
             block_end = time.time()
             block_elapsed_time = block_end - block_start
             print "Block Elapsed Time: %fs" % block_elapsed_time
-            newEntry = [str(i), str(result_density), str(result_mass_b), str(block_elapsed_time)]
+            cube_size = cube_size[:-1]
+            newEntry = [str(i), cube_size, str(result_density), str(result_mass_b), str(block_elapsed_time)]
             cube_sql_insert_row(db_conn, REPORT_TABLE, newEntry)
             cube_sql_print_table(db_conn, REPORT_TABLE)
 
