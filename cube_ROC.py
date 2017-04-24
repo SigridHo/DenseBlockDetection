@@ -113,43 +113,43 @@ def main():
 
         for i in range(maxNumBlocks):
             num_benign, num_attack = readBlocks(i)
-        #     num_records_inBlock = num_benign + num_attack
-        #     num_records_left -= num_records_inBlock
+            num_records_inBlock = num_benign + num_attack
+            num_records_left -= num_records_inBlock
 
-        #     accum_benign_inBlock += num_benign  # FP
-        #     accum_attack_inBlock += num_attack  # TP
+            accum_benign_inBlock += num_benign  # FP
+            accum_attack_inBlock += num_attack  # TP
 
-        #     falseNegative = total_num_attack - accum_attack_inBlock # FN
-        #     truePositive.append(accum_attack_inBlock)
-        #     trueNegative.append(num_records_left - falseNegative)   # TN
+            falseNegative = total_num_attack - accum_attack_inBlock # FN
+            truePositive.append(accum_attack_inBlock)
+            trueNegative.append(num_records_left - falseNegative)   # TN
 
-        #     fp, tp = computeStat(accum_benign_inBlock, accum_attack_inBlock, total_num_benign, total_num_attack)
-        #     falsePostive_rate.append(fp)
-        #     truePositive_rate.append(tp)
+            fp, tp = computeStat(accum_benign_inBlock, accum_attack_inBlock, total_num_benign, total_num_attack)
+            falsePostive_rate.append(fp)
+            truePositive_rate.append(tp)
 
-        # print "falsePostive_rate: \n", falsePostive_rate
-        # print "truePositive_rate: \n", truePositive_rate
-        # plotROC(falsePostive_rate, truePositive_rate, fileName)
+        print "falsePostive_rate: \n", falsePostive_rate
+        print "truePositive_rate: \n", truePositive_rate
+        plotROC(falsePostive_rate, truePositive_rate, fileName)
 
-        # # compute accuracy using linear interpolation 
-        # AUC = []
-        # for i in range(maxNumBlocks - 1):
-        #     TP = truePositive[i] + truePositive[i + 1]
-        #     TN = trueNegative[i] + trueNegative[i + 1]
-        #     accuracy = (TP + TN) * 0.5 / (total_num_benign + total_num_attack)
-        #     AUC.append(accuracy)
-        # X = [((2 * i + 1.0) / 2) for i in range(1, maxNumBlocks)]
-        # plt.figure(2)
-        # plt.title('Accuracy - %s' % fileName)  
-        # plt.xlabel('Number of blocks (k)')  
-        # plt.ylabel('Accuracy')  
-        # plt.axis([1, 20, 0.0, 1.0])
-        # plt.xticks([i for i in range(1, maxNumBlocks + 1)])
-        # plt.yticks([i * 0.1 for i in range(0, 11)])
-        # plt.plot(X, AUC, 'r', marker = 'x')  
-        # plt.grid()  
-        # # plt.show() 
-        # plt.savefig('./Acuuracy_%s.pdf' % fileName)
+        # compute accuracy using linear interpolation 
+        AUC = []
+        for i in range(maxNumBlocks - 1):
+            TP = truePositive[i] + truePositive[i + 1]
+            TN = trueNegative[i] + trueNegative[i + 1]
+            accuracy = (TP + TN) * 0.5 / (total_num_benign + total_num_attack)
+            AUC.append(accuracy)
+        X = [((2 * i + 1.0) / 2) for i in range(1, maxNumBlocks)]
+        plt.figure(2)
+        plt.title('Accuracy - %s' % fileName)  
+        plt.xlabel('Number of blocks (k)')  
+        plt.ylabel('Accuracy')  
+        plt.axis([1, 20, 0.0, 1.0])
+        plt.xticks([i for i in range(1, maxNumBlocks + 1)])
+        plt.yticks([i * 0.1 for i in range(0, 11)])
+        plt.plot(X, AUC, 'r', marker = 'x')  
+        plt.grid()  
+        # plt.show() 
+        plt.savefig('./Acuuracy_%s.pdf' % fileName)
 
     except:
         print "Unexpected error:", sys.exc_info()[0]    
