@@ -1,3 +1,0 @@
-POLICY, DENSITY, NUM_BLOCKS, METHOD, TOTAL_TIME, FP_RATE, TP_RATE
-cardinality， ari, 5, marker, 2202.668710s
-density, ari, 5, copy, 4871.904677s
