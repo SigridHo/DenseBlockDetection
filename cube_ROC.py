@@ -66,7 +66,7 @@ def plotROC(X, Y, fileName):
     # plt.axis([0.0, 0.1, 0.0, 0.1])
     # plt.xticks([i * 0.1 for i in range(0, 11)])
     # plt.yticks([i * 0.1 for i in range(0, 11)])
-    plt.plot(X, Y, 'r')  
+    plt.plot(X, Y, 'r', marker = 'x')  
     plt.grid()  
     # plt.show() 
     plt.savefig('./ROC_Curve_%s.pdf' % fileName)
@@ -130,13 +130,15 @@ def main():
             TN = trueNegative[i] + trueNegative[i + 1]
             accuracy = (TP + TN) * 0.5 / (total_num_benign + total_num_attack)
             AUC.append(accuracy)
-        X = [((2 * i + 1.0) / 2) for i in range(maxNumBlocks - 1)]
-        plt.figure(1)
+        X = [((2 * i + 1.0) / 2) for i in range(1, maxNumBlocks)]
+        plt.figure(2)
         plt.title('Accuracy - %s' % fileName)  
         plt.xlabel('Number of blocks (k)')  
         plt.ylabel('Accuracy')  
+        plt.axis([1, 20, 0.0, 1.0])
         plt.xticks([i for i in range(1, maxNumBlocks + 1)])
-        plt.plot(X, AUC, 'r')  
+        plt.yticks([i * 0.1 for i in range(0, 11)])
+        plt.plot(X, AUC, 'r', marker = 'x')  
         plt.grid()  
         # plt.show() 
         plt.savefig('./Acuuracy_%s.pdf' % fileName)
@@ -145,6 +147,12 @@ def main():
         print "Unexpected error:", sys.exc_info()[0]    
         raise 
 
+def copyTables(dataset):  
+    db_conn = cube_db_initialize() 
+    table_names = [('block_table%d' % i) for i in range(0, 20)]
+    for name in table_names:
+        dest_table = "block%s_%s" % (name[11:], dataset)
+        cube_sql_copy_table(db_conn, dest_table, name)
 
 if __name__ == '__main__':
     """
@@ -154,3 +162,5 @@ if __name__ == '__main__':
 
     """
     main()
+    # copyTables('DARPA')
+
