@@ -391,7 +391,7 @@ def main():
             #cube_sql_delete_from_block(db_conn, RELATION_TABLE, block_tables, att_names, args.dimension_num)
             
             ''' Marker Method: update marker'''
-            setting = "MARKER = ‘1’ "
+            setting = "MARKER = 0 "
             cube_sql_update_marker(db_conn, RELATION_TABLE, block_tables, att_names, args.dimension_num, setting)
             #cube_sql_delete_from_block(db_conn, RELATION_TABLE, block_tables, att_names, args.dimension_num)
             

@@ -1,0 +1,13 @@
+POLICY, DENSITY, METHOD, TOTAL_TIME, FP_RATE, TP_RATE
+cardinality， ari, copy, 534.468036175
+cardinality， ari, marker, 491.899703979
+cardinality， geo, copy, 458.317095041
+cardinality， geo, marker, 446.063700914
+cardinality， sus, marker, 496.745054007
+cardinality， sus, copy, 513.257727861
+density， sus, copy, 473.748892784
+density， sus, marker, 515.461890936
+density, geo, marker, 559.527994156
+density, geo, copy, 557.382141829
+density, ari, copy, 532.645810843
+density, ari, marker, 546.254909992
