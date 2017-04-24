@@ -4,13 +4,13 @@ from cube_params import *
 from cube_sql import *
 import matplotlib.pyplot as plt  
 
-def readBlocks(block_index):
+def readBlocks(block_index, block_name):
     num_benign = 0   # number of benign connection in the dense block
     num_attack = 0
     benignLabels = ["-", "normal."]
     LABEL = {}
 
-    table_name = BLOCK_TABLE + str(block_index)
+    table_name = block_name + str(block_index)
     denseBlock = cube_sql_fetchRows(db_conn, table_name)
 
     for row in denseBlock:
@@ -91,6 +91,7 @@ def main():
     labels = {} 
     file = sys.argv[1] 
     fileName = 'DARPA TCP Dump'
+    block_name = BLOCK_TABLE
     # fileName = 'AirForce TCP Dump'
     maxNumBlocks = int(sys.argv[2])
     # read the true labels of each record from dataset
@@ -112,7 +113,7 @@ def main():
         Accuracy = []
 
         for i in range(maxNumBlocks):
-            num_benign, num_attack = readBlocks(i)
+            num_benign, num_attack = readBlocks(i, block_name)
             num_records_inBlock = num_benign + num_attack
             num_records_left -= num_records_inBlock
 
