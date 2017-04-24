@@ -145,26 +145,6 @@ def main():
         print "Unexpected error:", sys.exc_info()[0]    
         raise 
 
-def report_block_statistics(num_blocks, num_dim):
-    db_conn = cube_db_initialize()
-    for i in range(num_blocks):
-        table_name = BLOCK_TABLE + str(i)
-        size = ""
-        for j in range(num_dim):
-            
-        query = "select count(*) from (select distinct %s from %s) as a"
-
-    for row in denseBlock:
-        trueLabel = labels[row]
-        if trueLabel in benignLabels:
-            num_benign += 1
-        else:
-            num_attack += 1
-
-    print "dense blocks #%d: benign=%d, attack=%d" % (block_index, num_benign, num_attack)
-    return num_benign, num_attack
-
-
 
 if __name__ == '__main__':
     """
@@ -173,6 +153,4 @@ if __name__ == '__main__':
     python cube_ROC.py dataset_with_labels number_of_dense_blocks 
 
     """
-    # main()
-    report_block_statistics(5, 3)
-
+    main()
