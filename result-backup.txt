@@ -1,15 +1,40 @@
-cardinality， ari, 5, marker, 2202.668710s
-(0, 10822.0, 10822, Decimal('428.485233068'))
-(1, 10155.0, 10155, Decimal('414.514290094'))
-(2, 213.073170732, 20384, Decimal('423.036697149'))
-(3, 134.424418605, 7707, Decimal('442.696874857'))
-(4, 10711.1684211, 1017561, Decimal('469.739583969'))
-Total Elapsed Time: 2202.668710s
-
-density, ari, 5, copy, 4871.904677s
-(0, 16368.9782609, 501982, Decimal('1041.50071502'))
-(1, 15230.9076923, 330003, Decimal('1016.43160987'))
-(2, 15234.6226415, 269145, Decimal('895.93735981'))
-(3, 8648.78571429, 40361, Decimal('884.392514944'))
-(4, 11646.4285714, 54350, Decimal('908.712995052'))
-Total Elapsed Time: 4871.904677s
+cardinality， ari, 2, marker
+(0, 10822.0, 10822, Decimal('491.899703979'))
+(1, 10155.0, 10155, Decimal('508.798312902'))
+Total Elapsed Time: 1028.546545s
+cardinality， ari, 2, copy
+(0, 10822.0, 10822, Decimal('534.468036175'))
+(1, 10155.0, 10155, Decimal('444.802997112'))
+Total Elapsed Time: 1006.591846s
+cardinality， geo, 2, marker
+(0, 10822.0, 10822, Decimal('446.063700914'))
+(1, 10155.0, 10155, Decimal('413.9750669'))
+Total Elapsed Time: 888.434692s
+cardinality， geo, 2, copy
+(0, 10822.0, 10822, Decimal('458.317095041'))
+(1, 10155.0, 10155, Decimal('454.487836838'))
+Total Elapsed Time: 940.306379s
+cardinality， sus, marker
+(0, 4079399.93231, 333466, Decimal('496.745054007'))
+Total Elapsed Time: 522.912491s
+cardinality， sus, copy
+(0, 4079399.93231, 333466, Decimal('513.257727861'))
+Total Elapsed Time: 539.677974s
+density， sus, copy
+(0, 21719858.6246, 1023912, Decimal('473.748892784'))
+Total Elapsed Time: 501.263774s
+density, sus, marker
+(0, 21719858.6246, 1023912, Decimal('515.461890936'))
+Total Elapsed Time: 544.799394s
+density, geo, marker
+(0, 160286.770223, 1023031, Decimal('559.527994156'))
+Total Elapsed Time: 588.908189s
+density, geo, copy
+(0, 160286.770223, 1023031, Decimal('557.382141829'))
+Total Elapsed Time: 584.351709s
+density, ari, copy
+(0, 16368.9782609, 501982, Decimal('532.645810843'))
+Total Elapsed Time: 566.085379s
+density, ari, marker
+(0, 16368.9782609, 501982, Decimal('546.254909992'))
+Total Elapsed Time: 576.798232s
