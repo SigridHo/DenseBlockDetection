@@ -276,7 +276,7 @@ def cube_sql_fetchSize(db_conn, table_name, num_dim):
 def cube_sql_index(db_conn, table_name, cols):
     cur = db_conn.cursor()
     # btree, gist, gin and brin
-    method = "gin"
+    method = "btree"
     query = "create index on %s USING %s (%s)" % (table_name, method, cols)
     cur.execute(query)
     db_conn.commit()                     
