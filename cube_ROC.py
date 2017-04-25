@@ -90,9 +90,9 @@ def main():
     global labels     # a dictionary to store the records and their label 
     labels = {} 
     file = sys.argv[1] 
-    fileName = 'DARPA TCP Dump'
+    # fileName = 'DARPA TCP Dump'
+    fileName = 'AirForce TCP Dump'
     block_name = BLOCK_TABLE
-    # fileName = 'AirForce TCP Dump'
     maxNumBlocks = int(sys.argv[2])
     # read the true labels of each record from dataset
     total_num_benign, total_num_attack = readLabels(file)
