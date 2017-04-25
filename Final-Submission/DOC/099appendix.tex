@@ -1,0 +1,44 @@
+
+\subsection{Member Contributions}
+
+We have finished \textit{Phase1: Literature} and \textit{Phase2: SQL Implementation} so far, and we listed the contributions of each group member as follows. \\
+
+\textbf{Haoming Chen:}
+\bit
+\setlength\itemsep{1em}
+\item Literature research and analysis of three papers: (1) D-Cube: Dense-Block Detection in Terabyte-Scale Tensors\cite{shin2017d}; (2) Graph analytics using vertica relational database\cite{jindal2015graph} and (3) Pegasus: A peta-scale graph mining system implementation and observations\cite{kang2009pegasus}.
+
+\item Implemented sub-modules in D-Cube using SQL and Psycopg including \textit{Algorithm2: find\_single\_block} and two methods of dimension selection in D-Cube, \textit{Algorithm4: select\_dimension by cardinality} and 
+\textit{select\_dimension by density}.
+
+\item Debugging and testing of D-Cube implementation, run the algorithm on three different methods of density measurement using \textit{Density} as the dimension selection method, extract the result and statistics from database and reach preliminary conclusions. 
+
+\item In charge of components of project report, including \textit{Abstract}, \textit{Introduction-Motivation}, half of \textit{Survey}, \textit{Experiment Design} and \textit{Plan of activities}.
+\eit
+
+\\
+\textbf{Xinrui He:}
+\bit
+\setlength\itemsep{1em}
+\item Literature research and analysis of three papers: (1) D-Cube: Dense-Block Detection in Terabyte-Scale Tensors\cite{shin2017d}; (2) Graph analytics using vertica relational database\cite{jindal2015graph} and (3) Pegasus: A peta-scale graph mining system implementation and observations\cite{kang2009pegasus}.
+
+\item Implemented sub-modules in D-Cube using SQL and Psycopg including three metrics of density measures \textit{Algorithm1: D-Cube Overall Structure}, \textit{Algorithm3: Density Measures with Arithmetic Average Mass}, \textit{Geometric Average Mass}, \textit{Suspiciousness}, and \textit{Bucketize time}.
+
+\item Debugging and testing of D-Cube implementation, run the algorithm on three different methods of density measurement using \textit{Cardinality} as the dimension selection method, extract the result and statistics from database and reach preliminary conclusions. 
+
+\item In charge of components of project report, including detailed introduction and showcase of D-Cube algorithm and SQL in \textit{Methods} and \textit{Unit tests}.
+
+\eit
+
+
+\subsection{Plan of activities}
+
+For the later phases of the project, we plan to perform the following tasks:
+\bit
+\setlength\itemsep{1em}
+\item Full inspection and debugging of the implemented D-Cube algorithm to make sure the algorithm works correctly before we step into the experiment process. 
+\item Based on the initial implementation, try to optimize the algorithm in terms of computational efficiency, disk space usage, etc. Possible optimization may involve indexing in relational databases. Test the optimized algorithm with the baseline to check the difference of performance. 
+\item Compare two implementations of generating intermediate tables mentioned in \textit{Project Description T3} and give conclusions upon analysis.
+\item Implement the evaluation method of \textit{ROC Curve} and report statistics such as mass, density, etc. of the dense blocks. Compared the found blocks with the labeled data and analyze their associated meanings in real-world scenarios. Present different applications of the algorithm on pattern recognition, anomaly detection, etc.
+\item Design controlled tests to conduct experiments on various parameter settings (e.g. different combinations of $k$ and metrics). Compare and interpret the findings in multiple aspects including accuracy, computational efficiency, etc.\\
+\eit

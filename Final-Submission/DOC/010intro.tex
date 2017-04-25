@@ -1,0 +1,47 @@
+\subsection{Problem Definition}
+
+The problem we want to solve can be summarized as follows:
+\bit
+\setlength\itemsep{1em}
+\item \textbf{GIVEN}: multi-dimensional data along with its attributes, and metrics/methods for the specific D-Cube algorithm presented in Table 1.
+
+\begin{table}[]
+\centering
+\caption{Given data and methods}
+\label{my-label}
+\begin{tabular}{cc}
+\hline
+\textit{\textbf{Notation}}    & \textit{\textbf{Explanation}}                \\ \hline
+\textit{\textbf{$R$}}         & Multi-dimensional data (Tensors)             \\ \hline
+\textit{\textbf{$N$}}         & Number of dimension attributes               \\ \hline
+\textit{\textbf{$k$}}         & Number of desired dense blocks               \\ \hline
+\textit{\textbf{$\rho$}}      & Density measure of tensor                    \\ \hline
+\textit{\textbf{$DimSelect$}} & Dimension selection method                   \\ \hline
+\end{tabular}
+\end{table}
+
+\item \textbf{FIND}: $k$ dense blocks (sub-tensors) with density in descending order.
+\eit
+
+More details of the D-Cube algorithm will be covered in \textit{Section 3: Methods}. 
+
+\subsection{Motivation}
+
+A specific entry of multi-dimensional data has a rich representation of meanings. For example, a patient's record can have dimension attributes of age, gender, allergy history, medical treatment, etc. A TCP dump record in real-life Internet may consists of source IP, destination IP, and forwarding timestamp, etc. \\
+
+Although it's trivial to understand what a specific record means, it's much harder to grasp the big picture of all records. What's more, there exist similar records in the data which may form dense blocks in high dimensional space with proper manipulation such as reorganization. These dense blocks are in-explicit to simple human inspection and hide in the N-dimension space, but they are associated with important characteristics and properties in the real world. In the example of TCP dump, for instance, if there're significant number of connections which come from the same source IP address and go to another same destination IP address within a fairly short time frame, then we have a reason to believe that these connections may come from a malicious cyber attack on purpose. In such scenario, these connections form a dense block in the multi-dimensional space as their attributes in different dimensions have great similarity to each other. Therefore, we can take advantage of this property of dense blocks and extract meaningful insights from gigantic amounts of data. \\ 
+
+Aside from the example given above, finding dense blocks can also be useful in several pattern recognition schemes, as well as anomaly detection like distinguishing fake reviews written by paid posters on online shopping websites. To realize the idea, we proposed and implemented a dense block detection algorithm, D-Cube\cite{shin2017d}, using SQL and disk-based data in relational databases to overcome the traditional problem where data are too large to fit in memory. Latter experiments and result shows that D-Cube achieves our goal with both great efficiency and accuracy. 
+
+\subsection{Contributions}
+
+The contributions of this project are summarized as follows:
+\bit
+\setlength\itemsep{1em}
+\item We implemented the D-Cube algorithm in SQL with a Python adapter named \textit{Psycopg} to present a succinct and logical frame work which can be easily understand. We then test the theory of dense block detection on different multi-aspect data collected in the real world and analyze their associated characteristics in different real-world problem settings.
+\item Upon the basis of the algorithm, we proposed and implemented optimization by taking advantage of indexing in relational databases. We tested the optimized algorithm and showed that it generally achieved better performance in multiple aspects.    
+\item We carefully designed several controlled tests and experiments to find out the effect of different real-value variable settings (e.g. different $k$, $N$, etc.).  
+\item Likewise, we tested different metrics/methods of dimension selection and density measurement, and compare results in multiple aspects to reach conclusions in terms of computational efficiency, accuracy, etc.\\
+
+Overall, our work presents a clear implementation and demonstration on the underlying intuition and setting of D-Cube algorithm by running and explaining on several real-world datasets, as well as elaborately investigating the effect and characteristics of different parameter and metrics. Moreover, we proposed possible optimization to speed up the computation and further cutting down the disk usage. We compare the results with the original algorithm and give detailed analysis.     
+\eit

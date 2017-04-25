@@ -1,0 +1,157 @@
+Next we list the papers that each member read,
+along with their summary and critique.
+
+\subsection{Papers read by Haoming Chen}
+\subsubsection{D-Cube: Dense-Block Detection in Terabyte-Scale Tensors} 
+The first paper was the D-Cube paper by Kijung Shin, Bryan Hooi, Jisu Kim, Christos Faloutsos.\cite{shin2017d} 
+\begin{itemize*}
+\item {\em \textbf{Problem definition}}: \\
+Detecting fraudulent behavior and anomaly in large scale multidimensional data have a great practical value in real-world applications. However, current approaches all presents the limitation of handling large volumes of such data which cannot fit in memory and their accuracy is far from satisfactory. \\ 
+
+\item {\em \textbf{Main idea}}: \\
+This paper introduces an approach called D-Cube to detect dense blocks in large scale multidimensional data while improving the effectiveness and accuracy. \\
+
+By modeling the data as a tensor, former techniques like tensor decomposition and search-based methods are dedicated to finding dense blocks in high dimension space, to detect suspicious and potentially fraudulent behaviors like the cyber intrusion, malicious review writing and rating, etc. Though effective in a sense, these methods are limited in scale as they can only handle data that fits in memory. D-Cube, a new model as this paper presents, tackles this problem by allowing data to stay in disk while finding the dense blocks. Moreover, this technique can further speed up the computation by running in a distributed framework like MapReduce.\\
+
+The algorithm starts by calculating certain statistics of block density and caches them in the memory as they will be frequently accessed. By running iteratively, the algorithm finds the dense blocks one by one and removes corresponding tuples that comprise these blocks with sequential scanning and writing in the disk space. Under this scheme, the algorithm does the computation on the fly, so we don’t have to load all tuples into the memory at once. Furthermore, this paper also mentions combining steps that require disk access to reduce disk I/O as an optimization to increase efficiency. \\ 
+
+Experiment on real-world datasets and analysis of D-Cube shows that it beats the traditional approaches of dense block detection in four dimensions: (1) requirement of memory; (2) computation speed; (3) accuracy and (4) efficiency in real-world application. Given the same amounts of data and computation resources, D-Cube amazingly achieves 1600x reduction of memory need and 5x speed up, while maintaining or even improving the detection accuracy. \\ 
+
+\item {\em \textbf{Use for our project}}: \\
+D-Cube is the exact algorithm that we are going to implement for our project. In addition, we have limited resource in terms of computation power and memory. Thus, D-Cube has the exact property we desire to detect dense block sitting in disk space. \\ 
+
+\item {\em \textbf{Shortcomings}}:\\
+Inside the iteration of D-Cube algorithm, there’s a sub-module which in charges of determining the removal order of dimensions. The paper presents two heuristic methods of decision of depending on cardinality or density. However, it’s not mathematically guaranteed to be the best in terms of efficiency and accuracy. Further research can dive into this sub-problem and try to find a way for wiser deletion of dimensions. 
+\end{itemize*}
+
+\subsubsection{Graph Analytics using the Vertica Relational Database} 
+The second paper was the Vertica paper by Jindal, Alekh, Samuel Madden, Malú Castellanos, and Meichun Hsu.\cite{jindal2015graph}
+\begin{itemize*}
+\item {\em \textbf{Problem definition}}:  \\
+Comparing to vertex-centric graph analytic systems, using a relational database like Vertica to conduct graph analysis through SQL queries presents several aspects of advantages and flexibility, while at the meantime, guarantees comparable runtime performance. \\ 
+
+\item {\em \textbf{Main idea}}:\\
+Nowadays, graph analytics plays a significant part in our real-world applications, including social network analysis, shortest path finding, etc. Under such circumstance, many vertex-centric graph analytics systems like Giraph and GraphLab are invented to facilitate the complex computation. This paper shows that a traditional relational database like Vertica is sufficient to tackle such tasks, and even better, outperforms these vertex-centric systems by exploiting the nature of relational operators and data storage. \\ 
+
+In the realm of graph analysis, many computations involve vertex/edge selection, aggregation, projections, weights update, etc. These sub-procedures can be easily done by forming SQL queries with relational operators, which are highly optimized in Vertica to reduce disk I/O and runtime complexity. Moreover, relational databases like Vertica can be easily extended using UDFs to handle modified execution pipelines while graph analytics systems are limited under such circumstance as they’re not suitable in nature. \\
+
+The paper further introduces several approaches to optimize query manipulation in relational databases, including creating temporary tables instead of updating existed ones to take advantage of the sequential writing, etc. From the experiments, we can conclude that conducting graph analysis using Vertica yields comparable runtime performance as it eliminates data loading in the first place. In addition, Vertica’s nature of excelling at performing relational operations and its built-in optimization of only accessing qualified records instead of doing full scan repeatedly like Giraph further expedite the computation. Finally, Vertica is also more flexible in a way as users can customize it to tradeoff between memory overhead and disk I/O, and even combine graph analysis with relational analysis. Vertex-centric systems lack the ability to do so as they are limited to certain types of analysis and have no control once the pipeline is settled.\\ 
+
+\item {\em \textbf{Use for our project}}: \\
+Since we are using SQL and relational database to implement our project, this paper is greatly helpful as it not only presents detailed SQL query translations of fundamental graph algorithms, but also points out the potential optimizations which we can exploit to further reduce disk I/O and memory overhead. \\ 
+
+\item {\em \textbf{Shortcomings}}:\\
+Relational databases like Vertica reduce the disk I/O at the cost of using more memory to achieve the comparable runtime performance as vertex-centric systems. However, memory is much more expensive than hard disks and usually memory is the bottleneck. Thus, future research can focus on optimizing computation procedures to further reduce the memory requirement. 
+\end{itemize*}
+
+\subsubsection{PEGASUS: A Peta-Scale Graph Mining System - Implementation and Observations} 
+The third paper was the PEGASUS paper by Kang, U., Charalampos E. Tsourakakis, and Christos Faloutsos.\cite{kang2009pegasus}
+\begin{itemize*}
+\item {\em \textbf{Problem definition}}: \\
+This paper introduces a large-scale graph mining library, Pegasus, which is implemented using the Hadoop architecture and its applications on several aspects like PageRank, connected components finding, etc. In addition, it also presents multiple optimizations to further speed up the computation and conducted experiments on real-world graph data.
+ \\ 
+
+\item {\em \textbf{Main idea}}: \\
+Pegasus is a large-scale graph mining system that runs in a distributed manner on top of the Hadoop architecture. On most graph mining problems and applications, matrix-vector multiplications are heavily and repeatedly performed, Pegasus exploits this phenomenon and introduces a generalization called GIM-V that runs iteratively. By customizing the basic operations in GIM-V with SQL, we can perform many frequently-used graph mining algorithms like PageRank, RWR, etc. in parallel. \\
+ 
+In addition to the naive implementation of GIM-V, this paper also introduces ways to optimize it, including computation based on block multiplication (GIM-V BL), which is superior in both speed and memory overhead using block encoding. Also, the idea of preprocessed edge clustering combined with block encoding (GIM-V CL) further reduces the computation. Another optimization exploits the nature of diagonal matrix blocks (GIM-V DI) to decrease the number of iterations when performing shuffling and disk I/O in MapReduce.\\
+ 
+Experiments of utilizing Pegasus to conduct graph analysis show that it achieves at least 5x faster performance comparing to the naïve implementation of algorithms mentioned above, and has the desired property to scale up well with increasing number of worker machines. \\ 
+
+\item {\em \textbf{Use for our project}}: \\
+A traditional problem for most graph mining approaches is that they assume graph data can sit in the memory, which is absolutely not the case in reality. Thus, using large-scale mining tools like Pegasus to take advantage of distributed architecture is a good choice to deal with gigantic graph mining problems, and our project is just the exact situation. Moreover, Pegasus has already applied several optimizations to its basic operations which beats the naïve implementations, thus we can utilize it to achieve faster computation. \\ 
+
+\item {\em \textbf{Shortcomings}}:\\
+Pegasus proposed GIM-V as a basic unit and implemented it with several optimizations. This is beneficial for many graph mining algorithms as they heavily rely on matrix-vector multiplication. However, not all graph mining algorithms are comprised of matrix-vector multiplication, and Pegasus is not helpful under these circumstances. 
+\end{itemize*}
+
+\subsection{Papers read by Xinrui He}
+\subsubsection{A General Suspiciousness Metric for Dense Blocks in Multimodal Data}
+The first paper was the CROSSSPOT paper by Jiang Meng, Alex Beutel, Peng Cui, Bryan Hooi, Shiqiang Yang, and Christos Faloutsos. \cite{jiang2015general}
+\begin{itemize*}
+\item {\em \textbf{Problem Definition}}: 
+
+In research, analysis about dense blocks is very important, because they indicate fraud, cheating, and emerging trends. However, we don’t have a good metric to measure whether these dense blocks are worthy of attention. In addition, we lack a method to evaluate the suspiciousness of dense block with a different number of modes.  \\ 
+
+
+\item {\em \textbf{Main idea}}: \\
+In this paper, authors propose a series of axioms, all axioms of which a good metric should be observed. These basic axioms include Density, Size, Concentration, Contrast and Multimodal. Authors propose a new metric, suspiciousness, that in line with all these axioms. The suspiciousness score of a multimodal block is the negative log likelihood of block’s mass under an ERP model. Other competitors, such as Mass, Density, Average Degree and Singular Value, have some shortcomings because they break some of the axioms somehow.  \\ 
+
+
+Furthermore, authors propose CROSSSPOT algorithm to solve suspicious block detection problem. This is a local search algorithm that starts from a seed suspicious block. For each iteration, we update by optimally choose a subset of values in a specific mode while holding constant values in other modes. We keep adjusting mode until it converges.  \\ 
+
+
+In addition, authors evaluate the CROSSSPOT algorithm with synthetic datasets. The experiment results show that CROSSSPOT outperforms other methods by having higher recall and precision on average. Compared to HOSVD, CROSSSPOT improves recall for finding both dense high-order blocks and low-order blocks. Experiments also prove that the performance of the algorithm is robust when we exceed a moderate number of random seeds, such as 50. The experiment results also indicate that the convergence happens really fast, usually within 5 iterations. Experiments on retweeting dataset also show CROSSSPOT has better performance because it could catch bigger and denser blocks. \\ 
+
+
+\item {\em \textbf{Use for our project}}:
+
+This paper introduces a new metric and a new algorithm. We could include this new metric, suspiciousness in our project. And we may try to develop a more efficient algorithm based on CROSSSPOT. \\ 
+
+
+\item {\em \textbf{Shortcomings}}:
+
+The suspiciousness metric proposed here is based on several axioms presented by authors. However, these axioms may not always hold. When these axioms violated, the suspiciousness metric may have a negative effect on measuring dense blocks. For the CROSSSPOT algorithm, it is a greedy algorithm by choosing the local maximum. Thus, the final result may not be a global maximum. It is very interesting to develop an algorithm for finding the global maximum. 
+
+\end{itemize*}
+
+
+\subsubsection{M-Zoom: Fast Dense-Block Detection in Tensors with Quality Guarantees}
+The second paper was the M-Zoom paper by Shin Kijung, Bryan Hooi, Christos Faloutsos.\cite{shin2016m}
+\begin{itemize*}
+\item {\em \textbf{Problem Definition}}: 
+
+In this paper, authors focus on the problem of detecting the k densest blocks in a tensor. They not only consider addressing the problem of finding k distinct blocks with highest densities, but also the problem of finding k densest blocks with size bounds. They solve the problems on three density measures: Arithmetic Average Mass, Geometric Average Mass, and Suspiciousness. \\ 
+
+
+\item {\em \textbf{Main idea}}: 
+
+Authors propose a flexible method to solve the problem of finding dense blocks, M-ZOOM (Multidimensional Zoom), which is more efficient, scalable and accurate. Authors also introduce how to implement the basic algorithm to solve various problems faster and better. The basic idea of the M-ZOOM algorithm is that it firstly duplicates the given relation and then finds k dense blocks one by one. In each iteration, it removes the tuples in the block to avoid same results. In the end, it returns the blocks of the duplication of relation, which have same attribute values with the found blocks. When finding the dense block, it uses a greedy strategy to choose the attribute value that maximizes the density of the block which removes this attribute value. It finally chooses the block with the maximum density among those obey the size limitation. To implement this algorithm in an efficient way, authors introduce the method of using min-heap for this greedy selection.  \\ 
+
+
+Compared to other traditional algorithms, M-ZOOM is fast, accurate and effective. Authors evaluate the performance of M-ZOOM with several experiments. On all the real world datasets, M-ZOOM reaches the highest accuracy and fastest speed. Even when the number of tuples rises significantly, M-ZOOM’ performance is relatively good as well and the running time scales sub-linearly. Experiments also prove that M-ZOOM could have good performance in real data. It could detect edit wars and bot activities in Wikipedia with high accuracy. Furthermore, compared to other algorithms, M-ZOOM is very flexible because it works on different data, density measures, and features.  \\ 
+
+
+\item {\em \textbf{Use for our project}}:
+
+The M-ZOOM algorithm proposed in this paper is more efficient than CROSSSPOT and several experiments show that this algorithm has high accuracy and efficiency. We could implement this algorithm for our dense block detection task. \\ 
+
+
+\item {\em \textbf{Shortcomings}}:
+
+The experiment shows that sometimes, the diversity of dense blocks M-ZOOM found is less than the CPD algorithm. We may figure out the reason and improve the M-ZOOM. M-ZOOM algorithm uses the min-heap for greedy selection of each single dense block. However, this method cannot guarantee the density because the algorithm is based on local optimum. We can use method like D-Cube to order the attribute values when we find each dense block.
+
+\end{itemize*}
+
+
+\subsubsection{ GBASE: an efficient analysis platform for large graphs}
+The third paper was the GBASE paper by Kang, U., Hanghang Tong, Jimeng Sun, Ching-Yung Lin, and Christos Faloutsos. 
+\cite{kang2012gbase}
+\begin{itemize*}
+\item {\em \textbf{Problem Definition}}: 
+
+Aiming at addressing large-scale graph queries in an efficient way, authors try to build a parallel and distributed graph management system. The key problems they need to address are storage, algorithms and query optimization. \\ 
+
+
+\item {\em \textbf{Main idea}}: 
+
+Authors propose a new structure of graph management system, which contains two components: the indexing stage and the query stage. In the indexing stage, a raw graph is partitioned into several clusters firstly. Then, reshuffle the nodes and compress. Finally, the compressed blocks are stored in graph base with metadata. One technology they use to compress block is “compressed block encoding”. The key idea of this technology is to encode the graph as a binary string to reduce the storage space. They also introduce several ways to implement this technology, such as Zip Compression and Gap Elias Encoding. Another interesting method to reduce storage is that they use the grid placement to store the compressed blocks. This method minimizes the number of input files to answer queries.  \\ 
+
+
+In the query stage, authors noticed that many graph mining operations could be transformed to matrix-vector multiplication. This kind of operation is corresponding to a SQL join. Based on this observation, authors point out that we could use optimized join algorithms to address these kinds of graph mining operations. Authors explain the detailed implementation of several graph queries. Because most of these operations are carried out over adjacency matrix, the query execution engine of GBASE is built on top of HADOOP and MapReduce platform to execute queries sufficiently. \\ 
+
+
+To evaluate the performance of the GBASE system, authors conduct several experiments.  Results show that compression could reduce the file size and running time significantly. This improvement is more significant on targeted queries.  \\ 
+
+
+\item {\em \textbf{Use for our project}}:
+
+The compression technique is very useful because it could lead to a huge reduction of storage and running time. We could also use the query transformation technology to speed up graph mining operations. \\ 
+
+
+\item {\em \textbf{Shortcomings}}:
+
+Some graph mining operations cannot be unified as matrix-vector multiplication. In these cases, the optimization authors proposed won’t work. 
+
+\end{itemize*}
+
