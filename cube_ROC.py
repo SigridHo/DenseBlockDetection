@@ -76,7 +76,7 @@ def plotROC(X, Y, fileName):
     plt.plot(X, Y, 'r', marker = 'x')  
     plt.grid()  
     # plt.show() 
-    plt.savefig('./ROC_Curve_%s.pdf' % fileName)
+    plt.savefig('./Figures/ROC_Curve_%s.pdf' % fileName)
 
 def computeStat(num_benign, num_attack, total_num_benign, total_num_attack):
     falsePostive_rate = num_benign * 1.0 / total_num_benign
@@ -150,7 +150,7 @@ def main():
         plt.plot(X, AUC, 'r', marker = 'x')  
         plt.grid()  
         # plt.show() 
-        plt.savefig('./Acuuracy_%s.pdf' % fileName)
+        plt.savefig('./Figures/Acuuracy_%s.pdf' % fileName)
 
     except:
         print "Unexpected error:", sys.exc_info()[0]    
