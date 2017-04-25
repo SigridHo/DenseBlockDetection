@@ -38,3 +38,56 @@ Total Elapsed Time: 566.085379s
 density, ari, marker
 (0, 16368.9782609, 501982, Decimal('546.254909992'))
 Total Elapsed Time: 576.798232s
+
+
+density, geo, btree
+Block Elapsed Time: 464.279876s
+(0, '1x1x260', 160286.770223, 1023031, Decimal('464.279875994'))
+Total Elapsed Time: 509.230563s
+density, geo, gist
+(0, '1x1x260', 160286.770223, 1023031, Decimal('532.857440948'))
+density, geo, gin
+(0, '1x1x260', 160286.770223, 1023031, Decimal('516.421762943'))
+Total Elapsed Time: 556.185281s
+cardinality, geo, gin
+(0, '1x1x1', 10822.0, 10822, Decimal('411.238831997'))
+Total Elapsed Time: 447.224223s
+cardinality, geo, gist
+(0, '1x1x1', 10822.0, 10822, Decimal('418.755778074'))
+Total Elapsed Time: 603.831053s
+cardinality, geo, btree
+(0, '1x1x1', 10822.0, 10822, Decimal('486.486675024'))
+Total Elapsed Time: 534.375586s
+density, ari, btree
+(0, '4x1x87', 16368.9782609, 501982, Decimal('478.142300129'))
+Total Elapsed Time: 522.546783s
+cardinality, ari, btree
+(0, '1x1x1', 10822.0, 10822, Decimal('413.677556038'))
+Total Elapsed Time: 459.302233s
+cardinality, sus, btree
+(0, '148x26x352', 4079399.93231, 333466, Decimal('434.57072401'))
+Total Elapsed Time: 486.437711s
+density, sus, btree
+(0, '2x1x262', 21719858.6246, 1023912, Decimal('487.415059805'))
+Total Elapsed Time: 533.394701s
+density, sus, gist
+(0, '2x1x262', 21719858.6246, 1023912, Decimal('508.112966061'))
+Total Elapsed Time: 703.040938s
+density, ari, gist
+(0, '4x1x87', 16368.9782609, 501982, Decimal('566.456278086'))
+Total Elapsed Time: 809.002651s
+cardinality, ari, gist
+(0, '1x1x1', 10822.0, 10822, Decimal('456.910819054'))
+Total Elapsed Time: 653.881448s
+cardinality, sus, gist
+(0, '148x26x352', 4079399.93231, 333466, Decimal('621.01692605'))
+Total Elapsed Time: 844.486783s
+cardinality, sus, gin
+(0, '148x26x352', 4079399.93231, 333466, Decimal('467.898030996'))
+Total Elapsed Time: 509.663781s
+cardinality, ari, gin
+(0, '1x1x1', 10822.0, 10822, Decimal('529.931929111'))
+Total Elapsed Time: 565.657936s
+density, ari, gin
+(0, '4x1x87', 16368.9782609, 501982, Decimal('522.268168211'))
+Total Elapsed Time: 560.348376s
