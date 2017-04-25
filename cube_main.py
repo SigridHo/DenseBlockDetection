@@ -233,14 +233,15 @@ def find_single_block(db_conn, RELATION_TABLE, relation_tables, mass_r, att_name
         set_dCube = cube_sql_fetchRows(db_conn, D_CUBE_TABLE)
         for a_value, attrVal_Mass in set_dCube:
             # update block_i and mass_b
-            conditions = ["%s = '%s'" % (att_names[dim_i], a_value)]
+            a_value = a_value.replace("\'", "\\'")
+            conditions = ["%s = E'%s'" % (att_names[dim_i], a_value)]
             cube_sql_delete_rows(db_conn, block_tables[dim_i], conditions)            # update block_i and mass_b
             mass_b -= long(attrVal_Mass)
             Bn_mass[dim_i] -= 1
-
+            
             # update order and density measure
             density_prime = measure_density(mass_b, Bn_mass, mass_r, Rn_mass, args)
-            newEntry = ["'%s'" % a_value, str(dim_i), str(r)]
+            newEntry = ["E'%s'" % a_value, str(dim_i), str(r)]
             cube_sql_insert_row(db_conn, ORDER_TABLE, newEntry)
             r += 1
             if density_prime > density_tilde:
