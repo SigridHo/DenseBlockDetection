@@ -1,0 +1,68 @@
+Wiki
+Block: 1
+Volume: 1 X 1 X 30
+Density: 2496.111889000422
+Mass: 7756
+Block: 2
+Volume: 3 X 3 X 744
+Density: 875.8357033996713
+Mass: 16508
+Block: 3
+Volume: 1 X 1 X 22
+Density: 542.4620501827422
+Mass: 1520
+Block: 4
+Volume: 13 X 11 X 730
+Density: 484.7362061356177
+Mass: 22824
+Block: 5
+Volume: 75 X 35 X 744
+Density: 320.14282985940946
+Mass: 40017
+Running time: 4.655 seconds
+
+Amazon
+Block: 1
+Volume: 60 X 60 X 1 X 1
+Density: 118.0327868852459
+Mass: 3600
+Block: 2
+Volume: 150 X 150 X 3 X 2
+Density: 99.01639344262296
+Mass: 7550
+Block: 3
+Volume: 40 X 40 X 1 X 1
+Density: 78.04878048780488
+Mass: 1600
+Block: 4
+Volume: 35 X 35 X 1 X 1
+Density: 68.05555555555556
+Mass: 1225
+Block: 5
+Volume: 3412 X 1745 X 1011 X 5
+Density: 50.344403045520814
+Mass: 77694
+Running time: 2.795 seconds
+
+yelp
+Block: 1
+Volume: 60 X 60 X 1 X 1
+Density: 118.0327868852459
+Mass: 3600
+Block: 2
+Volume: 55 X 55 X 1 X 1
+Density: 108.03571428571429
+Mass: 3025
+Block: 3
+Volume: 50 X 50 X 1 X 1
+Density: 98.03921568627452
+Mass: 2500
+Block: 4
+Volume: 45 X 45 X 1 X 1
+Density: 88.04347826086956
+Mass: 2025
+Block: 5
+Volume: 5416 X 4464 X 2792 X 5
+Density: 84.74497120769898
+Mass: 268578
+Running time: 1.976 seconds
