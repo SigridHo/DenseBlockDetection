@@ -14,4 +14,6 @@ def main(infile, outfile):
 
 
 if __name__ == '__main__':
+	# sys.argv[1] is the original csv file for reading 
+	# sys.argv[2] is the output modified csv file after removing the last column of 1
     main(sys.argv[1], sys.argv[2])
