@@ -1,16 +1,32 @@
 ##################
 # Authors: Haoming Chen and Xinrui He
-# Date: March 25, 2017
+# Date: April 25, 2017
 ##################
 
 null      :=
 SPACE     := $(null) $(null)
 ABS_PATH  := $(shell pwd)
 PATH 	  := $(subst $(SPACE),\ ,$(ABS_PATH))
-PREFIX 	  := python cube_main.py --file $(PATH)/datasets/darpa.csv --N 3
+PREFIX 	  := python cube_main.py --file $(PATH)/darpa_toy.csv --N 3
 
 run:
-	$(PREFIX) --k 5 --density arithmetic --selection cardinality
+	
+
+demo:
+	@echo ""
+	@echo "Running demo using darpa_toy.csv"
+	python cube_main.py --file $(PATH)/darpa_toy.csv --N 3 --k 5 --density ari --selection density
+
+clean:
+	\rm -f *.pyc
+
+
+
+
+
+
+
+
 
 k=5.density=g.selection=c: $(PREFIX) --k 5 --density geometric --selection cardinality
 

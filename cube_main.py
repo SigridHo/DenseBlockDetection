@@ -183,18 +183,18 @@ def find_single_block(db_conn, RELATION_TABLE, relation_tables, mass_r, att_name
             Bn_mass[n] = cube_sql_mass(db_conn, block_tables[n])
 
         # compute all possible attribute_value masses
-        print "\n# Calculating attribute-vale masses..."
+        # print "\n# Calculating attribute-vale masses..."
         cols_description = "dimension_index integer, a_value text, attrVal_mass numeric"
         cube_sql_table_drop_create(db_conn, ATTVAL_MASSES_TABLE, cols_description)
         compute_attribute_value_masses(db_conn, B_TABLE, block_tables, ATTVAL_MASSES_TABLE, att_names)
 
         # select dimension with specified metric (default: by cardinality)
-        print "\n# Selecting dimension..." 
+        # print "\n# Selecting dimension..." 
         # metric methods: density, cardinality(default)
         dim_i, mass_b_i = select_dimension(db_conn, block_tables, relation_tables, att_names, ATTVAL_MASSES_TABLE, mass_b, mass_r, Bn_mass, Rn_mass, args)  
 
         # find set which satisfies constraint to be removed 
-        print "\n# Forming set to be removed (dim-%d)..." % dim_i
+        # print "\n# Forming set to be removed (dim-%d)..." % dim_i
         threshold = mass_b * 1.0 / mass_b_i
         # print "threshold = %f" % threshold
         
@@ -231,10 +231,10 @@ def find_single_block(db_conn, RELATION_TABLE, relation_tables, mass_r, att_name
         # April 23: store and iterate over the removal values in memory
         cube_select_values_to_remove(db_conn, D_CUBE_TABLE, ATTVAL_MASSES_TABLE, threshold, dim_i)
         set_dCube = cube_sql_fetchRows(db_conn, D_CUBE_TABLE)
-        index = 1
+        # index = 1
         for a_value, attrVal_Mass in set_dCube:
-            print "iterating removed values %d/%d" % (index, len(set_dCube))
-            index += 1
+            # print "iterating removed values %d/%d" % (index, len(set_dCube))
+            # index += 1
             # update block_i and mass_b
             a_value = a_value.replace("\'", "\\'")
             conditions = ["%s = E'%s'" % (att_names[dim_i], a_value)]
@@ -253,7 +253,7 @@ def find_single_block(db_conn, RELATION_TABLE, relation_tables, mass_r, att_name
 
 
         # remove tuples from block (and update block_tables)
-        print "\n# Removing tuples from block..."
+        # print "\n# Removing tuples from block..."
         attrName = att_names[dim_i]
 
         # cube_sql_update_block(db_conn, B_TABLE, D_CUBE_STATIC_TABLE, attrName)
@@ -266,7 +266,7 @@ def find_single_block(db_conn, RELATION_TABLE, relation_tables, mass_r, att_name
         # Move the B_n update to the beginning of the loop
 
     # reconstruct target block
-    print "\n# Reconstructing distinct value sets of block dimensions..."
+    # print "\n# Reconstructing distinct value sets of block dimensions..."
     block_tables_ret = [None] * args.dimension_num
     # print r_tilde, density_tilde
     # cube_sql_print_table(db_conn, ORDER_TABLE)
@@ -431,11 +431,14 @@ def main():
             # add block statistcs into table
             block_end = time.time()
             block_elapsed_time = block_end - block_start
-            print "Block Elapsed Time: %fs" % block_elapsed_time
+            print "Block %d - Elapsed Time: %fs" % (i, block_elapsed_time)
             cube_size = "'" + cube_size[:-1] + "'"
             newEntry = [str(i), cube_size, str(result_density), str(result_mass_b), str(block_elapsed_time)]
             cube_sql_insert_row(db_conn, REPORT_TABLE, newEntry)
-            cube_sql_print_table(db_conn, REPORT_TABLE)
+            cube_sql_print_table(db_conn, REPORT_TABLE, i)
+
+        print "\nOverall statistics of the dense blocks"
+        cube_sql_print_table(db_conn, REPORT_TABLE)
 
         # overall timer
         overall_end = time.time()

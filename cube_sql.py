@@ -70,13 +70,17 @@ def cube_sql_distinct_entries(db_conn, src_table, dest_table):
     cur.close() 
 
 
-def cube_sql_print_table(db_conn, table_name):
+def cube_sql_print_table(db_conn, table_name, rowIdx = -1):
     cur = db_conn.cursor();
     cur.execute("SELECT * from %s" % table_name);
-    index = 1
+    index = 0
     for x in cur:
-        print x
-        index += 1
+        if rowIdx == -1:
+            print x
+        else:
+            if index == rowIdx:
+                print x 
+        index += 1  
         # if index > 20:   # print the top lines to avoid exhausted table-printing 
         #    break 
     cur.close();
