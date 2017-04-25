@@ -231,7 +231,10 @@ def find_single_block(db_conn, RELATION_TABLE, relation_tables, mass_r, att_name
         # April 23: store and iterate over the removal values in memory
         cube_select_values_to_remove(db_conn, D_CUBE_TABLE, ATTVAL_MASSES_TABLE, threshold, dim_i)
         set_dCube = cube_sql_fetchRows(db_conn, D_CUBE_TABLE)
+        index = 1
         for a_value, attrVal_Mass in set_dCube:
+            print "iterating removed values %d/%d" % (index, len(set_dCube))
+            index += 1
             # update block_i and mass_b
             a_value = a_value.replace("\'", "\\'")
             conditions = ["%s = E'%s'" % (att_names[dim_i], a_value)]
