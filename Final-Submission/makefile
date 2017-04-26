@@ -13,8 +13,13 @@ PREFIX 	  := python cube_main.py --file $(PATH)/darpa_toy.csv --N 3
 all: demo clean
 
 demo:
+	@echo ""
 	@echo "Running demo using darpa_toy.csv"
+	@echo ""
+	@echo "IMPORTANT!!! Please change Username, Password, Port, etc. in cube_params.py and start the Postgres Database before running cube_main.py."
+	@echo ""
 	\python cube_main.py --file $(PATH_Data)/darpa_toy.csv --N 3 --k 5 --density ari --selection density
+
 
 clean:
 	\rm -f *.pyc *.tar *.pdf

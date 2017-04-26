@@ -17,7 +17,7 @@
 
 ** INSTRUCTIONS **
 
-1. Please change the corresponding initialization parameters in “cube_params.py” (i.e.: Username, Password, Port, etc.) before running cube_main.py.
+1. IMPORTANT: Please change the corresponding initialization parameters in “cube_params.py” (i.e.: Username, Password, Port, etc.) before running cube_main.py.
 
 2. Type “make” to run the demo on a sample input file “darpa_toy.csv”.
 
