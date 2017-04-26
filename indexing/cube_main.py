@@ -187,7 +187,7 @@ def find_single_block(db_conn, RELATION_TABLE, relation_tables, mass_r, att_name
         cols_description = "dimension_index integer, a_value text, attrVal_mass numeric"
         cube_sql_table_drop_create(db_conn, ATTVAL_MASSES_TABLE, cols_description)
         compute_attribute_value_masses(db_conn, B_TABLE, block_tables, ATTVAL_MASSES_TABLE, att_names)
-        # Index
+        ''' Indexing on ATTVAL_MASSES_TABLE'''
         cols = "dimension_index, a_value"
         cube_sql_index(db_conn, ATTVAL_MASSES_TABLE, cols)
         # select dimension with specified metric (default: by cardinality)
@@ -270,10 +270,10 @@ def find_single_block(db_conn, RELATION_TABLE, relation_tables, mass_r, att_name
     # print r_tilde, density_tilde
     # cube_sql_print_table(db_conn, ORDER_TABLE)
 
-    # Index
+    ''' Indexing on order table'''
     cols = "a_value, dimension_index"
     cube_sql_index(db_conn, ORDER_TABLE, cols)
-    for n in range(args.dimension_num):
+    for n in range(args.dindeximension_num):
         block_tables_ret[n] = 'B' + str(n)
         att_name = att_names[n]
         col_fmt = col_fmts[n]
@@ -350,7 +350,7 @@ def main():
         #cube_sql_print_table(db_conn, RELATION_TABLE)
 
         cube_sql_copy_table(db_conn, ORI_TABLE, RELATION_TABLE)
-        # Index
+        ''' Indexing on ORI table '''
         cube_sql_index(db_conn, ORI_TABLE, cols_name)
         ''' Marker Method: Add Marker column''' 
         # marker_description = "MARKER text"
