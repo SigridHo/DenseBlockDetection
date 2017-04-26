@@ -25,8 +25,8 @@
 
 
 For Task 3:
-   1. To run the Marker Method, change you current directory to DBDMarker. Use "make" command to run a demo with Marker Method.
+   1. To run the Marker Method, change you current directory to DBDMarker. Type "make" to run the demo on a sample input file “darpa_toy.csv” with Marker Method.
 
-   2. To run the different indexing options, change your current directory to index. Use "make" command to run a demo with indexing. The default indexing option is btree. If you want to change the indexing method to gist or gin, set the "method" variable to "gist" or "gin" in function "cube_sql_index" of "indexing/cube_sql.py". 
+   2. To run the different indexing options, change your current directory to index.Type "make" to run the demo on a sample input file “darpa_toy.csv” with indexing. The default indexing option is btree. If you want to change the indexing method to gist or gin, set the "method" variable to "gist" or "gin" in function "cube_sql_index" of "indexing/cube_sql.py". 
    
    Note: To run with gist or gin options, you may need to create extension on your dataset to support multicolumn indexing. Use command "CREATE EXTENSION btree_gin;" or "CREATE EXTENSION btree_gist;" in your database. You can only use these commands once on your database.
