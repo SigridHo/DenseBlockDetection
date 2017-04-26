@@ -8,17 +8,15 @@ TEXPARTS= 	$(MAIN).tex 		\
 		050conclusions.tex 	\
 		099appendix.tex 		
 
-BIBPARTS= BIB/*.bib
-FIGPARTS= FIG/*.pdf FIG/*.png
-STYPARTS= mdwlist.sty
-ALL= makefile  $(TEXPARTS) $(BIBPARTS) $(FIGPARTS) $(STYPARTS) README 
+ALL= makefile $(TEXPARTS) references.bib *.pdf *.png README 
 
-$(MAIN).pdf: $(MAIN).tex
+$(MAIN).pdf: 
+	export PATH=$PATH:/Library/TeX/Distributions/.DefaultTeX/Contents/Programs/texbin
 	pdflatex $(MAIN).tex
 	bibtex $(MAIN)
 	pdflatex $(MAIN).tex
 	pdflatex $(MAIN).tex
-
+	
 clean:
 	\rm -f *.dvi *.bbl *.aux *.log *.blg *.toc
 
@@ -29,6 +27,5 @@ spotless: clean
 
 
 all.tar:
-	tar cvfh all.tar makefile $(MAIN).tex $(TEXPARTS) $(BIBPARTS) \
-	$(FIGPARTS) README 
+	tar cvfh all.tar makefile $(MAIN).tex $(TEXPARTS) references.bib *.pdf *.png README 
 

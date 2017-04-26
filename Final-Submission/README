@@ -1,1 +1,23 @@
-Please change the corresponding initialization parameters in cube_params.py (e.g.: Username, Password, Port, etc.) before running cube_main.py.
+—- Author: Haoming Chen, Xinrui He
+—- Date: April 25, 2017
+
+** FILES DESCRIPTION **
+
+1. The directory “DOC” contains the related tex files to generate the final writeup.
+
+2. Python files “cube_*.py” are the implementation of D-Cube Algorithm. Other python files are auxiliary functions to modify the format of the dataset before applying D-Cube.
+
+3. “darpa_toy.csv” is a toy dataset for demonstration and quick validation. 
+
+
+** INSTRUCTIONS **
+
+1. Please change the corresponding initialization parameters in “cube_params.py” (i.e.: Username, Password, Port, etc.) before running cube_main.py.
+
+2. Type “make” to run the demo on a sample input file “darpa_toy.csv”.
+
+3. Type “make paper.pdf” to generate the PDF version of the project writeup. {Note that you must install corresponding version of Tex compiler to run this command.)
+
+4. Type “make clean” to eliminate all the derived and temporary files.
+
+5. Type “make all.tar” to create a tar file for distribution.

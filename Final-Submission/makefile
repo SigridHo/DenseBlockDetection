@@ -12,21 +12,20 @@ PREFIX 	  := python cube_main.py --file $(PATH)/darpa_toy.csv --N 3
 
 all: demo clean
 
-
 demo:
 	@echo "Running demo using darpa_toy.csv"
 	python cube_main.py --file $(PATH_Data)/darpa_toy.csv --N 3 --k 5 --density ari --selection density
 
-all.tar: 
-	@echo ""
-	tar cvf all.tar *
-
 clean:
-	rm -f *.pyc
-	cd DOC; make spotless
+	rm -f *.pyc *.tar
+	cd DOC; make -s spotless
 
 paper.pdf:
 	@echo ""
-	cd DOC; pdflatex paper.tex
+	cd DOC; make -s
+
+all.tar: 
+	@echo ""
+	tar cvf all.tar *
 
 
