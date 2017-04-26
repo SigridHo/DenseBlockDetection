@@ -17,15 +17,5 @@ demo:
 	\python cube_main.py --file $(PATH_Data)/darpa_toy.csv --N 3 --k 5 --density ari --selection density
 
 clean:
-	\rm -f *.pyc *.tar *.pdf
-	\cd DOC; make -s spotless
-
-paper.pdf: clean
-	\cd DOC; make -s
-	\mv DOC/paper.pdf ./15826_final_report.pdf
-
-all.tar: 
-	@echo ""
-	tar cvf all.tar *
-
+	\rm -f *.pyc 
 

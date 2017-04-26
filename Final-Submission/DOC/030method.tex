@@ -362,9 +362,9 @@ We construct a test dataset of 798 rows by manuly select dense blocks labeled as
 \end{table}
 
 \subsection{Optimization (T3)}
-In this section, we implement two different methods to update tables. One is to copy relation table for block detection and actually delete dense block tuples in the relation table. The other one is to add a marker column to mark removed tuples. This method need to update the markers instead of deleting records in table. We also explore the influence of various indexing options. We do several experiments to compare the total running time under different methods.
+In this section, we implement two different methods to update tables. One is to copy relation table for block detection and actually delete dense block tuples in the relation table. The other one is to add a marker column to mark removed tuples. This method needs to update the markers instead of deleting records in the table. We also explore the influence of various indexing options. We do several experiments to compare the total running time under different methods.
 \subsubsection{'Copy' Method}
-In the 'Copy' Method, we firstly load the relation table form the csv file. For each iteration of finding single dense block, we need to copy the whole relation table to block table. After we get the sets of attribute values forming a dense block, we need to actually delete the records with same attribute values in the relation table. \\
+In the 'Copy' Method, we firstly load the relation table from the csv file. For each iteration of finding a single dense block, we need to copy the whole relation table to block table. After we get the sets of attribute values forming a dense block, we need to actually delete the records with same attribute values in the relation table. \\
 The advantages of this method include: 
 \begin{itemize}
     \item Since all data are up to date, we don't need to judge if the records were deleted when we want to select some records from the table.
@@ -372,20 +372,20 @@ The advantages of this method include:
 \end{itemize}
 The downsides of this method include:
 \begin{itemize}
-    \item Deletion is often very slow because the database need to change the size of the table and actually remove the data.
+    \item Deletion is often very slow because the database needs to change the size of the table and actually remove the data.
     \item We can't get the data back after deletion
 \end{itemize}
  
 \subsubsection{'Mark' Method}
-In the 'Mark' Method, we add an empty column called 'Marker' after we load the relation table from the csv file. For each iteration of finding single dense block, we need to select all the records in the relation table with NULL in Marker. Operations of getting distinct attribute values and calculating block mass will also need to check the value of Marker. After we get the sets of attribute values forming a dense block, we need to update the Markers of related records to 0. \\
+In the 'Mark' Method, we add an empty column called 'Marker' after we load the relation table from the csv file. For each iteration of finding a single dense block, we need to select all the records in the relation table with NULL in Marker. Operations of getting distinct attribute values and calculating block mass will also need to check the value of Marker. After we get the sets of attribute values forming a dense block, we need to update the Markers of related records to 0. \\
 The advantages of this method include:
 \begin{itemize}
-    \item Using a flag to mark the deletion option will be faster than actually delete the records in table.
+    \item Using a flag to mark the deletion option will be faster than actually delete the records in the table.
     \item We can get the data back after deletion.
 \end{itemize}
 The downsides of this method include:
 \begin{itemize}
-    \item We need to check the markers when we try to copy the relation table, compute distinct attribute values of relation table and calculating mass. This makes codes more complicated and takes more time because database need to check more constraints.
+    \item We need to check the markers when we try to copy the relation table, compute distinct attribute values of relation table and calculating mass. This makes codes more complicated and takes more time because database needs to check more constraints.
     \item Waste more space because the deleted records are still in the table.
 \end{itemize}
 
@@ -406,7 +406,7 @@ Thus, we decide to create index on $AttValMassTable$, $OrderTable$ and $ORI$. We
     \caption{Copy Method vs Marker Method}
     \label{fig:CopyMarker}
 \end{figure}
-We compare the total running times of Copy Method and Marker Method under different parameter settings. The result in Figure \ref{fig:CopyMarker} shows that Marker Method could reduce the running time on average. However, in some cases, for example, when we use suspicousness as diversity measurement and density as selection policy, the Copy Method beats Marker Method. This is because Marker Method wastes too much time on checking flags for select operation. The time spent on checking marks exceeds the time saved for deletion.
+We compare the total running times of Copy Method and Marker Method under different parameter settings. The result in Figure \ref{fig:CopyMarker} shows that Marker Method could reduce the running time on average. However, in some cases, for example, when we use suspiciousness as diversity measurement and density as selection policy, the Copy Method beats Marker Method. This is because Marker Method wastes too much time on checking flags for select operation. The time spent on checking marks exceeds the time saved for deletion.
 \begin{figure}[h]
     \begin{center}
       \makebox[\textwidth]{\includegraphics[width=\textwidth]{indexing.png}}

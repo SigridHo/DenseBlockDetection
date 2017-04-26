@@ -21,7 +21,7 @@ In this chapter, we propose multiple experiments to validate our D-Cube algorith
 
 \subsection{Evaluation using ROC Curve (T4)}
 
-By applying the implementation of D-Cube to \textit{AirForcce TCP Dump} and \textit{DARPA TCP Dump}, we obtain the dense blocks inside the data for detecting network intrution. In Table \ref{tab:darpa_t4.1} and Table \ref{tab:airforce_t4.1}, we report the statistics of the detected dense blocks in \textit{DARPA TCP Dump} and \textit{AirForce TCP Dump} with $\rho=\rho_{ari}$, $k=5$ and Maximum density policy.  
+By applying the implementation of D-Cube to \textit{AirForce TCP Dump} and \textit{DARPA TCP Dump}, we obtain the dense blocks inside the data for detecting network intrution. In Table \ref{tab:darpa_t4.1} and Table \ref{tab:airforce_t4.1}, we report the statistics of the detected dense blocks in \textit{DARPA TCP Dump} and \textit{AirForce TCP Dump} with $\rho=\rho_{ari}$, $k=5$ and Maximum density policy.  
 
 \renewcommand{\arraystretch}{1.2}
 \begin{table}[!ht]
@@ -60,7 +60,7 @@ As we can see from the distribution of connection types shown in Table \ref{tab:
 \end{tabular}
 \end{table}
 
-If we take a closer look into the connections, we can conclude that "neptune" is a type of denial of service attack that intensively send packages with high frequency to a specific destination IP address. For instance, in the first dense block (Figure \ref{fig:t4_neptune}), two source IP addresses "010.020.030.040" and "230.001.010.020" launched almost all the TCP connections to the same destination IP "172.016.112.050". 
+If we take a closer look into the connections, we can conclude that "neptune" is a type of denial of service attack that intensively sends packages with high frequency to a specific destination IP address. For instance, in the first dense block (Figure \ref{fig:t4_neptune}), two source IP addresses "010.020.030.040" and "230.001.010.020" launched almost all the TCP connections to the same destination IP "172.016.112.050". 
 
 \begin{figure}[!ht]
     \centering
@@ -104,7 +104,7 @@ While for the \textit{Airforce TCP Dump} dataset, the attack types are mostly "s
 \end{tabular}
 \end{table}
 
-To better visualize the result, we draw the ROC curve (Figure \ref{fig:t4.3_roc} with the number of dense blocks varying from 1 to 20. Note that in previous discussion, we treat those connections with inconsistent labels as network attack. Thus the result may vary from the others given different approaches of dealing with conflicting labels. 
+To better visualize the result, we draw the ROC curve (Figure \ref{fig:t4.3_roc} with the number of dense blocks varying from 1 to 20. Note that in the previous discussion, we treat those connections with inconsistent labels as network attack. Thus the result may vary from the others given different approaches of dealing with conflicting labels. 
 
 \begin{figure}[!ht]
     \centering
@@ -191,8 +191,7 @@ Table \ref{tab:wikipedia} presents the statistics of the first five detected den
 {0}                     & 1x1x30                 & 7756                               & 2496.111889                           \\ \hline
 {1}                     & 1x1x743                 & 8224                               & 908.002052                           \\ \hline
 {2}                     & 1676x1x59                 & 30607                               & 661.879232                          \\ \hline
-{3}                     & 13x11x730                  & 22824                                & 484.736206                           \\ \hline
-{4}                     & 75x35x744                 & 40017                               & 320.142829                           \\ \hline
+{3}                     & 1572x14x32                  & 1604                                & 18.028551                           \\ \hline
+{4}                     & 2915x1x3                 & 2931                              & 142.264283                           \\ \hline
 \end{tabular}
 \end{table}
-
