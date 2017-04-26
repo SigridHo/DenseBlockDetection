@@ -104,27 +104,27 @@ While for the \textit{Airforce TCP Dump} dataset, the attack types are mostly "s
 \end{tabular}
 \end{table}
 
-To better visualize the result, we draw the ROC curve (Figure \ref{fig:t4.3_roc} with the number of dense blocks varying from 1 to 20. Note that in previous discussion, we treat those connections with inconsistent labels as network attack. Thus the result may vary from the others given different approaches of dealing with conflicting labels.   
+To better visualize the result, we draw the ROC curve (Figure \ref{fig:t4.3_roc} with the number of dense blocks varying from 1 to 20. Note that in previous discussion, we treat those connections with inconsistent labels as network attack. Thus the result may vary from the others given different approaches of dealing with conflicting labels. 
 
 \begin{figure}[!ht]
     \centering
-    \subfigure{\includegraphics[scale=0.4]{ROC_Curve_DARPA_TCP_Dump.pdf}}
-    \subfigure{\includegraphics[scale=0.4]{ROC_Curve_AirForce_TCP_Dump.pdf}}
+    \subfigure{\includegraphics[scale=0.38]{ROC_Curve_DARPA_TCP_Dump.pdf}}
+    \subfigure{\includegraphics[scale=0.38]{ROC_Curve_AirForce_TCP_Dump.pdf}}
     \caption{ROC Curve - (a) DARPA TCP Dump (b) AirForce TCP Dump}
     \label{fig:t4.3_roc}
 \end{figure}
 
-With the statistics provided by the ROC curve, we compute the corresponding accuracy (AUC) using linear interpolation between data points and present them in Figure \ref{fig:t4.3_auc}. 
-
+With the statistics provided by the ROC curve, we compute the corresponding accuracy (AUC) using linear interpolation between data points and present them in Figure \ref{fig:t4.3_auc}.
 
 \begin{figure}[!ht]
     \centering
-    \subfigure{\includegraphics[scale=0.4]{Acuuracy_DARPA_TCP_Dump.pdf}}
-    \subfigure{\includegraphics[scale=0.4]{Acuuracy_AirForce_TCP_Dump.pdf}}
+    % \subfloat[]{\includegraphics[scale=0.38]{Acuuracy_DARPA_TCP_Dump.pdf}}
+    % \subfloat[]{\includegraphics[scale=0.38]{Acuuracy_AirForce_TCP_Dump.pdf}}
+    \subfigure{\includegraphics[scale=0.38]{Acuuracy_DARPA_TCP_Dump.pdf}}
+    \subfigure{\includegraphics[scale=0.38]{Acuuracy_AirForce_TCP_Dump.pdf}}
     \caption{Accuracy - (a) DARPA TCP Dump (b) AirForce TCP Dump}
     \label{fig:t4.3_auc}
 \end{figure}
-
 
 
 \subsection{Anomaly Detection in Real-world Data (T5)}
@@ -136,7 +136,7 @@ We applied the D-Cube algorithm to multi-aspect datasets derived from the real w
 Table \ref{tab:amazon} presents the statistics of the first five detected dense blocks in \textit{Amazon Ratings} with $\rho=\rho_{ari}$, $k=5$ and Maximum density policy.  
 
 \renewcommand{\arraystretch}{1.5}
-\begin{table}[h!t]
+\begin{table}[!ht]
 \centering
 \caption{Five dense blocks in Amazon Rating Dataset}
 \label{tab:amazon}
@@ -157,7 +157,7 @@ Table \ref{tab:yelp} presents the statistics of the first five detected dense bl
 
 
 \renewcommand{\arraystretch}{1.5}
-\begin{table}[h!t]
+\begin{table}[!ht]
 \centering
 \caption{Five dense blocks in Yelp Rating Dataset}
 \label{tab:yelp}
@@ -181,7 +181,7 @@ Table \ref{tab:wikipedia} presents the statistics of the first five detected den
 
 
 \renewcommand{\arraystretch}{1.4}
-\begin{table}[h!t]
+\begin{table}[!ht]
 \centering
 \caption{Five dense blocks in English Wikipedia Revision History}
 \label{tab:wikipedia}
@@ -190,8 +190,9 @@ Table \ref{tab:wikipedia} presents the statistics of the first five detected den
 \textit{\textbf{Block\_index}} & \textit{\textbf{Size}} & \textit{\textbf{Mass}} & \textit{\textbf{Density}} \\ \hline
 {0}                     & 1x1x30                 & 7756                               & 2496.111889                           \\ \hline
 {1}                     & 1x1x743                 & 8224                               & 908.002052                           \\ \hline
-{2}                     & 1x1x22                 & 1520                               & 542.462050                          \\ \hline
+{2}                     & 1676x1x59                 & 30607                               & 661.879232                          \\ \hline
 {3}                     & 13x11x730                  & 22824                                & 484.736206                           \\ \hline
 {4}                     & 75x35x744                 & 40017                               & 320.142829                           \\ \hline
 \end{tabular}
 \end{table}
+

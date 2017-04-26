@@ -14,7 +14,7 @@ This following table introduces symbols frequently used in the paper.
  \hline
  MassR & mass of R (or B) \\ 
  \hline
- MassB_{a,n} & attribute value mass of a in dimension n \\[1ex]
+ $MassB_{a,n}$ & attribute value mass of a in dimension n \\[1ex]
  \hline
 \end{tabular}
 \caption{Table of Notations and Symbols}
@@ -71,7 +71,7 @@ This section describes general SQL method for general data management and manipu
 This section describes the implementation of D-Cube algorithms in Python and SQL. D-Cube algorithms are efficient and accurate to find dense blocks. This method is widely used in different practical tasks, such as finding malicious attacks in the network transmission and finding abnormal following relationship in social network data.
 
 \subsubsection{Overall Structure of D-Cube (Algorithm 1)}
-This algorithm describes the over structure of D-CUBE. It takes command line input as arguments. The table \ref{table:1} shows description of these arguments.
+This algorithm describes the over structure of D-CUBE. It takes command line input as arguments. The table \ref{table:2} shows description of these arguments.
  
 \begin{table}[h!]
 \centering
@@ -88,7 +88,7 @@ This algorithm describes the over structure of D-CUBE. It takes command line inp
  \hline
 \end{tabular}
 \caption{Table of arguments}
-\label{table:1}
+\label{table:2}
 \end{table}
 
 The main idea of this algorithm is to find each dense block one by one. It keeps a static copy of the original relation table. After each block $B$ is found, tuples are removed from relation table to avoid duplication. However, when construct the final dense block, it select tuples from the original relation table such that we can get overlaped dense blocks.
@@ -98,26 +98,28 @@ The main idea of this algorithm is to find each dense block one by one. It keeps
 \SetKwInOut{Output}{Output}
 \SetAlgoLined
 \Input{Arguments}
-\Output{$k$ dense block tables and a report table}
- TableDropCreate($R$)\\
- TableDropCreate($ReportTable$)\\
- LoadTableFromFile($R$)\\
- CopyTable($ORI$, $R$) \\
- \For{$n$ in range($N$)}{
- DistinctAttributeValue($Rn$)
- } 
- TableDropCreate($ResultTable$) \\
- \For{$i$ in range($k$)}{
-  $MassR$ \gets Mass($R$) \\
-  $Bn$ \gets find\_single\_block($R$,$Rn$,$MassR$,$density$)        \#See Algorithm 2\\
-  DeleteFromBlock($R$, $Bn$)\\
-  BlockCreateInsert($ResultTable\_i$, $ORI$, $Bn$)\\
+\Output{k dense block tables and a report table}
+\begin{algorithmic}
+ \STATE $TableDropCreate(R)$
+ \STATE $TableDropCreate(ReportTable)$
+ \STATE $LoadTableFromFile(R)$
+ \STATE $CopyTable(ORI, R)$ 
+ \STATE \For{n in range(N)} {
+    \STATE $DistinctAttributeValue(Rn)$
  }
- Add dense block information into $ReportTable$ \\
+ \STATE $TableDropCreate(ResultTable)$ 
+ \STATE \For{i in range(k)}{
+    \STATE $MassR \gets Mass(R)$
+    \STATE $Bn \gets find\_single\_block(R,Rn,MassR,density)$  
+    \COMMENT{$\#See\ Algorithm\ 2$}
+    \STATE $DeleteFromBlock(R, Bn)$
+    \STATE $BlockCreateInsert(ResultTable\_i, ORI, Bn)$
+    \STATE $Update(ReportTable)$
+ }
+\end{algorithmic}
  \caption{D-CUBE}
-\end{algorithm}
+\end{algorithm} 
 
-\\
 Details of special functions in Algorithm 1 are listed below:
 \begin{itemize}
     \item \textbf{DeleteFromBlock} \\
@@ -137,7 +139,7 @@ Details of special functions in Algorithm 1 are listed below:
 \end{itemize}
 
 \subsubsection{Single Block Detection (Algorithm 2)}
-This algorithm describes how to find each dense block from the given relation. The main idea is to order the attribute values based on block density. We can iterate to select dimension and delete attribute values. Because of the order of attribute values, we can get the optimal number of attribute to remove where we could get maximum block density.
+This algorithm describes how to find each dense block from the given relation. The main idea is to order the attribute values based on block density. We can iterate to select dimension and delete attribute values. Because of the order of attribute values, we can get the optimal number of attribute to remove where we could get maximum block density. 
 
 \begin{algorithm}[H]
 \SetKwInOut{Input}{Input}
@@ -145,42 +147,50 @@ This algorithm describes how to find each dense block from the given relation. T
 \SetAlgoLined
 \Input{$R$, $Rn$, $MassR$, $density$}
 \Output{tables of attribute values forming a dense block}
- CopyTable($B$, $R$)\\
- $MassB$ \gets $MassR$ \\
- CopyTable($Bn$, $Rn$) \\
- $BestDensity$ \gets DensityMeasure($MassB$, $Bn$, $MassR$, $Rn$)   \#See Algorithm 3 \\
- $r$,$Best\_r$ \gets 1 \\
- TableDropCreate($OrderTable$)\\
- \While{BlockNotEmpty($B$)}{
-    \For{$n$ in range($N$)}{
-    DistinctAttributeValue($Bn$)
+\begin{algorithmic}
+ \STATE $CopyTable(B, R)$
+ \STATE $MassB \gets MassR$
+ \STATE $CopyTable(Bn, Rn)$
+ \STATE $BestDensity \gets DensityMeasure(MassB, Bn, MassR, Rn)$   
+ \COMMENT{$\#See\ Algorithm\ 3$}
+ \STATE $r, Best\_r \gets 1$
+ \STATE $TableDropCreate(OrderTable)$
+ \STATE \While{$BlockNotEmpty(B)$}{
+    \STATE \For{n in range(N)}{
+    \STATE $DistinctAttributeValue(Bn)$
     } 
-    TableDropCreate($AttValMassTable$)\\
-    AttValMass($AttValMassTable$)\\
-    $i$ \gets SelectDimension() \#See Algorithm 4 \\
-    $threshold$ \gets $MassB$ / $MassB_i$ \\
-    SelectValuesToRemove($D_i$)\\
-    CopyTable($D_static$, $D_i$)\\
-    \While{TableNotEmpty($D_i$)}{
-        $a$,$MassB_{a,i}$ \gets FetchFirstRow($D_i$)\\
-        DeleteRows($D_i$) \# Delete all rows with same $a$ and  $MassB_{a,i}$\\
-        DeleteRows($B_i$) \# Delete $a$ from $B_i$\\
-        $MassB$ \gets $MassB$ - $MassB_{a,i}$\\
-        $density'$ \gets DensityMeasure($MassB$, $Bn$, $MassR$, $Rn$) \\
-        InsertRow($OrderTable$) \# Insert $a$,$i$,$r$ into $OrderTable$ \\
-        $r$ \gets {$r$ + $1$}\\
-        \If{${{density'}>{BestDensity}}$}{
-            $BestDensity$ \gets $density'$ \\
-            $Best\_r$ \gets $r$\\
+    \STATE $TableDropCreate(AttValMassTable)$
+    \STATE $AttValMass(AttValMassTable)$
+    \STATE $i \gets SelectDimension()$ 
+    \COMMENT{$\#See\ Algorithm\ 4$}
+    \STATE $threshold \gets MassB / MassB_i$
+    \STATE $SelectValuesToRemove(D_i)$
+    \STATE $CopyTable(D_static, D_i)$
+    \STATE \While{$TableNotEmpty(D_i)$}{
+        \STATE $a,MassB_{a,i} \gets FetchFirstRow(D_i)$
+        \STATE $DeleteRows(D_i)$
+        \COMMENT{$\# Delete\ all\ rows\ with\ same\ a\ and\ MassB_{a,i}$}
+        \STATE $DeleteRows(B_i)$ 
+        \COMMENT{$\# Delete\ a\ from\ B_i$}
+        \STATE $MassB \gets MassB - MassB_{a,i}$
+        \STATE $density' \gets DensityMeasure(MassB, Bn, MassR, Rn)$ 
+        \STATE $InsertRow(OrderTable)$
+        \COMMENT{$\# Insert\ a,i,r\ into\ OrderTable$}
+        \STATE $r \gets {r + 1}$
+        \STATE \If{${{density'}>{BestDensity}}$}{
+            \STATE $BestDensity \gets density'$ 
+            \STATE $Best\_r \gets r$ 
         }
     }
-    UpdateBlock($B$, $D_i$)\\
+    \STATE $UpdateBlock(B, D_i)$
  } 
- ReconstructBlock($Best\_Bn$) \\
+ \STATE $ReconstructBlock(Best\_Bn)$ 
+\end{algorithmic}
  \caption{find\_single\_block in D-CUBE}
 \end{algorithm}
 
 Details of special functions in Algorithm 2 are listed below:
+
 \begin{itemize}
     \item \textbf{AttValMass}    \\
     Compute attribute value mass $M_{B(a,n)}$. For each dimension $dim$, we calculate number of the tuples in $B$ whose attribute value equals to $a$.
@@ -195,7 +205,7 @@ Details of special functions in Algorithm 2 are listed below:
     \begin{algorithmic}
     \STATE  INSERT INTO $D_i$ SELECT $a\_value$, $attrVal\_mass$ \\
     FROM $AttValMassTable$  \\
-    WHERE $dimension\_index$ = $i$ AND {$attrVal\_mass$ \leq $threshold$} \\
+    WHERE $dimension\_index = i$ AND $attrVal\_mass \leq threshold$ \\
     ORDER BY $attrVal\_mass$
     \end{algorithmic}
     \item \textbf{FetchFirstRow} \\
@@ -222,83 +232,88 @@ Details of special functions in Algorithm 2 are listed below:
 \end{itemize}
 
 \subsubsection{Density Measures (Algorithm 3)}
-This algorithm support three methods to calculate block density: Arithmetic Average Mass, Geometric Average Mass and Suspiciousness.\\
+This algorithm support three methods to calculate block density: Arithmetic Average Mass, Geometric Average Mass and Suspiciousness.
+
 \begin{algorithm}[H]
-\SetKwInOut{Input}{Input}
-\SetKwInOut{Output}{Output}
-\SetAlgoLined
-\Input{$MassB$, $Bn$, $MassR$, $Rn$, $method$}
-\Output{density of the dense block}
- \If{$method$=$Arithmetic$}{                                                                                                                                                                                                                                                                                                 
-    $sum$ \gets $0$ \\
-    \For{$n$ in range($N$)}{
-     $sum$ = ${{sum} + {Mass(Bn)}}$\\
-     } 
-     $density$ = $MassB / sum * N$\\
- }
-\If{$method$=$Geometric$}{
-    $product$ \gets $1$ \\
-    \For{$n$ in range($N$)}{
-     $product$ = ${{product} * {Mass(Bn)}}$\\
-     } 
-     $power$ = pow($product$, $\frac{1}{N}$)\\
-     $density$ = $MassB / power$\\
- }
- \If{$method$=$Suspiciousness$}{
-    $ratio$ \gets ${MassB}/{MassR}$ \\
-    $density$ = $MassB$ * ($log(ratio)-1$)
-    $ratioProduct$ \gets $1$\\
-    \For{$n$ in range($N$)}{
-     $ratioProduct$ = ${{ratioProduct} * {Mass(Bn)} / {Mass(Rn)}}$\\
-     } 
-     $density$ = $density$ + $MassR$ * $ratioProduct$ - $MassB$ * log($ratioProduct$)\\
- }
- 
- \caption{DensityMeasure}
+\caption{DensityMeasure}
+    \SetKwInOut{Input}{Input}
+    \SetKwInOut{Output}{Output}
+    \SetAlgoLined
+    \Input{$MassB$, $Bn$, $MassR$, $Rn$, $method$}
+    \Output{density of the dense block}
+    \begin{algorithmic}  
+    \STATE \If{$method=Arithmetic$}{                                
+        \STATE $sum \gets 0$
+        \STATE \For{n in range(N)}{
+            \STATE $sum = {{sum} + {Mass(Bn)}}$
+        } 
+        \STATE $density = MassB / sum * N$
+    }
+    \If{$method = Geometric$}{
+        \STATE $product \gets 1$
+        \STATE \For{n in range(N)}{
+            \STATE $product = {{product} * {Mass(Bn)}}$
+         } 
+         \STATE $power = pow(product, \frac{1}{N})$
+         \STATE $density = MassB / power$
+     }
+    \STATE \If{$method=Suspiciousness$}{
+        \STATE $ratio \gets {MassB}/{MassR}$ 
+        \STATE $density = MassB * (log(ratio)-1)$
+        \STATE $ratioProduct \gets 1$ 
+        \STATE \For{n in range(N)}{
+            \STATE $ratioProduct = {{ratioProduct} * {Mass(Bn)} / {Mass(Rn)}}$
+        } 
+        \STATE $density = density + MassR * ratioProduct - MassB * log(ratioProduct)$
+    }
+    \end{algorithmic}
 \end{algorithm}
 
 \subsubsection{Dimension Selection (Algorithm 4)}
-This algorithm support two policy to select dimension for attribute value removal in Algoithm 2. They are select\_dimension by cardinality and select\_dimension by density.\\
+This algorithm support two policy to select dimension for attribute value removal in Algorithm 2. They are select\_dimension by cardinality and select\_dimension by density.
+
 \begin{algorithm}[H]
 \SetKwInOut{Input}{Input}
 \SetKwInOut{Output}{Output}
 \SetAlgoLined
 \Input{$Bn$, $N$, $policy$}
 \Output{a dimension in [$N$]}
- \If{$policy$=$cardinality$}{
-    $dim$ \gets $-1$ \\
-    $maxMass$ \gets $-1$\\
-    \For{$n$ in range($N$)}{
-        $currMass$ = Mass($Bn$) \\
-        \If{${{currMass} > {maxMass}}$}{
-        $maxMass$=$currMass$\\
-        $dim$ = $n$
+\begin{algorithmic}
+ \STATE \If{$policy = cardinality$}{
+    \STATE $dim \gets -1$
+    \STATE $maxMass \gets -1$
+    \STATE \For{n in range(N)}{
+        \STATE $currMass = Mass(Bn)$
+        \STATE \If{${{currMass} > {maxMass}}$}{
+        \STATE $maxMass=currMass$
+        \STATE $dim = n$
         }
      } 
  }
-\If{$policy$=$density$}{
-    $BestDensity$ \gets -\infty\\
-    $dim$ \gets 1\\
-    \For{$i$ in range($N$)}{
-        \If{BlockNotEmpty($B_i$)}{
-        $threshold$ \gets $MassB$ / $MassB_i$ \\
-        SelectValuesToRemove($D_i$)\\
-        $delta$ \gets DcubeSum($D_i$)\\
-        $MassB'$ \gets $MassB$-$delta$\\
-        $B_i'$ \gets UpdateBlock($B_i$, $D_i$)\\
-        Switch $B_i'$ and $B_i$\\
-        $density'$ \gets DensityMeasure($MassB$, $Bn$, $MassR$, $Rn$) \\
-        Switch $B_i'$ and $B_i$\\
-        \If{${{density'}>{BestDensity}}$}{
-            $BestDensity$ \gets $density'$ \\
-            $dim$ \gets $i$\\
-        }
+\STATE \If{$policy = density$}{
+    \STATE $BestDensity \gets -\infty$
+    \STATE $dim \gets 1$
+    \STATE \For{$i\ in\ range(N)$}{
+        \STATE \If{$BlockNotEmpty(B_i)$}{
+            \STATE $threshold \gets MassB / MassB_i$ 
+            \STATE $SelectValuesToRemove(D_i)$
+            \STATE $delta \gets DcubeSum(D_i)$
+            \STATE $MassB' \gets MassB-delta$
+            \STATE $B_i' \gets UpdateBlock(B_i, D_i)$
+            \STATE $Switch\ B_i'\ and\ B_i$
+            \STATE $density' \gets DensityMeasure(MassB, Bn, MassR, Rn)$
+            \STATE $Switch\ B_i'\ and\ B_i$
+            \STATE \If{${{density'}>{BestDensity}}$}{
+                \STATE $BestDensity \gets density'$
+                \STATE $dim \gets i$
+                }
         }
     }
  }
- 
- \caption{select\_dimension}
+\end{algorithmic}
+\caption{select\_dimension}
 \end{algorithm}
+
 Details of special functions in Algorithm 2 are listed below:
 \begin{itemize}
     \item \textbf{DcubeSum} \\
@@ -381,7 +396,8 @@ We monitor the running time of each module and we figure out that most of time g
     \item In the algorithm 2: Single Block Detection, it takes some time to reconstruct sets of attribute values after we have the order table.
     \item In the algorithm 1: Overall Structure of D-Cube, it takes some time to reconstruct the final dense block.
 \end{itemize}
-Thus, we decide to create index on $AttValMassTable$, $OrderTable$ and $ORI$. We used 3 different methods of creating index: btree, gist, and gin. We also do experiments to explore which option performs best.\\
+Thus, we decide to create index on $AttValMassTable$, $OrderTable$ and $ORI$. We used 3 different methods of creating index: btree, gist, and gin. We also do experiments to explore which option performs best. \\
+
 \subsubsection{Experimental Comparison}
 \begin{figure}[h]
     \begin{center}
@@ -389,13 +405,14 @@ Thus, we decide to create index on $AttValMassTable$, $OrderTable$ and $ORI$. We
     \end{center}
     \caption{Copy Method vs Marker Method}
     \label{fig:CopyMarker}
-\end{figure}\\
-We compare the total running times of Copy Method and Marker Method under different parameter settings. The result in Figure \ref{fig:CopyMarker} shows that Marker Method could reduce the running time on average. However, in some cases, for example, when we use suspicousness as diversity measurement and density as selection policy, the Copy Method beats Marker Method. This is because Marker Method wastes too much time on checking flags for select operation. The time spent on checking marks exceeds the time saved for deletion.\\
+\end{figure}
+We compare the total running times of Copy Method and Marker Method under different parameter settings. The result in Figure \ref{fig:CopyMarker} shows that Marker Method could reduce the running time on average. However, in some cases, for example, when we use suspicousness as diversity measurement and density as selection policy, the Copy Method beats Marker Method. This is because Marker Method wastes too much time on checking flags for select operation. The time spent on checking marks exceeds the time saved for deletion.
 \begin{figure}[h]
     \begin{center}
       \makebox[\textwidth]{\includegraphics[width=\textwidth]{indexing.png}}
     \end{center}
     \caption{Indexing Options}
     \label{fig:Indexing}
-\end{figure}\\
+\end{figure} \\
+
 We also compare the total running times of 3 indexing options under different parameter settings. The result in Figure \ref{fig:Indexing} shows that in most cases, indexing will help reduce running time. In the worst case, the time spent on creating index sometimes exceeds the time saved by indexing. We think indexing will help a lot on larger datasets. The experiment result also indicates that the btree option is the best choice since it has lowest average running time.\\
